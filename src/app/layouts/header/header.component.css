@@ -1,0 +1,42 @@
+:host {
+  position: relative;
+}
+
+/* Optional transitions */
+.fixed {
+  transform: translateX(-100%);
+}
+
+.translate-x-0 {
+  transform: translateX(0);
+}
+
+.transition-all {
+  transition: all 0.3s ease-in-out;
+}
+
+.blinking {
+  animation: blinker 1s linear infinite;
+}
+
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
+}
+
+@keyframes blink {
+  0%,
+  50%,
+  100% {
+    opacity: 1;
+  }
+  25%,
+  75% {
+    opacity: 0;
+  }
+}
+
+.blink {
+  animation: blink 1s infinite;
+}
