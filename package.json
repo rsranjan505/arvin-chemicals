@@ -7,7 +7,8 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:arvin-chemicals": "node dist/arvin-chemicals/server/server.mjs"
+    "serve:ssr:arvin-chemicals": "node dist/arvin-chemicals/server/server.mjs",
+    "prerender": "ng build"
   },
   "private": true,
   "dependencies": {
