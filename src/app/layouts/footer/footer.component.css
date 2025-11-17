@@ -1,12 +1,6 @@
-/* Dropdown arrow */
-.qrpopup::before {
-  content: "";
-  position: absolute;
-  bottom: -10px;
-  right: 15px; /* aligns the arrow with input */
-  border-width: 0 10px 10px 10px;
-  border-style: solid;
-  transform: rotateX(180deg); /* flips the triangle vertically */
-  border-color: transparent transparent white transparent;
-  filter: drop-shadow(0 -2px 2px rgba(0, 0, 0, 0.1));
+footer svg {
+  transition: transform 0.3s ease;
+}
+footer svg:hover {
+  transform: scale(1.05);
 }

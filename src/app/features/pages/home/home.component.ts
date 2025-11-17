@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
-//import { HeroSectionComponent } from "../../../layouts/hero-section/hero-section.component";
+import { HomeCategoriesComponent } from "../components/home-categories/home-categories.component";
+import { HeroSectionComponent } from "../../../layouts/hero-section/hero-section.component";
+import { ProductListsComponent } from "../components/product-lists/product-lists.component";
 
 @Component({
+  standalone: true,
   selector: 'app-home',
-  imports: [],
+  imports: [HomeCategoriesComponent, HeroSectionComponent, ProductListsComponent],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.css'
+  styleUrls: ['./home.component.css'], // ✅ must be plural: styleUrls
 })
-export class HomeComponent {
-
-}
+export class HomeComponent {}

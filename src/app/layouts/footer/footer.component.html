@@ -1,263 +1,107 @@
-<footer class="bg-black text-gray-300 text-sm">
-  <div class="container mx-auto max-w-screen-xl">
-    <div class="container mx-auto">
-      <!-- Top links row -->
-      <div
-        class="border-b border-gray-700 px-4 py-3 flex flex-wrap gap-x-4 gap-y-2 align-center justify-center overflow-x-auto scrollbar-hide"
-      >
-        <div
-          class="flex-shrink-0 font-semibold text-xs px-4 flex flex-wrap gap-x-4 gap-y-2 align-center"
-        >
-          <a
-            *ngFor="let item of categories"
-            href="#"
-            class="hover:text-white"
-            >{{ item }}</a
-          >
-        </div>
+<footer class="bg-[#0f3a24] text-white pt-12 pb-6">
+  <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-10">
+
+    <!-- Brand + Social -->
+    <div>
+      <div class="flex items-center space-x-3">
+        <img src="assets/logo.png" alt="Logo" class="h-10 mb-4" />
+        <span class="text-3xl font-bold text-white tracking-wider">ARVIN PLUS<sup>TM</sup></span>
       </div>
 
-      <!-- Main columns -->
-      <div
-        class="px-4 py-6 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-6 text-sm text-gray-400 border-b border-gray-700"
-      >
-        <div>
-          <h4 class="text-red-700 font-semibold mb-2">Quick Links:</h4>
-          <ul class="space-y-1">
-            <li>
-              <a routerLink="/home" class="cursor-pointer hover:text-white"
-                >Home</a
-              >
-            </li>
-            <li>
-              <a routerLink="/about" class="cursor-pointer hover:text-white"
-                >About us</a
-              >
-            </li>
-            <li>
-              <a routerLink="/contact" class="cursor-pointer hover:text-white"
-                >Contact us</a
-              >
-            </li>
-            <li>
-              <a
-                routerLink="/advertise-with-us"
-                class="cursor-pointer hover:text-white"
-                >Advertise with us</a
-              >
-            </li>
-          </ul>
-        </div>
-        <div>
-          <!-- <h4 class="text-red-600 font-semibold mb-2">SUBSCRIPTION:</h4> -->
-          <ul class="space-y-1">
-            <li>
-              <a
-                routerLink="complaint-redressal"
-                class="cursor-pointer hover:text-white"
-                >Complaint Redressal</a
-              >
-            </li>
-            <li>
-              <a routerLink="investors" class="cursor-pointer hover:text-white"
-                >Investors</a
-              >
-            </li>
-            <li>
-              <a routerLink="rate-card" class="cursor-pointer hover:text-white"
-                >Rate Card</a
-              >
-            </li>
-          </ul>
-        </div>
-
-        <div>
-          <h4 class="text-red-700 font-semibold mb-2">Legal:</h4>
-          <ul class="space-y-1">
-            <li>
-              <a
-                routerLink="privacy-policy"
-                class="cursor-pointer hover:text-white"
-                >Privacy Policy</a
-              >
-            </li>
-            <li>
-              <a
-                routerLink="terms-and-conditions"
-                class="cursor-pointer hover:text-white"
-                >Terms and Conditions</a
-              >
-            </li>
-            <li>
-              <a
-                routerLink="correction-policy"
-                class="cursor-pointer hover:text-white"
-                >Correction Policy</a
-              >
-            </li>
-          </ul>
-        </div>
-
-        <div>
-          <h4 class="font-bold text-red-700 mb-3">Contact Us:</h4>
-          <p class="flex items-start text-gray-300 mb-2">
-            <i class="fas fa-map-marker-alt text-red-600 w-5 mt-1 mr-2"></i>
-            5th Floor, Rashmi Complex, S.K Nagar, P & T Colony, Patna Bihar -
-            800001
-          </p>
-          <p class="flex items-center text-gray-300 mb-2">
-            <i class="fas fa-phone-alt text-red-600 w-5 mr-2"></i>
-            +91-7676-56-2424
-          </p>
-          <p class="flex items-center text-gray-300">
-            <i class="fas fa-envelope text-red-600 w-5 mr-2"></i>
-            ar24bihar&#64;gmail.com
-          </p>
-        </div>
-      </div>
-
-      <!-- Language switcher & Newsletter -->
-      <div
-        class="px-4 py-4 border-b border-gray-700 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4"
-      >
-        <div class="flex items-center gap-3">
-          <label for="lang" class="text-gray-300 font-medium hidden sm:block"
-            >Language:</label
-          >
-          <select
-            id="lang"
-            name="lang"
-            class="bg-gray-800 border border-gray-600 rounded px-3 py-1 text-sm text-white"
-          >
-            <option value="en">English</option>
-            <option value="hi">Hindi</option>
-          </select>
-        </div>
-
-        <form class="flex gap-2">
-          <input
-            type="email"
-            placeholder="Subscribe to newsletter"
-            class="bg-gray-800 border border-gray-600 rounded px-3 py-1 text-sm text-white placeholder:text-gray-400"
-          />
-          <button
-            type="submit"
-            class="bg-red-700 hover:bg-red-800 text-white font-semibold px-4 py-1 rounded"
-          >
-            Subscribe
-          </button>
-        </form>
-      </div>
-
-      <!-- Lower nav row -->
-      <!-- <div class="flex flex-wrap items-center justify-between px-4 py-4 text-gray-400 text-sm">
-        <div class="flex flex-wrap gap-4">
-          <a href="#" class="hover:text-white">INDIA TODAY</a>
-          <a href="#" class="hover:text-white">DAILYO</a>
-          <a href="#" class="hover:text-white">ICHOWK</a>
-          <a href="#" class="hover:text-white">ARCHIVE</a>
-        </div>
-
-        <div class="flex items-center space-x-4 mt-3 md:mt-0">
-          <span class="text-white">DOWNLOAD APP</span>
-          <img src="assets/google-play.png" alt="Google Play" class="h-8" />
-          <img src="assets/app-store.png" alt="App Store" class="h-8" />
-        </div>
-
-        <div class="flex items-center gap-3 mt-3 md:mt-0">
-          <span class="text-white">FOLLOW US ON</span>
-          <i class="fab fa-whatsapp text-green-500"></i>
-          <i class="fab fa-facebook text-blue-500"></i>
-          <i class="fab fa-x-twitter text-white"></i>
-          <i class="fas fa-rss text-orange-500"></i>
-          <i class="fab fa-youtube text-red-600"></i>
-        </div>
-      </div> -->
-      <div class="flex items-center gap-5 py-3 mx-4">
-        <span class="text-white">FOLLOW US ON</span>
-        <a href="https://www.youtube.com/@ar24biharlive" target="_blank"
-          ><i class="fab fa-youtube text-red-600 text-4xl"></i
-        ></a>
-        <a
-          href="https://www.facebook.com/people/AR24-Bihar/61579891733559/"
-          target="_blank"
-          ><i class="fab fa-facebook text-blue-500 text-4xl"></i
-        ></a>
-        <a
-          href="https://www.instagram.com/ar24bihar/?igsh=MWo5aHp4a2hkcXdodg%3D%3D"
-          target="_blank"
-          ><i class="fab fa-instagram text-red-500 text-4xl"></i
-        ></a>
-
-        <a
-          href=" https://x.com/AR24Bihar?t=NZbBehkfQJXVg3a7d1vnZA&s=09"
-          target="_blank"
-          ><i class="fab fa-x-twitter text-white text-4xl"></i
-        ></a>
-        <!-- <i class="fas fa-rss text-orange-500 text-2xl"></i> -->
-      </div>
-
-      <div
-        class="text-center py-2 border-t border-gray-700 text-xs text-gray-500"
-      >
-        Copyright © 2025 AR24 Media Network Private Limited. Designed and
-        developed by
-        <a
-          href="https://sortieservices.com"
-          target="_blank"
-          rel="noopener"
-          class="text-white hover:text-red-800 text-xs"
-        >
-          SSPL</a
-        >
+      <p class="text-white">At ArvinPlus, we believe that true wellness comes from addressing the root cause — not just the symptoms. Our mission is simple:
+to craft clean, research-backed supplements that restore balance to the body and support long-term health</p>
+      <div class="flex space-x-4 mt-4">
+        <a href="#" class="hover:text-green-400"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" class="hover:text-green-400"><i class="fab fa-instagram"></i></a>
+        <a href="#" class="hover:text-green-400"><i class="fab fa-youtube"></i></a>
+        <a href="#" class="hover:text-green-400"><i class="fab fa-twitter"></i></a>
       </div>
     </div>
 
-    <!-- Existing Arrow Button -->
-    <div class="fixed bottom-4 right-4 flex flex-col items-center space-y-8">
-      <!-- Wrapper for popup + button -->
-      <div class="relative">
-        <!-- New Button -->
-        <button
-          (click)="togglePopup()"
-          class="flex items-center absolute border-white bottom-15 right-0 justify-center w-12 h-12 rounded-full bg-red-800 shadow-lg hover:bg-red-900 transition"
-        >
-          <i class="fas fa-qrcode text-white text-2xl"></i>
-          <span class="sr-only">Scan QR Code</span>
-        </button>
-
-        <!-- Popup (opens above the button) -->
-        <div
-          *ngIf="showPopup"
-          class="qrpopup absolute bottom-30 right-0 bg-white border rounded-lg shadow-lg w-64 p-4"
-        >
-          <!-- Close Button -->
-          <button
-            (click)="togglePopup()"
-            class="absolute top-2 right-2 text-gray-600 hover:text-red-600"
-          >
-            ✖
-          </button>
-
-          <!-- Popup Image -->
-          <p>Scan the QR code to Subscribe</p>
-          <img
-            src="assets/scan.png"
-            alt="Popup Image"
-            class="rounded-md w-120"
-          />
-        </div>
-      </div>
-
-      <!-- Scroll to Top Button -->
-      <button
-        (click)="scrollToTop()"
-        class="fixed bottom-6 right-4 z-50 bg-red-600 text-white py-3 px-4 rounded-full shadow-lg hover:bg-red-800 transition"
-        *ngIf="showScrollButton"
-        aria-label="Scroll to Top"
-      >
-        <i class="fas fa-chevron-up"></i>
-      </button>
+    <!-- Shop -->
+    <div>
+      <h3 class="font-semibold text-lg mb-4">Shop</h3>
+      <ul class="space-y-2">
+        <li><a href="#" class="hover:text-green-400">Home</a></li>
+        <li><a href="#" class="hover:text-green-400">Products</a></li>
+        <li><a href="#" class="hover:text-green-400">Our Collections</a></li>
+      </ul>
     </div>
+
+    <!-- Explore -->
+    <div>
+      <h3 class="font-semibold text-lg mb-4">Explore</h3>
+      <ul class="space-y-2">
+        <li><a href="#" class="hover:text-green-400">About Us</a></li>
+        <li><a href="#" class="hover:text-green-400">Contact Us</a></li>
+        <li><a href="#" class="hover:text-green-400">Terms of Service</a></li>
+        <li><a href="#" class="hover:text-green-400">Refund Policy</a></li>
+      </ul>
+    </div>
+
+    <!-- Important Links -->
+    <div>
+      <h3 class="font-semibold text-lg mb-4">Important Links</h3>
+      <ul class="space-y-2">
+        <li><a href="#" class="hover:text-green-400">Privacy Policy</a></li>
+        <li><a href="#" class="hover:text-green-400">Shipping Policy</a></li>
+        <li><a href="#" class="hover:text-green-400">Quality Certifications</a></li>
+      </ul>
+      <div class="mt-6">
+        <p class="font-medium">Get in Touch</p>
+        <p class="text-sm mt-2">+91 7382838383</p>
+        <p class="text-sm">care&#64;arvinplus.in</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Payment Icons -->
+  <div class="border-t border-green-800 mt-10 pt-6">
+    <div class="flex flex-wrap justify-center items-center space-x-4">
+
+      <!-- VISA -->
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 30" class="h-6 w-auto bg-white rounded p-1">
+        <rect width="48" height="30" fill="#1a1f71"/>
+        <text x="8" y="20" fill="white" font-family="Arial Black" font-size="12">VISA</text>
+      </svg>
+
+      <!-- RUPAY -->
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 30" class="h-6 w-auto bg-white rounded p-1">
+        <rect width="48" height="30" fill="#005daa"/>
+        <text x="5" y="20" fill="white" font-family="Arial Black" font-size="10">RUPAY</text>
+      </svg>
+
+      <!-- MASTERCARD -->
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 30" class="h-6 w-auto bg-white rounded p-1">
+        <circle cx="18" cy="15" r="7" fill="#eb001b"/>
+        <circle cx="28" cy="15" r="7" fill="#f79e1b" fill-opacity="0.9"/>
+        <text x="7" y="27" fill="#000" font-family="Arial Black" font-size="6">MASTERCARD</text>
+      </svg>
+
+      <!-- PAYTM -->
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 30" class="h-6 w-auto bg-white rounded p-1">
+        <rect width="48" height="30" fill="#00baf2"/>
+        <text x="5" y="20" fill="#002970" font-family="Arial Black" font-size="10">PAYTM</text>
+      </svg>
+
+      <!-- GPAY -->
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 30" class="h-6 w-auto bg-white rounded p-1">
+        <rect width="48" height="30" fill="#fff"/>
+        <text x="10" y="20" fill="#4285F4" font-family="Arial Black" font-size="10">G</text>
+        <text x="18" y="20" fill="#000" font-family="Arial Black" font-size="10">Pay</text>
+      </svg>
+
+      <!-- AMEX -->
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 30" class="h-6 w-auto bg-white rounded p-1">
+        <rect width="48" height="30" fill="#2e77bc"/>
+        <text x="5" y="20" fill="white" font-family="Arial Black" font-size="9">AMEX</text>
+      </svg>
+
+    </div>
+  </div>
+
+  <!-- Copyright -->
+  <div class="text-center text-sm text-gray-400 mt-4">
+    © 2025, Anira Chemicals Private Limited
   </div>
 </footer>

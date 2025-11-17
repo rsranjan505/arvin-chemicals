@@ -1,0 +1,22 @@
+<section class="py-16 bg-white text-center">
+  <h2 class="text-3xl md:text-4xl font-semibold text-green-900 mb-12">
+    Shop by Categories
+  </h2>
+
+  <div
+    class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-8 justify-items-center"
+  >
+    <div
+      *ngFor="let category of categories"
+      class="flex flex-col items-center space-y-3 group cursor-pointer"
+    >
+      <div
+        class="bg-green-900 w-20 h-20 flex items-center justify-center rounded-full shadow-lg transition-transform duration-300 group-hover:scale-110"
+        [innerHTML]="category.icon"
+      ></div>
+      <p class="text-green-800 font-medium leading-tight">
+        {{ category.name }}
+      </p>
+    </div>
+  </div>
+</section>

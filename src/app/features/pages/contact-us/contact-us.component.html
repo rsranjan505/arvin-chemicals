@@ -1,0 +1,107 @@
+
+<div class="px-8 container min-w-screen-lg mx-auto">
+  <div class="w-full bg-gray-50 py-16 px-6">
+  <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12">
+
+    <!-- LEFT: Contact Info -->
+    <div class="space-y-6">
+      <h2 class="text-4xl font-bold text-gray-900 mb-4">Contact Us</h2>
+      <p class="text-lg text-gray-600 leading-relaxed">
+        Have questions, need support, or want to know more about ArvinPlus?
+        We’re here to help. Simply fill out the form or reach us through the details below.
+      </p>
+
+      <div class="space-y-4">
+        <div class="flex items-start gap-3">
+          <div class="bg-green-100 p-3 rounded-xl">
+            <i class="bi bi-envelope text-green-600 text-xl"></i>
+          </div>
+          <div>
+            <h3 class="font-semibold text-gray-800">Email</h3>
+            <p class="text-gray-600">support&#64;arvinplus.in</p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-3">
+          <div class="bg-green-100 p-3 rounded-xl">
+            <i class="bi bi-telephone text-green-600 text-xl"></i>
+          </div>
+          <div>
+            <h3 class="font-semibold text-gray-800">Phone</h3>
+            <p class="text-gray-600">+91 98765 43210</p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-3">
+          <div class="bg-green-100 p-3 rounded-xl">
+            <i class="bi bi-geo-alt text-green-600 text-xl"></i>
+          </div>
+          <div>
+            <h3 class="font-semibold text-gray-800">Address</h3>
+            <p class="text-gray-600">ArvinPlus Wellness, Mumbai, India</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: Contact Form -->
+    <div>
+      <form
+        [formGroup]="contactForm"
+        (ngSubmit)="onSubmit()"
+        class="bg-white shadow-xl rounded-2xl p-8 space-y-6"
+      >
+        <div>
+          <label class="block text-gray-700 font-medium mb-1">Name</label>
+          <input
+            formControlName="name"
+            type="text"
+            class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-green-500 focus:outline-none"
+            placeholder="Enter your name"
+          />
+        </div>
+
+        <div>
+          <label class="block text-gray-700 font-medium mb-1">Email</label>
+          <input
+            formControlName="email"
+            type="email"
+            class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-green-500 focus:outline-none"
+            placeholder="Enter your email"
+          />
+        </div>
+
+        <div>
+          <label class="block text-gray-700 font-medium mb-1">Phone</label>
+          <input
+            formControlName="phone"
+            type="text"
+            class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-green-500 focus:outline-none"
+            placeholder="Enter your mobile number"
+          />
+        </div>
+
+        <div>
+          <label class="block text-gray-700 font-medium mb-1">Message</label>
+          <textarea
+            formControlName="message"
+            rows="4"
+            class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-green-500 focus:outline-none"
+            placeholder="Write your message..."
+          ></textarea>
+        </div>
+
+        <button
+          type="submit"
+          class="w-full bg-green-600 text-white py-3 rounded-xl hover:bg-green-700 transition font-semibold"
+        >
+          Send Message
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+
+</div>
+
+

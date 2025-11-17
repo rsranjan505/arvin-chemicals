@@ -17,9 +17,38 @@ const routes: Routes = [
         redirectTo: '',
         pathMatch: 'full',
       },
+      {
+        path: 'our-collections',
+        pathMatch: 'full',
+        loadComponent: () => import('../../features/pages/our-collection/our-collection.component').then((m) => m.OurCollectionComponent),
+      },
+      {
+        path: 'about-us',
+        pathMatch: 'full',
+        loadComponent: () => import('../../features/pages/about-us/about-us.component').then((m) => m.AboutUsComponent),
+      },
+      {
+        path: 'contact-us',
+        pathMatch: 'full',
+        loadComponent: () => import('../../features/pages/contact-us/contact-us.component').then((m) => m.ContactUsComponent),
+      },
+      // {
+      //   path: 'products',
+      //   pathMatch: 'full',
+      // },
+      {
+        path: 'products/:id',
+        pathMatch: 'full',
+        loadComponent: () => import('../../features/pages/product-details/product-details.component').then((m) => m.ProductDetailsComponent),
+      },
     ],
   },
 ];
+
+// path: 'our-collections',
+//   loadComponent: () =>
+//     import('./pages/our-collections/our-collections.component')
+//       .then(m => m.OurCollectionsComponent)
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
