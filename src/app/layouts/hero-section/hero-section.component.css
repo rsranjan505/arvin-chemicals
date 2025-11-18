@@ -1,8 +1,29 @@
-.fade-in {
-  animation: fadeIn 1s ease-in-out;
+/* IMAGE STRIP ANIMATION */
+@keyframes scrollX {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+.scroll-animation {
+  animation: scrollX 10s linear infinite;
+}
+
+
+/* INDICATOR ANIMATION */
+/* For 4 images → 4 steps */
+@keyframes indicatorSteps {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(1.5rem); }
+  50% { transform: translateX(3rem); }
+  75% { transform: translateX(4.5rem); }
+  100% { transform: translateX(0); }
+}
+
+/* Sliding dot bar */
+.indicator-slider {
+  animation: indicatorSteps 8s infinite;
 }

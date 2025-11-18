@@ -21,5 +21,21 @@ export class HeaderComponent implements OnInit {
     this.dropdownOpen = !this.dropdownOpen;
   }
 
+  closeMenu() {
+    this.mobileOpen = false;
+  }
+
   ngOnInit(): void {}
+
+
+  searchOpen = false;
+
+  toggleSearch() {
+    this.searchOpen = !this.searchOpen;
+  }
+
+  closeSearch() {
+    this.searchOpen = false;
+  }
+
 }

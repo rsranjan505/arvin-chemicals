@@ -5,7 +5,7 @@
     <!-- Left: Logo -->
     <div class="flex items-center space-x-3">
       <!-- <img src="/assets/logo.png" alt="Logo" class="h-10 w-auto" /> -->
-      <span class="text-3xl font-bold text-green-900 tracking-wider">ARVIN PLUS<sup>TM</sup></span>
+      <span class="md:text-3xl sm:text-2xl font-bold text-green-900 tracking-wider">ARVIN PLUS<sup>TM</sup></span>
     </div>
 
     <!-- Center: Navigation -->
@@ -82,7 +82,25 @@
 
     <!-- Right: Icons -->
     <div class="flex items-center space-x-2">
-      <button class="hidden md:block px-4 py-2 rounded-md text-green-900 hover:bg-green-50 transition">
+
+      <input
+        *ngIf="searchOpen"
+        type="text"
+        placeholder="Search..."
+        (click)="$event.stopPropagation()"
+        class="absolute right-88 top-1/2 -translate-y-1/2
+           w-0 opacity-0
+           transition-all duration-300
+           px-4 py-2 border border-gray-300 rounded-full
+           bg-white shadow-sm
+           text-sm"
+        [ngClass]="{
+          'w-64 opacity-100': searchOpen
+        }"
+      />
+
+
+      <button class="hidden md:block px-4 py-2 rounded-md text-green-900 hover:bg-green-50 transition" (click)="toggleSearch()">
         <svg _ngcontent-ng-c599621487="" fill="none" stroke="darkgreen" stroke-width="2" viewBox="0 0 24 24" class="w-6 h-6 ng-tns-c599621487-0"><path _ngcontent-ng-c599621487="" stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35M10 18a8 8 0 100-16 8 8 0 000 16z" class="ng-tns-c599621487-0"></path></svg>
       </button>
       <button class="text-gray-700 hover:text-green-900 hover:bg-green-50 transition">
@@ -123,16 +141,28 @@
 
 
   <!-- Mobile Menu -->
+<!-- BACKDROP (click outside closes menu) -->
   <div
     *ngIf="mobileOpen"
-    class="md:hidden bg-white border-t border-gray-200 animate-slide-down">
+    class="md:hidden z-90"
+    (click)="closeMenu()"
+  >
 
-    <nav class="px-4 py-4 flex flex-col gap-4 text-gray-700">
-      <a routerLink="/home" class="hover:text-green-900">Home</a>
-      <a routerLink="/products" class="hover:text-green-900">Products</a>
-      <a routerLink="/our-collections" class="hover:text-green-900">Our Collections</a>
-      <a routerLink="/about-us" class="hover:text-green-900">About</a>
-      <a routerLink="/contact-us" class="hover:text-green-900">Contact</a>
-    </nav>
+    <!-- MOBILE MENU PANEL -->
+    <div
+      class="bg-white w-full border-t border-gray-200 animate-slide-down"
+      (click)="$event.stopPropagation()"
+    >
+
+      <nav class="px-4 py-4 flex flex-col gap-4 text-gray-700">
+        <a routerLink="/home" class="hover:text-green-900" (click)="closeMenu()">Home</a>
+        <a routerLink="/products" class="hover:text-green-900" (click)="closeMenu()">Products</a>
+        <a routerLink="/our-collections" class="hover:text-green-900" (click)="closeMenu()">Our Collections</a>
+        <a routerLink="/about-us" class="hover:text-green-900" (click)="closeMenu()">About</a>
+        <a routerLink="/contact-us" class="hover:text-green-900" (click)="closeMenu()">Contact</a>
+      </nav>
+
+    </div>
+
   </div>
 </header>
