@@ -4,6 +4,22 @@
   <!-- SLIDER CONTAINER -->
   <div class="relative w-full h-[80vh] overflow-hidden">
 
+    <!-- LEFT ARROW -->
+    <button
+      (click)="prevSlide()"
+      class="absolute left-4 top-1/2 -translate-y-1/2 z-50 bg-white/40 hover:bg-white/70 text-green-900 p-3 rounded-full shadow-lg transition"
+    >
+      &#10094;
+    </button>
+
+    <!-- RIGHT ARROW -->
+    <button
+      (click)="nextSlide()"
+      class="absolute right-4 top-1/2 -translate-y-1/2 z-50 bg-white/40 hover:bg-white/70 text-green-900 p-3 rounded-full shadow-lg transition"
+    >
+      &#10095;
+    </button>
+
     <!-- SLIDE WRAPPER -->
     <div
       class="flex h-full transition-transform duration-700 ease-in-out"
@@ -20,24 +36,17 @@
           class="w-full h-full object-cover"
         />
 
-        <!-- DARK OVERLAY (optional, improves text visibility) -->
-        <div class="absolute inset-0   bg-opacity-20"></div>
+        <!-- DARK OVERLAY -->
+        <!-- <div class="absolute inset-0 bg-black bg-opacity-20"></div> -->
 
         <!-- SLIDE CONTENT -->
         <div class="absolute inset-0 flex flex-col justify-center items-center px-10 lg:px-28 text-white">
           <h1 class="text-4xl md:text-6xl font-bold drop-shadow-lg">
             {{ slide.title }}
           </h1>
-
           <p class="text-lg md:text-2xl mt-4 max-w-2xl drop-shadow-lg">
             {{ slide.subtitle }}
           </p>
-
-          <!-- <button
-            class="mt-6 px-6 py-3 bg-green-800 rounded-xl text-lg font-semibold hover:bg-green-900 transition shadow-lg"
-          >
-            {{ slide.button }}
-          </button> -->
         </div>
       </div>
     </div>
@@ -54,6 +63,7 @@
   </div>
 
 </section>
+
 
 
 

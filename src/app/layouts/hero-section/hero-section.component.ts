@@ -44,8 +44,17 @@ export class HeroSectionComponent  {
 
   ngOnInit(): void {
     setInterval(() => {
-      this.currentIndex = (this.currentIndex + 1) % this.slides.length;
-    }, 3000);
+      this.nextSlide();
+    }, 5000);
+  }
+
+  nextSlide() {
+    this.currentIndex = (this.currentIndex + 1) % this.slides.length;
+  }
+
+  prevSlide() {
+    this.currentIndex =
+      (this.currentIndex - 1 + this.slides.length) % this.slides.length;
   }
 
 }

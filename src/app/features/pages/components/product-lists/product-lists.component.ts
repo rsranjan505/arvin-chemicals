@@ -14,25 +14,49 @@ export class ProductListsComponent {
 
   products = [
     {
-      name: 'Liver Detox',
+      name: 'Zinc Tablets',
+      subtitle: 'Supports Healthy Immunity',
+      slug: 'zinc-tablets',
       price: 1333,
       emi: 444,
       rating: 4.5,
-      img: '/assets/products/p1.jpeg'
+      img: '/assets/products/zinc.png'
     },
     {
-      name: 'Vitamin B12 Tablets',
+      name: 'Iron, Zinc, Folic Acid & Vit B12',
+      subtitle: 'Supports Healthy Immunity',
+      slug: 'iron-zinc-folic-acid-vit-b12',
       price: 710,
       emi: 237,
       rating: 4.8,
-      img: '/assets/products/p1.jpeg'
+      img: '/assets/products/iron.png'
     },
     {
-      name: 'Magnesium Relax',
+      name: 'Vitamin D3',
+      subtitle: 'Supports Healthy Immunity',
+      slug: 'vitamin-d3',
       price: 799,
       emi: 266,
       rating: 4.2,
-      img: '/assets/products/p1.jpeg'
+      img: '/assets/products/vitamin.png'
+    },
+    {
+      name: 'Forever 21',
+      subtitle: 'Supports Healthy Immunity',
+      slug: 'forever-21',
+      price: 710,
+      emi: 237,
+      rating: 4.8,
+      img: '/assets/products/forever24.png'
+    },
+    {
+      name: 'Magnesium',
+      subtitle: 'Supports Healthy Immunity',
+      slug: 'magnesium',
+      price: 799,
+      emi: 266,
+      rating: 4.2,
+      img: '/assets/products/magnesium.png'
     }
   ];
 
