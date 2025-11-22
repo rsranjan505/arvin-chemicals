@@ -10,4 +10,11 @@ import { RouterLink } from '@angular/router';
 })
 export class OurCollectionComponent {
 
+  pauseVideo(video: HTMLVideoElement) {
+    video.pause();
+  }
+
+  playVideo(video: HTMLVideoElement) {
+    video.play();
+  }
 }

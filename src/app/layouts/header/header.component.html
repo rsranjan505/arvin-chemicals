@@ -53,27 +53,29 @@
     </nav>
 
     <div class="flex items-center space-x-2">
-
-      <input
-        *ngIf="searchOpen"
-        type="text"
-        placeholder="Search..."
-        (click)="$event.stopPropagation()"
-        class="absolute right-88 top-1/2 -translate-y-1/2
-           w-0 opacity-0
-           transition-all duration-300
-           px-4 py-2 border border-gray-300 rounded-full
-           bg-white shadow-sm
-           text-sm"
-        [ngClass]="{
-          'w-64 opacity-100': searchOpen
-        }"
-      />
-
-
+      <div class="relative">
+  <!-- Floating Search Input (absolute) -->
+  <input
+    *ngIf="searchOpen"
+    type="text"
+    placeholder="Search..."
+    (click)="$event.stopPropagation()"
+    class="
+      absolute right-14 top-1/2 -translate-y-1/2
+      w-0 opacity-0 
+      transition-all duration-300 ease-in-out
+      px-4 py-2 rounded-full bg-white shadow-lg
+      border border-gray-300 text-sm z-50
+    "
+    [ngClass]="{
+      'w-64 opacity-100': searchOpen
+    }"
+  />
       <button class="hidden md:block px-4 py-2 rounded-md text-green-900 hover:bg-green-50 transition" (click)="toggleSearch()">
         <svg _ngcontent-ng-c599621487="" fill="none" stroke="darkgreen" stroke-width="2" viewBox="0 0 24 24" class="w-6 h-6 ng-tns-c599621487-0"><path _ngcontent-ng-c599621487="" stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35M10 18a8 8 0 100-16 8 8 0 000 16z" class="ng-tns-c599621487-0"></path></svg>
       </button>
+      </div>
+      
       <button class="text-gray-700 hover:text-green-900 hover:bg-green-50 transition">
 
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
