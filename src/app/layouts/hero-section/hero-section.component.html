@@ -1,9 +1,6 @@
-
 <section class="relative w-full overflow-hidden">
-
   <!-- SLIDER CONTAINER -->
   <div class="relative w-full h-[80vh] overflow-hidden">
-
     <!-- LEFT ARROW -->
     <button
       (click)="prevSlide()"
@@ -31,16 +28,15 @@
         class="w-screen h-full flex-shrink-0 relative"
       >
         <!-- BACKGROUND IMAGE -->
-        <img
-          [src]="slide.image"
-          class="w-full h-full object-cover"
-        />
+        <img [src]="slide.image" class="w-full h-full object-cover" />
 
         <!-- DARK OVERLAY -->
         <!-- <div class="absolute inset-0 bg-black bg-opacity-20"></div> -->
 
         <!-- SLIDE CONTENT -->
-        <div class="absolute inset-0 flex flex-col justify-center items-center px-10 lg:px-28 text-white">
+        <div
+          class="absolute inset-0 flex flex-col justify-center items-center px-10 lg:px-28 text-white"
+        >
           <h1 class="text-4xl md:text-6xl font-bold drop-shadow-lg">
             {{ slide.title }}
           </h1>
@@ -61,57 +57,47 @@
       [class.bg-white]="i !== currentIndex"
     ></div>
   </div>
-
 </section>
 
-
-
-
-<section class="relative w-full overflow-hidden bg-gray-50 border-b ">
+<section class="relative w-full bg-gray-50 border-b">
   <div
     class="flex flex-wrap justify-center items-center text-gray-700 text-sm border-t bg-white py-3"
   >
     <div class="flex ">
-      <div class="flex">
-        <div class="flex items-center space-x-2 mx-4">
-
+      <div class="flex flex-wrap justify-center items-center ">
+        <div class="flex items-center space-x-2 mx-4 md:py-0 py-1">
           <span class="whitespace-nowrap font-bold">CLINICALLY PROVEN</span>
         </div>
-        <div class="flex items-center space-x-2 mx-4">
-
-
+        <div class="flex items-center space-x-2 mx-4 md:py-0 py-1">
           <span class="whitespace-nowrap font-bold">NO SIDE EFFECTS</span>
         </div>
-        <div class="flex items-center space-x-2 mx-4">
-
+        <div class="flex items-center space-x-2 mx-4 md:py-0 py-1">
           <span class="whitespace-nowrap font-bold">100% BIOAVAILABLE</span>
         </div>
-        <div class="flex items-center space-x-2 mx-4">
-
-          <span class="whitespace-nowrap font-bold">ADVANCED NANOTECHNOLOGY</span>
+        <div class="flex items-center space-x-2 mx-4 md:py-0 py-1">
+          <span class="whitespace-nowrap font-bold"
+            >ADVANCED NANOTECHNOLOGY</span
+          >
         </div>
       </div>
 
       <!-- SAME SET AGAIN FOR LOOP -->
-      <div class="flex">
+      <!-- <div class="flex">
         <div class="flex items-center space-x-2 mx-4">
-
           <span class="whitespace-nowrap font-bold">CLINICALLY PROVEN</span>
         </div>
         <div class="flex items-center space-x-2 mx-4">
-
-
           <span class="whitespace-nowrap font-bold">NO SIDE EFFECTS</span>
         </div>
         <div class="flex items-center space-x-2 mx-4">
-
           <span class="whitespace-nowrap font-bold">100% BIOAVAILABLE</span>
         </div>
         <div class="flex items-center space-x-2 mx-4">
-
-          <span class="whitespace-nowrap font-bold">ADVANCED NANOTECHNOLOGY</span>
+          <span class="whitespace-nowrap font-bold"
+            >ADVANCED NANOTECHNOLOGY</span
+          >
         </div>
-        </div>
-      </div>
+      </div> -->
+    </div>
   </div>
 </section>

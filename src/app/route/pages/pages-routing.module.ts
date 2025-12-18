@@ -10,7 +10,9 @@ const routes: Routes = [
       {
         path: '',
         loadComponent: () =>
-          import('../../features/pages/home/home.component').then((m) => m.HomeComponent),
+          import('../../features/pages/home/home.component').then(
+            (m) => m.HomeComponent
+          ),
       },
       {
         path: 'home',
@@ -20,26 +22,38 @@ const routes: Routes = [
       {
         path: 'our-collections',
         pathMatch: 'full',
-        loadComponent: () => import('../../features/pages/our-collection/our-collection.component').then((m) => m.OurCollectionComponent),
+        loadComponent: () =>
+          import(
+            '../../features/pages/our-collection/our-collection.component'
+          ).then((m) => m.OurCollectionComponent),
       },
       {
         path: 'about-us',
         pathMatch: 'full',
-        loadComponent: () => import('../../features/pages/about-us/about-us.component').then((m) => m.AboutUsComponent),
+        loadComponent: () =>
+          import('../../features/pages/about-us/about-us.component').then(
+            (m) => m.AboutUsComponent
+          ),
       },
       {
         path: 'contact-us',
         pathMatch: 'full',
-        loadComponent: () => import('../../features/pages/contact-us/contact-us.component').then((m) => m.ContactUsComponent),
+        loadComponent: () =>
+          import('../../features/pages/contact-us/contact-us.component').then(
+            (m) => m.ContactUsComponent
+          ),
       },
       // {
       //   path: 'products',
       //   pathMatch: 'full',
       // },
       {
-        path: 'products/:id',
+        path: 'products/:slug',
         pathMatch: 'full',
-        loadComponent: () => import('../../features/pages/product-details/product-details.component').then((m) => m.ProductDetailsComponent),
+        loadComponent: () =>
+          import(
+            '../../features/pages/product-details/product-details.component'
+          ).then((m) => m.ProductDetailsComponent),
       },
     ],
   },
