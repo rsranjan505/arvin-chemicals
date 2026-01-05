@@ -8,7 +8,7 @@ export class ProductService {
 
   products: any[] = [];
 
-  productsLists() {
+  getProducts() {
     this.products = [
       {
         name: 'Zinc Tablets',
@@ -19,6 +19,11 @@ export class ProductService {
         capsule: 120,
         rating: 4.5,
         image: '/assets/products/zinc.png',
+        images: [
+          '/assets/products/zinc.png',
+          '/assets/products/zinc.png',
+          '/assets/products/zinc.png',
+        ],
         desc: 'As an essential trace mineral, Zinc performs diverse and critical physiological functions, including regulating growth, supporting robust immune system maintenance, and facilitating tissue repair. Functionally, it acts as a structural and regulatory catalyst for the biological activity of numerous enzymes and proteins, while providing cellular defense as an antioxidant and anti-inflammatory agent',
         benefits: [
           'Helps to strengthen the immune system',
@@ -35,6 +40,11 @@ export class ProductService {
         capsule: 60,
         rating: 4.8,
         image: '/assets/products/iron.png',
+        images: [
+          '/assets/products/iron.png',
+          '/assets/products/iron.png',
+          '/assets/products/iron.png',
+        ],
         desc: 'Essential nutrients combined in supplements to support red blood cell formation, prevent anemia, and promote overall health. This combination aids in oxygen transport, energy levels, nerve function, immune response, and cell growth and repair. ',
         benefits: [
           'Support blood formation (RBC) ',
@@ -51,6 +61,11 @@ export class ProductService {
         capsule: 90,
         rating: 4.2,
         image: '/assets/products/vitamin.png',
+        images: [
+          '/assets/products/vitamin.png',
+          '/assets/products/vitamin.png',
+          '/assets/products/vitamin.png',
+        ],
         desc: 'We provide Vitamin K2 in its superior, active form: Menaquinone-7 (MK-7). This essential nutrient directs calcium exactly where it needs to go: to your bones for strength, and away from your arteries where it can cause calcification. By keeping arteries resilient and flexible, K2 MK-7 powerfully supports both bone density and cardiovascular health. ',
         benefits: [
           'Bone Strengthening and Density',
@@ -68,6 +83,7 @@ export class ProductService {
         capsule: 60,
         rating: 4.8,
         image: '/assets/products/forever24.png',
+        images: ['/assets/products/forever24.png', '/assets/products/forever24.png', '/assets/products/forever24.png'],
         desc: 'This natural vitality and rejuvenation formula is      engineered to restore youthful energy and support overall well-being. It   features a powerful herbal blend, including Horny Goat Weed for sexual  health, Maca Root for boosting energy and endurance, and Safed Musli to  support male reproductive health. Use it to naturally balance hormones, increase stamina, and promote long-term wellness. Feel young, stay strong, and boost your vitality. ',
         benefits: [
           'Improves performance & endurance',
@@ -86,6 +102,7 @@ export class ProductService {
         capsule: 60,
         rating: 4.2,
         image: '/assets/products/magnesium.png',
+        images: ['/assets/products/magnesium.png', '/assets/products/magnesium.png', '/assets/products/magnesium.png'],
         desc: 'Magnesium Glycinate Tablets are a premium supplement formulated for superior relaxation and recovery. Utilizing a highly bioavailable chelated form for optimal absorption, these tablets effectively reduce muscle cramps, fatigue, and post-workout soreness. They also promote deep, restful sleep, aid in stress reduction, and support nerve and cognitive health for improved mood and mental clarity. Experience better rest, recovery, and focus with every dose.',
         benefits: [
           'Support relaxation, calm & restful sleep',
@@ -100,6 +117,8 @@ export class ProductService {
   }
 
   getProductBySlug(slug: string) {
+    slug = slug.toLowerCase();
+    this.products = this.getProducts();
     return this.products.find((p) => p.slug === slug);
   }
 }

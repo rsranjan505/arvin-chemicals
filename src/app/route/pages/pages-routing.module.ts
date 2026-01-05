@@ -16,7 +16,10 @@ const routes: Routes = [
       },
       {
         path: 'home',
-        redirectTo: '',
+        loadComponent: () =>
+          import('../../features/pages/home/home.component').then(
+            (m) => m.HomeComponent
+          ),
         pathMatch: 'full',
       },
       {

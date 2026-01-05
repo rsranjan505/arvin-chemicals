@@ -1,4 +1,4 @@
-<header class="py-4 shadow-sm bg-white sticky top-0 z-50">
+<header class="py-4 shadow-sm bg-white sticky top-0 z-99">
   <div
     class="flex justify-between items-center px-8 w-screen-md mx-auto container"
   >
@@ -12,19 +12,21 @@
     </a>
 
     <!-- Center: Navigation -->
-    <nav class="hidden md:flex space-x-10 text-gray-700">
+    <nav class="hidden md:flex space-x-10 text-gray-700 my-3">
       <a
         routerLink="/home"
-        class="hover:text-green-900"
-        routerLinkActive="text-green-900 text-bold"
+        class="hover:text-green-900  font-bold"
+        routerLinkActive="text-green-900 font-bold text-md"
+        exactActive="true"
         >Home</a
       >
       <!-- Shop Dropdown -->
-      <div class="relative group">
+      <div class="relative group ">
         <button
-          class="flex items-center space-x-1 hover:text-green-900 transition"
+          class="flex items-center space-x-1 hover:text-green-900  font-bold transition"
+          routerLinkActive="text-green-900 font-bold text-md"
         >
-          <span>Products</span>
+          <span class="pb-2">Products</span>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -41,7 +43,7 @@
           </svg>
         </button>
         <div
-          class="absolute left-0 top-full hidden group-hover:flex bg-white border shadow-lg mt-2 rounded-lg w-[200px] p-6 space-x-10 animate-slideIn"
+          class="absolute left-0 top-full hidden group-hover:flex bg-white border shadow-lg pt-3 rounded-lg w-[200px] p-6 space-x-10 animate-slideIn"
         >
           <ul class="space-y-3 text-gray-700">
             <li class="hover:text-green-900 cursor-pointer">Vitamins</li>
@@ -54,21 +56,21 @@
 
       <a
         routerLink="/our-collections"
-        routerLinkActive="text-green-900 text-bold "
-        class="hover:text-green-900"
+        routerLinkActive="text-green-900 font-bold text-md"
+        class="hover:text-green-900  font-bold"
         >Our Collections</a
       >
 
       <a
         routerLink="/about-us"
-        routerLinkActive="text-green-700"
-        class="hover:text-green-900"
+        routerLinkActive="text-green-900 font-bold text-md"
+        class="hover:text-green-900  font-bold"
         >About Us</a
       >
       <a
         routerLink="/contact-us"
-        routerLinkActive="text-green-900"
-        class="hover:text-green-900"
+        routerLinkActive="text-green-900 font-bold text-md"
+        class="hover:text-green-900  font-bold"
         >Contact Us</a
       >
     </nav>
@@ -109,7 +111,7 @@
         </button>
       </div>
 
-      <!-- <button class="text-gray-700 hover:text-green-900 hover:bg-green-50 transition">
+      <!-- <button class="text-gray-700 hover:text-green-900  font-bold hover:bg-green-50 transition">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
@@ -130,7 +132,7 @@
         </svg>
       </button> -->
       <!-- Cart -->
-      <!-- <button class="text-gray-700 hover:text-green-900 relative hover:bg-green-50 transition">
+      <!-- <button class="text-gray-700 hover:text-green-900  font-bold relative hover:bg-green-50 transition">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="40"
@@ -177,30 +179,30 @@
       (click)="$event.stopPropagation()"
     >
       <nav class="px-4 py-4 flex flex-col gap-4 text-gray-700">
-        <a routerLink="/home" class="hover:text-green-900" (click)="closeMenu()"
+        <a routerLink="/home" class="hover:text-green-900  font-bold" (click)="closeMenu()"
           >Home</a
         >
         <a
           routerLink="/products"
-          class="hover:text-green-900"
+          class="hover:text-green-900  font-bold"
           (click)="closeMenu()"
           >Products</a
         >
         <a
           routerLink="/our-collections"
-          class="hover:text-green-900"
+          class="hover:text-green-900  font-bold"
           (click)="closeMenu()"
           >Our Collections</a
         >
         <a
           routerLink="/about-us"
-          class="hover:text-green-900"
+          class="hover:text-green-900  font-bold"
           (click)="closeMenu()"
           >About</a
         >
         <a
           routerLink="/contact-us"
-          class="hover:text-green-900"
+          class="hover:text-green-900  font-bold"
           (click)="closeMenu()"
           >Contact</a
         >

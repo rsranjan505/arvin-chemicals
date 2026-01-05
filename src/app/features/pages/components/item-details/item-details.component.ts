@@ -6,7 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-item-details',
-  imports: [NgFor, CommonModule],
+  imports: [NgFor, CommonModule, RouterLink],
   templateUrl: './item-details.component.html',
   styleUrl: './item-details.component.css',
 })
@@ -25,13 +25,7 @@ export class ItemDetailsComponent {
 
       this.product = {
         ...this.productService.getProductBySlug(slug),
-        image: 'assets/products/p1.jpeg',
-        images: [
-          'assets/products/p1.jpeg',
-          'assets/products/p1.jpeg',
-          'assets/products/p1.jpeg',
-          'assets/products/p1.jpeg',
-        ],
+
         tags: [
           'Detoxification',
           'Digestive Issues',
