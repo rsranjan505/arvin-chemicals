@@ -1,107 +1,85 @@
-<footer class="bg-[#0f3a24] text-white pt-12 pb-6">
-  <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-10">
+<footer class="bg-[#0a2e1a] text-white">
+  <!-- Newsletter Section -->
+  <div class="border-b border-white/10">
+    <div class="max-w-7xl mx-auto px-6 py-10 lg:py-12 flex flex-col sm:flex-row items-center justify-between gap-6">
+      <div>
+        <h3 class="text-xl font-bold">Stay Updated</h3>
+        <p class="text-white/70 text-sm mt-1">Get the latest on wellness tips and product launches.</p>
+      </div>
+      <div class="flex w-full sm:w-auto">
+        <input type="email" placeholder="Enter your email" class="px-4 py-2.5 rounded-l-lg bg-white/10 border border-white/20 text-white placeholder-white/50 text-sm focus:outline-none focus:ring-2 focus:ring-green-400 w-full sm:w-64" />
+        <button class="px-5 py-2.5 bg-green-600 hover:bg-green-500 text-white font-semibold rounded-r-lg transition-colors text-sm">Subscribe</button>
+      </div>
+    </div>
+  </div>
 
+  <div class="max-w-7xl mx-auto px-6 py-12 lg:py-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12">
     <!-- Brand + Social -->
-    <div>
-      <div class="flex items-center space-x-3">
-        <img src="assets/arvin-white.png" alt="Logo" class="h-10 mb-4" />
-        <span class="text-3xl font-bold text-white tracking-wider">ARVIN PLUS<sup>TM</sup></span>
+    <div class="sm:col-span-2 lg:col-span-1">
+      <div class="flex items-center gap-2.5 mb-4">
+        <img src="assets/arvin-white.png" alt="ArvinPlus" class="h-9 w-auto" />
+        <span class="text-2xl font-bold text-white tracking-tight">ARVIN PLUS<sup class="text-[10px] text-green-400">TM</sup></span>
       </div>
-
-      <p class="text-white">At ArvinPlus, we believe that true wellness comes from addressing the root cause — not just the symptoms. Our mission is simple:
-to craft clean, research-backed supplements that restore balance to the body and support long-term health</p>
-      <div class="flex space-x-4 mt-4">
-        <a routerLink="/home" class="hover:text-green-400"><i class="fab fa-facebook-f"></i></a>
-        <a href="https://www.instagram.com/arvinplus.in?igsh=MXF5NjlwMml1amJvZQ%3D%3D&utm_source=qr" class="hover:text-green-400" target="_blank"><i class="fab fa-instagram"></i></a>
-        <a href="https://www.youtube.com/@ArvinPlus" target="_blank" class="hover:text-green-400"><i class="fab fa-youtube"></i></a>
-        <a routerLink="/home" class="hover:text-green-400"><i class="fab fa-twitter"></i></a>
+      <p class="text-white/70 text-sm leading-relaxed">
+        Clean, research-backed supplements that restore balance to the body and support long-term health.
+      </p>
+      <div class="flex gap-3 mt-5">
+        <a href="https://www.instagram.com/arvinplus.in?igsh=MXF5NjlwMml1amJvZQ%3D%3D&utm_source=qr" target="_blank" class="w-9 h-9 rounded-full bg-white/10 hover:bg-green-600 flex items-center justify-center transition-colors duration-200"><i class="fab fa-instagram text-sm"></i></a>
+        <a href="https://www.youtube.com/@ArvinPlus" target="_blank" class="w-9 h-9 rounded-full bg-white/10 hover:bg-green-600 flex items-center justify-center transition-colors duration-200"><i class="fab fa-youtube text-sm"></i></a>
+        <a routerLink="/home" class="w-9 h-9 rounded-full bg-white/10 hover:bg-green-600 flex items-center justify-center transition-colors duration-200"><i class="fab fa-facebook-f text-sm"></i></a>
+        <a routerLink="/home" class="w-9 h-9 rounded-full bg-white/10 hover:bg-green-600 flex items-center justify-center transition-colors duration-200"><i class="fab fa-twitter text-sm"></i></a>
       </div>
     </div>
 
-    <!-- Shop -->
+    <!-- Quick Links -->
     <div>
-      <h3 class="font-semibold text-lg mb-4">Shop</h3>
-      <ul class="space-y-2">
-        <li><a routerLink="/home" class="hover:text-green-400">Home</a></li>
-        <li><a routerLink="/products" class="hover:text-green-400">Products</a></li>
-        <li><a routerLink="/our-collections" class="hover:text-green-400">Our Collections</a></li>
+      <h3 class="font-semibold text-white text-sm uppercase tracking-widest mb-5">Shop</h3>
+      <ul class="space-y-3 text-sm text-white/70">
+        <li><a routerLink="/home" class="hover:text-white transition-colors">Home</a></li>
+        <li><a routerLink="/products" class="hover:text-white transition-colors">Products</a></li>
+        <li><a routerLink="/our-collections" class="hover:text-white transition-colors">Our Collections</a></li>
       </ul>
     </div>
 
-    <!-- Explore -->
+    <!-- Support -->
     <div>
-      <h3 class="font-semibold text-lg mb-4">Explore</h3>
-      <ul class="space-y-2">
-        <li><a routerLink="/about-us" class="hover:text-green-400">About Us</a></li>
-        <li><a routerLink="/contact-us" class="hover:text-green-400">Contact Us</a></li>
-        <li><a routerLink="/home" class="hover:text-green-400">Terms of Service</a></li>
-        <li><a routerLink="/home" class="hover:text-green-400">Refund Policy</a></li>
+      <h3 class="font-semibold text-white text-sm uppercase tracking-widest mb-5">Support</h3>
+      <ul class="space-y-3 text-sm text-white/70">
+        <li><a routerLink="/about-us" class="hover:text-white transition-colors">About Us</a></li>
+        <li><a routerLink="/contact-us" class="hover:text-white transition-colors">Contact Us</a></li>
+        <li><a routerLink="/terms-conditions" class="hover:text-white transition-colors">Terms of Service</a></li>
+        <li><a routerLink="/return-policy" class="hover:text-white transition-colors">Refund Policy</a></li>
+        <li><a routerLink="/cancellation-policy" class="hover:text-white transition-colors">Cancellation Policy</a></li>
       </ul>
     </div>
 
-    <!-- Important Links -->
+    <!-- Contact & Policies -->
     <div>
-      <h3 class="font-semibold text-lg mb-4">Important Links</h3>
-      <ul class="space-y-2">
-        <li><a routerLink="/home" class="hover:text-green-400">Privacy Policy</a></li>
-        <li><a routerLink="/home" class="hover:text-green-400">Shipping Policy</a></li>
-        <li><a routerLink="/home" class="hover:text-green-400">Quality Certifications</a></li>
+      <h3 class="font-semibold text-white text-sm uppercase tracking-widest mb-5">Policies</h3>
+      <ul class="space-y-3 text-sm text-white/70 mb-6">
+        <li><a routerLink="/privacy-policy" class="hover:text-white transition-colors">Privacy Policy</a></li>
+        <li><a routerLink="/shipping-policy" class="hover:text-white transition-colors">Shipping Policy</a></li>
+        <li><a routerLink="/quality-certifications" class="hover:text-white transition-colors">Quality Certifications</a></li>
       </ul>
-      <div class="mt-6">
-        <p class="font-medium">Get in Touch</p>
-        <p class="text-sm mt-2">+91 +91 99906 96316</p>
-        <p class="text-sm">care&#64;arvinplus.in</p>
-      </div>
+      <h3 class="font-semibold text-white text-sm uppercase tracking-widest mb-3">Get in Touch</h3>
+      <p class="text-sm text-white/70">+91 99906 96316</p>
+      <p class="text-sm text-white/70">arvinplus.in&#64;gmail.com</p>
     </div>
   </div>
 
-  <!-- Payment Icons -->
-  <div class="border-t border-green-800 mt-10 pt-6">
-    <div class="flex flex-wrap justify-center items-center space-x-4">
-
-      <!-- VISA -->
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 30" class="h-6 w-auto bg-white rounded p-1">
-        <rect width="48" height="30" fill="#1a1f71"/>
-        <text x="8" y="20" fill="white" font-family="Arial Black" font-size="12">VISA</text>
-      </svg>
-
-      <!-- RUPAY -->
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 30" class="h-6 w-auto bg-white rounded p-1">
-        <rect width="48" height="30" fill="#005daa"/>
-        <text x="5" y="20" fill="white" font-family="Arial Black" font-size="10">RUPAY</text>
-      </svg>
-
-      <!-- MASTERCARD -->
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 30" class="h-6 w-auto bg-white rounded p-1">
-        <circle cx="18" cy="15" r="7" fill="#eb001b"/>
-        <circle cx="28" cy="15" r="7" fill="#f79e1b" fill-opacity="0.9"/>
-        <text x="7" y="27" fill="#000" font-family="Arial Black" font-size="6">MASTERCARD</text>
-      </svg>
-
-      <!-- PAYTM -->
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 30" class="h-6 w-auto bg-white rounded p-1">
-        <rect width="48" height="30" fill="#00baf2"/>
-        <text x="5" y="20" fill="#002970" font-family="Arial Black" font-size="10">PAYTM</text>
-      </svg>
-
-      <!-- GPAY -->
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 30" class="h-6 w-auto bg-white rounded p-1">
-        <rect width="48" height="30" fill="#fff"/>
-        <text x="10" y="20" fill="#4285F4" font-family="Arial Black" font-size="10">G</text>
-        <text x="18" y="20" fill="#000" font-family="Arial Black" font-size="10">Pay</text>
-      </svg>
-
-      <!-- AMEX -->
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 30" class="h-6 w-auto bg-white rounded p-1">
-        <rect width="48" height="30" fill="#2e77bc"/>
-        <text x="5" y="20" fill="white" font-family="Arial Black" font-size="9">AMEX</text>
-      </svg>
-
+  <!-- Payment Methods + Copyright -->
+  <div class="border-t border-white/10">
+    <div class="max-w-7xl mx-auto px-6 py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex flex-wrap items-center gap-3">
+        <span class="text-xs text-white/50 uppercase tracking-wider">We Accept</span>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 30" class="h-7 w-auto bg-white rounded-md p-1"><rect width="48" height="30" fill="#1a1f71"/><text x="8" y="20" fill="white" font-family="Arial Black" font-size="11">VISA</text></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 30" class="h-7 w-auto bg-white rounded-md p-1"><rect width="48" height="30" fill="#005daa"/><text x="5" y="20" fill="white" font-family="Arial Black" font-size="9">RUPAY</text></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 30" class="h-7 w-auto bg-white rounded-md p-1"><circle cx="18" cy="15" r="7" fill="#eb001b"/><circle cx="28" cy="15" r="7" fill="#f79e1b" fill-opacity="0.9"/><text x="7" y="27" fill="#000" font-family="Arial Black" font-size="5.5">MASTERCARD</text></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 30" class="h-7 w-auto bg-white rounded-md p-1"><rect width="48" height="30" fill="#00baf2"/><text x="5" y="20" fill="#002970" font-family="Arial Black" font-size="9">PAYTM</text></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 30" class="h-7 w-auto bg-white rounded-md p-1"><rect width="48" height="30" fill="#fff"/><text x="9" y="20" fill="#4285F4" font-family="Arial Black" font-size="9">G</text><text x="17" y="20" fill="#000" font-family="Arial Black" font-size="9">Pay</text></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 30" class="h-7 w-auto bg-white rounded-md p-1"><rect width="48" height="30" fill="#2e77bc"/><text x="5" y="20" fill="white" font-family="Arial Black" font-size="8">AMEX</text></svg>
+      </div>
+      <p class="text-xs text-white/50">© 2022, Anira Chemicals Private Limited. All rights reserved.</p>
     </div>
-  </div>
-
-  <!-- Copyright -->
-  <div class="text-center text-sm text-gray-400 mt-4">
-    © 2022, Anira Chemicals Private Limited
   </div>
 </footer>

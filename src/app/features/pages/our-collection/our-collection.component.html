@@ -1,68 +1,74 @@
-<div class="px-8 container min-w-screen-lg mx-auto">
+<!-- Video Hero Section -->
+<!-- <div class="relative w-full h-[60vh] sm:h-[70vh] lg:h-[80vh] overflow-hidden">
+  <video
+    #heroVideo
+    src="assets/video.mp4"
+    autoplay
+    muted
+    loop
+    playsinline
+    class="w-full h-full object-cover"
+    (mouseenter)="pauseVideo(heroVideo)"
+    (mouseleave)="playVideo(heroVideo)"
+  ></video>
+  <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent flex items-center justify-center">
+    <div class="text-center px-4">
+      <span class="inline-block text-green-300 font-semibold text-sm uppercase tracking-widest mb-3">Explore</span>
+      <h1 class="text-white text-4xl md:text-5xl lg:text-6xl font-bold drop-shadow-lg leading-tight">
+        Our Collections
+      </h1>
+      <p class="text-white/80 text-lg mt-4 max-w-xl mx-auto">Discover premium supplements crafted for your wellness journey.</p>
+    </div>
+  </div>
+</div> -->
 
-    <div class="w-full">
-    <!-- Top Hero Video Section -->
-        <div class="relative w-full h-[80vh] overflow-hidden">
-            <video
-            #heroVideo
-            src="assets/video.mp4"
-            autoplay
-            muted
-            loop
-            playsinline
-            class="w-full h-full w-object-fill"
-            (mouseenter)="pauseVideo(heroVideo)"
-            (mouseleave)="playVideo(heroVideo)"
-            ></video>
-
-            <!-- Optional video overlay text -->
-            <div class="absolute inset-0 bg-black/20 flex items-center justify-center">
-            <h1 class="text-white text-4xl md:text-5xl font-bold drop-shadow-lg">
-                Our Collections
-            </h1>
-            </div>
-        </div>
-
-        <!-- Content Section -->
-        <div class="max-w-6xl mx-auto px-6 py-12">
-            <h2 class="text-2xl font-semibold mb-6">Explore Our Premium Product Collections</h2>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-
-            <div
-                class="border rounded-lg p-4 shadow-sm hover:shadow-xl transition cursor-pointer"
-            >
-                <!-- <img src="assets/images/collection1.jpg" class="w-full rounded-lg mb-4" /> -->
-                <h3 class="text-xl font-semibold">Home Care</h3>
-                <p class="text-gray-600 text-sm mt-2">
-                A variety of high-quality cleaning & home care products.
-                </p>
-            </div>
-
-            <div
-                class="border rounded-lg p-4 shadow-sm hover:shadow-xl transition cursor-pointer"
-            >
-                <!-- <img src="assets/images/collection2.jpg" class="w-full rounded-lg mb-4" /> -->
-                <h3 class="text-xl font-semibold">Personal Care</h3>
-                <p class="text-gray-600 text-sm mt-2">
-                Explore our range of skincare & wellness products.
-                </p>
-            </div>
-
-            <div
-                class="border rounded-lg p-4 shadow-sm hover:shadow-xl transition cursor-pointer"
-            >
-                <!-- <img src="assets/images/collection3.jpg" class="w-full rounded-lg mb-4" /> -->
-                <h3 class="text-xl font-semibold">Industrial</h3>
-                <p class="text-gray-600 text-sm mt-2">
-                High-grade industrial chemical solutions for enterprises.
-                </p>
-            </div>
-
-            </div>
-        </div>
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <!-- Collections Grid -->
+  <section class="py-16 lg:py-20">
+    <div class="text-center mb-12">
+      <span class="inline-block text-green-700 font-semibold text-sm uppercase tracking-widest mb-2">Categories</span>
+      <h2 class="text-3xl lg:text-4xl font-bold text-gray-900">Explore Our Premium Collections</h2>
+      <p class="text-gray-500 mt-3 max-w-xl mx-auto">Find the perfect supplements tailored to your specific health needs.</p>
     </div>
 
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+      <div class="group relative rounded-2xl overflow-hidden bg-white border border-gray-100 hover:border-green-100 hover:shadow-xl transition-all duration-300 p-6 lg:p-8">
+        <div class="w-14 h-14 rounded-2xl bg-green-100 flex items-center justify-center mb-5 group-hover:bg-green-200 transition-colors">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" class="w-7 h-7 text-green-700"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5m8.25 3v6.75m0 0l-3-3m3 3l3-3M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z"/></svg>
+        </div>
+        <h3 class="text-xl font-bold text-gray-900 mb-2">Vitamins & Minerals</h3>
+        <p class="text-gray-500 text-sm leading-relaxed">Essential daily nutrients to support overall health and fill nutritional gaps.</p>
+        <div class="mt-5 flex items-center text-green-700 font-semibold text-sm group-hover:gap-2 transition-all">
+          <span>Explore Range</span>
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" class="w-4 h-4 ml-1"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
+        </div>
+      </div>
 
-    <app-product-lists></app-product-lists>
+      <div class="group relative rounded-2xl overflow-hidden bg-white border border-gray-100 hover:border-green-100 hover:shadow-xl transition-all duration-300 p-6 lg:p-8">
+        <div class="w-14 h-14 rounded-2xl bg-green-100 flex items-center justify-center mb-5 group-hover:bg-green-200 transition-colors">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" class="w-7 h-7 text-green-700"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/></svg>
+        </div>
+        <h3 class="text-xl font-bold text-gray-900 mb-2">Wellness & Vitality</h3>
+        <p class="text-gray-500 text-sm leading-relaxed">Targeted formulations for energy, vitality, immune support, and daily wellness.</p>
+        <div class="mt-5 flex items-center text-green-700 font-semibold text-sm group-hover:gap-2 transition-all">
+          <span>Explore Range</span>
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" class="w-4 h-4 ml-1"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
+        </div>
+      </div>
+
+      <div class="group relative rounded-2xl overflow-hidden bg-white border border-gray-100 hover:border-green-100 hover:shadow-xl transition-all duration-300 p-6 lg:p-8">
+        <div class="w-14 h-14 rounded-2xl bg-green-100 flex items-center justify-center mb-5 group-hover:bg-green-200 transition-colors">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" class="w-7 h-7 text-green-700"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/></svg>
+        </div>
+        <h3 class="text-xl font-bold text-gray-900 mb-2">Specialty Supplements</h3>
+        <p class="text-gray-500 text-sm leading-relaxed">Advanced formulations targeting specific health concerns like liver, digestion & skin.</p>
+        <div class="mt-5 flex items-center text-green-700 font-semibold text-sm group-hover:gap-2 transition-all">
+          <span>Explore Range</span>
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" class="w-4 h-4 ml-1"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <app-product-lists></app-product-lists>
 </div>

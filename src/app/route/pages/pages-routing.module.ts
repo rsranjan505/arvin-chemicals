@@ -46,6 +46,54 @@ const routes: Routes = [
             (m) => m.ContactUsComponent
           ),
       },
+      {
+        path: 'terms-conditions',
+        pathMatch: 'full',
+        loadComponent: () =>
+          import(
+            '../../features/pages/term-condition/term-condition.component'
+          ).then((m) => m.TermConditionComponent),
+      },
+      {
+        path: 'return-policy',
+        pathMatch: 'full',
+        loadComponent: () =>
+          import(
+            '../../features/pages/return-policy/return-policy.component'
+          ).then((m) => m.ReturnPolicyComponent),
+      },
+      {
+        path: 'privacy-policy',
+        pathMatch: 'full',
+        loadComponent: () =>
+          import(
+            '../../features/pages/privacy-policy/privacy-policy.component'
+          ).then((m) => m.PrivacyPolicyComponent),
+      },
+      {
+        path: 'cancellation-policy',
+        pathMatch: 'full',
+        loadComponent: () =>
+          import(
+            '../../features/pages/concellation-policy/concellation-policy.component'
+          ).then((m) => m.ConcellationPolicyComponent),
+      },
+      {
+        path: 'shipping-policy',
+        pathMatch: 'full',
+        loadComponent: () =>
+          import(
+            '../../features/pages/shipping-policy/shipping-policy.component'
+          ).then((m) => m.ShippingPolicyComponent),
+      },
+      {
+        path: 'quality-certifications',
+        pathMatch: 'full',
+        loadComponent: () =>
+          import(
+            '../../features/pages/quality-certifications/quality-certifications.component'
+          ).then((m) => m.QualityCertificationsComponent),
+      },
       // {
       //   path: 'products',
       //   pathMatch: 'full',

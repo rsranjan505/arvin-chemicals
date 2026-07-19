@@ -1,103 +1,92 @@
 <section class="relative w-full overflow-hidden">
-  <!-- SLIDER CONTAINER -->
-  <div class="relative w-full h-[80vh] overflow-hidden">
-    <!-- LEFT ARROW -->
+  <div class="relative w-full h-[60vh] sm:h-[70vh] lg:h-[85vh] overflow-hidden">
+    <!-- Left Arrow -->
     <button
       (click)="prevSlide()"
-      class="absolute left-4 top-1/2 -translate-y-1/2 z-50 bg-white/40 hover:bg-white/70 text-green-900 p-3 rounded-full shadow-lg transition"
+      class="absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 z-40 bg-white/20 hover:bg-white/40 backdrop-blur-sm text-white p-2.5 sm:p-3.5 rounded-full shadow-lg transition-all duration-300 hover:scale-105"
     >
-      &#10094;
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 sm:w-6 sm:h-6">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+      </svg>
     </button>
 
-    <!-- RIGHT ARROW -->
+    <!-- Right Arrow -->
     <button
       (click)="nextSlide()"
-      class="absolute right-4 top-1/2 -translate-y-1/2 z-50 bg-white/40 hover:bg-white/70 text-green-900 p-3 rounded-full shadow-lg transition"
+      class="absolute right-3 sm:right-6 top-1/2 -translate-y-1/2 z-40 bg-white/20 hover:bg-white/40 backdrop-blur-sm text-white p-2.5 sm:p-3.5 rounded-full shadow-lg transition-all duration-300 hover:scale-105"
     >
-      &#10095;
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 sm:w-6 sm:h-6">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+      </svg>
     </button>
 
-    <!-- SLIDE WRAPPER -->
+    <!-- Slides -->
     <div
       class="flex h-full transition-transform duration-700 ease-in-out"
       [style.transform]="'translateX(-' + currentIndex * 100 + 'vw)'"
     >
-      <!-- EACH SLIDE -->
       <div
         *ngFor="let slide of slides"
         class="w-screen h-full flex-shrink-0 relative"
       >
-        <!-- BACKGROUND IMAGE -->
-        <img [src]="slide.image" class="w-full h-full object-cover" />
-
-        <!-- DARK OVERLAY -->
-        <!-- <div class="absolute inset-0 bg-black bg-opacity-20"></div> -->
-
-        <!-- SLIDE CONTENT -->
+        <img [src]="slide.image" class="w-full h-full object-fill" />
+        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
         <div
-          class="absolute inset-0 flex flex-col justify-center items-center px-10 lg:px-28 text-white"
+          class="absolute inset-0 flex flex-col justify-center items-center px-6 sm:px-10 lg:px-28 text-white text-center"
         >
-          <h1 class="text-4xl md:text-6xl font-bold drop-shadow-lg">
+          <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold drop-shadow-lg leading-tight">
             {{ slide.title }}
           </h1>
-          <p class="text-lg md:text-2xl mt-4 max-w-2xl drop-shadow-lg">
+          <p class="text-sm sm:text-lg md:text-xl lg:text-2xl mt-3 sm:mt-4 max-w-2xl drop-shadow-lg text-white/90">
             {{ slide.subtitle }}
           </p>
+          <!-- <button class="mt-6 sm:mt-8 bg-white text-green-900 font-semibold px-6 sm:px-8 py-2.5 sm:py-3.5 rounded-full hover:bg-green-50 transition-all duration-300 shadow-lg hover:shadow-xl text-sm sm:text-base">
+            {{ slide.button }}
+          </button> -->
         </div>
       </div>
     </div>
   </div>
 
-  <!-- INDICATORS -->
-  <div class="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-3 z-50">
+  <!-- Indicators -->
+  <div class="absolute bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2 flex gap-2.5 z-40">
     <div
       *ngFor="let slide of slides; let i = index"
-      class="w-3 h-3 rounded-full transition-all duration-300"
-      [class.bg-green-800]="i === currentIndex"
-      [class.bg-white]="i !== currentIndex"
+      (click)="currentIndex = i"
+      class="rounded-full h-2.5 transition-all duration-300 cursor-pointer"
+      [ngClass]="i === currentIndex ? 'w-8 bg-white' : 'w-2.5 bg-white/50'"
     ></div>
   </div>
 </section>
 
-<section class="relative w-full bg-gray-50 border-b">
-  <div
-    class="flex flex-wrap justify-center items-center text-gray-700 text-sm border-t bg-white py-3"
-  >
-    <div class="flex ">
-      <div class="flex flex-wrap justify-center items-center ">
-        <div class="flex items-center space-x-2 mx-4 md:py-0 py-1">
-          <span class="whitespace-nowrap font-bold">CLINICALLY PROVEN</span>
-        </div>
-        <div class="flex items-center space-x-2 mx-4 md:py-0 py-1">
-          <span class="whitespace-nowrap font-bold">NO SIDE EFFECTS</span>
-        </div>
-        <div class="flex items-center space-x-2 mx-4 md:py-0 py-1">
-          <span class="whitespace-nowrap font-bold">100% BIOAVAILABLE</span>
-        </div>
-        <div class="flex items-center space-x-2 mx-4 md:py-0 py-1">
-          <span class="whitespace-nowrap font-bold"
-            >ADVANCED NANOTECHNOLOGY</span
-          >
-        </div>
+<!-- Trust Bar -->
+<section class="relative w-full bg-white border-b border-gray-100">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-0 md:gap-0">
+      <div class="flex items-center justify-center gap-2.5 py-3.5 sm:py-4 border-b md:border-b-0 md:border-r border-gray-100">
+        <svg class="w-4 h-4 sm:w-5 sm:h-5 text-green-700 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <span class="text-[11px] sm:text-xs font-bold text-gray-700 tracking-wider whitespace-nowrap">CLINICALLY PROVEN</span>
       </div>
-
-      <!-- SAME SET AGAIN FOR LOOP -->
-      <!-- <div class="flex">
-        <div class="flex items-center space-x-2 mx-4">
-          <span class="whitespace-nowrap font-bold">CLINICALLY PROVEN</span>
-        </div>
-        <div class="flex items-center space-x-2 mx-4">
-          <span class="whitespace-nowrap font-bold">NO SIDE EFFECTS</span>
-        </div>
-        <div class="flex items-center space-x-2 mx-4">
-          <span class="whitespace-nowrap font-bold">100% BIOAVAILABLE</span>
-        </div>
-        <div class="flex items-center space-x-2 mx-4">
-          <span class="whitespace-nowrap font-bold"
-            >ADVANCED NANOTECHNOLOGY</span
-          >
-        </div>
-      </div> -->
+      <div class="flex items-center justify-center gap-2.5 py-3.5 sm:py-4 border-b md:border-b-0 md:border-r border-gray-100">
+        <svg class="w-4 h-4 sm:w-5 sm:h-5 text-green-700 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <span class="text-[11px] sm:text-xs font-bold text-gray-700 tracking-wider whitespace-nowrap">NO SIDE EFFECTS</span>
+      </div>
+      <div class="flex items-center justify-center gap-2.5 py-3.5 sm:py-4 md:border-r border-gray-100">
+        <svg class="w-4 h-4 sm:w-5 sm:h-5 text-green-700 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <span class="text-[11px] sm:text-xs font-bold text-gray-700 tracking-wider whitespace-nowrap">100% BIOAVAILABLE</span>
+      </div>
+      <div class="flex items-center justify-center gap-2.5 py-3.5 sm:py-4">
+        <svg class="w-4 h-4 sm:w-5 sm:h-5 text-green-700 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <span class="text-[11px] sm:text-xs font-bold text-gray-700 tracking-wider whitespace-nowrap">ADVANCED NANOTECHNOLOGY</span>
+      </div>
     </div>
   </div>
 </section>

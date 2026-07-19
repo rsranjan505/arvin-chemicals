@@ -1,21 +1,24 @@
-import { CommonModule, NgFor } from '@angular/common';
-import { Component, Input, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, inject, HostListener } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ProductService } from '../../../../services/product/product.service';
 import { ActivatedRoute } from '@angular/router';
+import { SeoService } from '../../../../services/seo/seo.service';
 
 @Component({
   selector: 'app-item-details',
-  imports: [NgFor, CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink],
   templateUrl: './item-details.component.html',
   styleUrl: './item-details.component.css',
 })
 export class ItemDetailsComponent {
-  constructor(private route: ActivatedRoute) {}
+  constructor(private route: ActivatedRoute, private seo: SeoService) {}
 
   private productService = inject(ProductService);
 
   product: any | null;
+
+  selectedImage: string = '';
 
   ngOnInit() {
     this.route.paramMap.subscribe((params) => {
@@ -37,8 +40,117 @@ export class ItemDetailsComponent {
           'Skin Diseases',
         ],
       };
-      console.log('product:', this.product);
+      this.selectedImage = this.product?.image || '';
+
+      if (this.product) {
+        this.seo.setPageSeo({
+          title: `${this.product.name} | ArvinPlus™`,
+          description: `Buy ${this.product.name} — ${this.product.subtitle}. ${this.product.desc?.substring(0, 120)} Free shipping. GMP certified.`,
+          keywords: `${this.product.name.toLowerCase()}, ${(this.product.benefits || []).slice(0, 3).join(', ').toLowerCase()}, ayurvedic supplements, ArvinPlus`,
+          image: this.product.image,
+          url: `https://arvinplus.in/products/${this.product.slug}`,
+          type: 'product',
+          jsonLd: {
+            '@context': 'https://schema.org',
+            '@type': 'Product',
+            name: this.product.name,
+            description: this.product.subtitle,
+            image: this.product.image,
+            offers: {
+              '@type': 'Offer',
+              price: this.product.price,
+              priceCurrency: 'INR',
+              availability: 'https://schema.org/InStock',
+            },
+            brand: {
+              '@type': 'Brand',
+              name: 'ArvinPlus™',
+            },
+          },
+        });
+      }
     });
+  }
+
+  selectImage(img: string) {
+    this.selectedImage = img;
+  }
+
+  zoomStyle: { transform: string; transformOrigin?: string } = { transform: 'scale(1)' };
+
+  onMouseMove(e: MouseEvent) {
+    const container = e.currentTarget as HTMLElement;
+    const rect = container.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top) / rect.height) * 100;
+    this.zoomStyle = {
+      transform: `scale(2.5)`,
+      transformOrigin: `${x}% ${y}%`,
+    };
+  }
+
+  onMouseLeave() {
+    this.zoomStyle = { transform: 'scale(1)' };
+  }
+
+  isModalOpen = false;
+  modalSelectedImage: string = '';
+  modalZoomed = false;
+
+  openModal() {
+    this.modalSelectedImage = this.selectedImage;
+    this.modalZoomed = false;
+    this.isModalOpen = true;
+    document.body.style.overflow = 'hidden';
+  }
+
+  closeModal() {
+    this.isModalOpen = false;
+    this.modalZoomed = false;
+    document.body.style.overflow = '';
+  }
+
+  toggleModalZoom() {
+    this.modalZoomed = !this.modalZoomed;
+  }
+
+  selectModalImage(img: string) {
+    this.modalSelectedImage = img;
+    this.modalZoomed = false;
+  }
+
+  get currentIndex(): number {
+    return this.product?.images?.indexOf(this.modalSelectedImage) ?? 0;
+  }
+
+  prevImage() {
+    const images = this.product?.images;
+    if (!images?.length) return;
+    const idx = (this.currentIndex - 1 + images.length) % images.length;
+    this.modalSelectedImage = images[idx];
+    this.modalZoomed = false;
+  }
+
+  nextImage() {
+    const images = this.product?.images;
+    if (!images?.length) return;
+    const idx = (this.currentIndex + 1) % images.length;
+    this.modalSelectedImage = images[idx];
+    this.modalZoomed = false;
+  }
+
+  onModalBackdropClick(e: MouseEvent) {
+    if ((e.target as HTMLElement).classList.contains('modal-backdrop')) {
+      this.closeModal();
+    }
+  }
+
+  @HostListener('document:keydown', ['$event'])
+  onModalKeydown(e: KeyboardEvent) {
+    if (!this.isModalOpen) return;
+    if (e.key === 'Escape') this.closeModal();
+    if (e.key === 'ArrowLeft') this.prevImage();
+    if (e.key === 'ArrowRight') this.nextImage();
   }
 
   // @Input() product = {
