@@ -1,0 +1,89 @@
+<section class="py-16 lg:py-20 bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-12">
+      <span class="inline-block text-green-700 font-semibold text-sm uppercase tracking-widest mb-2">Wellness Journal</span>
+      <h2 class="text-3xl md:text-4xl font-bold text-gray-900">Latest From the Blog</h2>
+      <p class="text-gray-500 mt-3 max-w-xl mx-auto">Science-backed tips on liver health, gut balance, immunity and more.</p>
+    </div>
+
+    <!-- Skeleton -->
+    <div *ngIf="loading" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+      <div *ngFor="let x of [1, 2, 3]" class="animate-pulse rounded-2xl overflow-hidden bg-white border border-gray-100">
+        <div class="h-44 bg-gray-200"></div>
+        <div class="p-6 space-y-3">
+          <div class="h-4 bg-gray-200 w-1/3 rounded-lg"></div>
+          <div class="h-5 bg-gray-200 w-3/4 rounded-lg"></div>
+          <div class="h-4 bg-gray-200 w-full rounded-lg"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Post Grid -->
+    <div *ngIf="!loading && posts.length > 0" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+      <a
+        *ngFor="let post of posts"
+        [routerLink]="['/blog', post.slug]"
+        class="group bg-white rounded-2xl overflow-hidden border border-gray-100 hover:border-green-100 hover:shadow-xl transition-all duration-300 flex flex-col"
+      >
+        <!-- Cover -->
+        <div class="relative h-44 overflow-hidden bg-green-50">
+          <img
+            *ngIf="post.cover_url"
+            [src]="post.cover_url"
+            [alt]="post.title"
+            class="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+            loading="lazy"
+          />
+          <div
+            *ngIf="!post.cover_url"
+            class="h-full w-full flex flex-col items-center justify-center bg-gradient-to-br from-green-100 via-emerald-50 to-green-200"
+          >
+            <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" class="w-10 h-10 text-green-700/50 mb-2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 01-2.25 2.25M16.5 7.5V18a2.25 2.25 0 002.25 2.25M16.5 7.5V4.875c0-.621-.504-1.125-1.125-1.125H4.125C3.504 3.75 3 4.254 3 4.875V18a2.25 2.25 0 002.25 2.25h13.5M6 7.5h3v3H6v-3z" />
+            </svg>
+            <span class="text-xs font-semibold uppercase tracking-widest text-green-700/60">{{ post.category?.name || 'Wellness' }}</span>
+          </div>
+          <span
+            *ngIf="post.category"
+            class="absolute top-3 left-3 z-10 inline-block bg-white/90 backdrop-blur-sm text-green-800 text-xs font-semibold px-3 py-1 rounded-full shadow-sm"
+          >
+            {{ post.category.name }}
+          </span>
+        </div>
+
+        <!-- Body -->
+        <div class="p-6 flex flex-col flex-1">
+          <div class="flex items-center gap-3 text-xs text-gray-400 mb-3">
+            <span>{{ post.published_at }}</span>
+            <span class="w-1 h-1 rounded-full bg-gray-300"></span>
+            <span>{{ post.reading_time }} min read</span>
+          </div>
+          <h3 class="text-lg font-bold text-gray-900 group-hover:text-green-700 transition-colors leading-snug line-clamp-2">
+            {{ post.title }}
+          </h3>
+          <p class="text-sm text-gray-500 mt-2 line-clamp-2">{{ post.excerpt }}</p>
+
+          <div class="mt-auto pt-4 flex items-center justify-between">
+            <span class="text-xs text-gray-400">{{ post.author?.name || 'ArvinPlus Team' }}</span>
+            <span class="inline-flex items-center gap-1 text-sm font-semibold text-green-700">
+              Read Article
+              <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" class="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12l-7.5 7.5M21 12H3" />
+              </svg>
+            </span>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <!-- View More -->
+    <div *ngIf="!loading" class="text-center mt-12">
+      <a
+        routerLink="/blog"
+        class="inline-flex items-center justify-center border-2 border-green-700 text-green-700 font-semibold px-10 py-3.5 rounded-xl hover:bg-green-700 hover:text-white transition-all duration-200"
+      >
+        View More Articles
+      </a>
+    </div>
+  </div>
+</section>

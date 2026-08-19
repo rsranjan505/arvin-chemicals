@@ -1,9 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, HostListener } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { ProductService } from '../../../../services/product/product.service';
+import {
+  ProductService,
+  ProductDetail,
+} from '../../../../services/product/product.service';
 import { ActivatedRoute } from '@angular/router';
 import { SeoService } from '../../../../services/seo/seo.service';
+import { CartService } from '../../../../services/cart/cart.service';
 
 @Component({
   selector: 'app-item-details',
@@ -15,65 +19,138 @@ export class ItemDetailsComponent {
   constructor(private route: ActivatedRoute, private seo: SeoService) {}
 
   private productService = inject(ProductService);
+  private cartService = inject(CartService);
 
-  product: any | null;
+  product: ProductDetail | null = null;
+
+  loading = true;
+  notFound = false;
 
   selectedImage: string = '';
 
+  added = false;
+
   ngOnInit() {
-    this.route.paramMap.subscribe((params) => {
+    this.route.paramMap.subscribe(async (params) => {
       const slug = params.get('slug');
 
       if (!slug) return;
 
-      this.product = {
-        ...this.productService.getProductBySlug(slug),
+      this.loading = true;
+      this.notFound = false;
 
-        tags: [
-          'Detoxification',
-          'Digestive Issues',
-          'Fatty Liver',
-          'Hormonal Imbalance',
-          'Milk Thistle',
-          'N-Acetyl Cysteine',
-          'Pigmentation',
-          'Skin Diseases',
-        ],
-      };
-      this.selectedImage = this.product?.image || '';
+      try {
+        const product = await this.productService.getProductBySlug(slug);
 
-      if (this.product) {
-        this.seo.setPageSeo({
-          title: `${this.product.name} | ArvinPlus™`,
-          description: `Buy ${this.product.name} — ${this.product.subtitle}. ${this.product.desc?.substring(0, 120)} Free shipping. GMP certified.`,
-          keywords: `${this.product.name.toLowerCase()}, ${(this.product.benefits || []).slice(0, 3).join(', ').toLowerCase()}, ayurvedic supplements, ArvinPlus`,
-          image: this.product.image,
-          url: `https://arvinplus.in/products/${this.product.slug}`,
-          type: 'product',
-          jsonLd: {
-            '@context': 'https://schema.org',
-            '@type': 'Product',
-            name: this.product.name,
-            description: this.product.subtitle,
-            image: this.product.image,
-            offers: {
-              '@type': 'Offer',
-              price: this.product.price,
-              priceCurrency: 'INR',
-              availability: 'https://schema.org/InStock',
-            },
-            brand: {
-              '@type': 'Brand',
+        if (!product) {
+          this.notFound = true;
+          this.product = null;
+          return;
+        }
+
+        this.product = product;
+        const images = product.images?.length
+          ? product.images
+          : product.image
+            ? [product.image]
+            : [];
+        this.selectedImage = images[0] || '';
+        this.setSeo(product, images);
+      } catch {
+        this.notFound = true;
+        this.product = null;
+      } finally {
+        this.loading = false;
+      }
+    });
+  }
+
+  private setSeo(product: ProductDetail, images: string[]) {
+    const url = `https://arvinplus.in/products/${product.slug}`;
+    const price = product.sale_price ?? product.price;
+
+    this.seo.setPageSeo({
+      title: product.meta_title || `${product.name}`,
+      description: `${product.meta_description || `Buy ${product.name} — ${product.subtitle}.`} ${(product.description || '').substring(0, 110)} Free shipping across India. GMP certified, FSSAI approved.`,
+      keywords: `${product.name.toLowerCase()}, ${(product.benefits || []).slice(0, 3).join(', ').toLowerCase()}, ayurvedic supplements, herbal supplements India, ArvinPlus`,
+      image: product.image || images[0],
+      url,
+      type: 'product',
+      jsonLd: [
+        {
+          '@context': 'https://schema.org',
+          '@type': 'Product',
+          name: product.name,
+          description: product.subtitle,
+          sku: product.sku || product.slug,
+          image: product.image || images[0],
+          brand: {
+            '@type': 'Brand',
+            name: 'ArvinPlus™',
+            url: 'https://arvinplus.in',
+          },
+          offers: {
+            '@type': 'Offer',
+            url,
+            price,
+            priceCurrency: 'INR',
+            priceValidUntil: new Date(new Date().setFullYear(new Date().getFullYear() + 1))
+              .toISOString()
+              .slice(0, 10),
+            itemCondition: 'https://schema.org/NewCondition',
+            availability: product.in_stock
+              ? 'https://schema.org/InStock'
+              : 'https://schema.org/OutOfStock',
+            seller: {
+              '@type': 'Organization',
               name: 'ArvinPlus™',
             },
           },
-        });
-      }
+        },
+        {
+          '@context': 'https://schema.org',
+          '@type': 'BreadcrumbList',
+          itemListElement: [
+            {
+              '@type': 'ListItem',
+              position: 1,
+              name: 'Home',
+              item: 'https://arvinplus.in',
+            },
+            {
+              '@type': 'ListItem',
+              position: 2,
+              name: 'Our Collections',
+              item: 'https://arvinplus.in/our-collections',
+            },
+            {
+              '@type': 'ListItem',
+              position: 3,
+              name: product.name,
+              item: url,
+            },
+          ],
+        },
+      ],
     });
   }
 
   selectImage(img: string) {
     this.selectedImage = img;
+  }
+
+  addToCart() {
+    if (!this.product) return;
+    this.cartService.addToCart({
+      slug: this.product.slug,
+      name: this.product.name,
+      subtitle: this.product.subtitle,
+      price: this.product.sale_price ?? this.product.price,
+      capsule: this.product.capsule ?? 0,
+      image: this.product.image || (this.product.images?.[0] ?? ''),
+    });
+    this.added = true;
+    setTimeout(() => (this.added = false), 2500);
   }
 
   zoomStyle: { transform: string; transformOrigin?: string } = { transform: 'scale(1)' };
@@ -120,20 +197,21 @@ export class ItemDetailsComponent {
   }
 
   get currentIndex(): number {
-    return this.product?.images?.indexOf(this.modalSelectedImage) ?? 0;
+    const images = this.product?.images ?? [];
+    return images.indexOf(this.modalSelectedImage);
   }
 
   prevImage() {
-    const images = this.product?.images;
-    if (!images?.length) return;
+    const images = this.product?.images ?? [];
+    if (!images.length) return;
     const idx = (this.currentIndex - 1 + images.length) % images.length;
     this.modalSelectedImage = images[idx];
     this.modalZoomed = false;
   }
 
   nextImage() {
-    const images = this.product?.images;
-    if (!images?.length) return;
+    const images = this.product?.images ?? [];
+    if (!images.length) return;
     const idx = (this.currentIndex + 1) % images.length;
     this.modalSelectedImage = images[idx];
     this.modalZoomed = false;
@@ -152,33 +230,6 @@ export class ItemDetailsComponent {
     if (e.key === 'ArrowLeft') this.prevImage();
     if (e.key === 'ArrowRight') this.nextImage();
   }
-
-  // @Input() product = {
-  //   name: 'Liver Detox',
-  //   subtitle: 'Fatty Liver Detox & Cleanse Capsules for Optimum Liver Health',
-  //   price: 1333.0,
-  //   discount: 10,
-  //   description:
-  //     'ARVIN PLUS+ Liver Detox capsules are crafted with powerful natural ingredients like Organic Milk Thistle (Silymarin Extract 80%), Beetroot, Dandelion, and N-Acetyl Cysteine to support optimal liver health.',
-  //   benefits: ['Pigmentation', 'Liver & Skin Health', 'Alcohol Detox'],
-  //   image: 'assets/products/p1.jpeg', // adjust path as needed
-  //   tags: [
-  //     'Detoxification',
-  //     'Digestive Issues',
-  //     'Fatty Liver',
-  //     'Hormonal Imbalance',
-  //     'Milk Thistle',
-  //     'N-Acetyl Cysteine',
-  //     'Pigmentation',
-  //     'Skin Diseases',
-  //   ],
-  //   images: [
-  //     'assets/products/p1.jpeg',
-  //     'assets/products/p1.jpeg',
-  //     'assets/products/p1.jpeg',
-  //     'assets/products/p1.jpeg',
-  //   ],
-  // };
 
   description = [
     'Having potent antioxidant properties is used to prevent liver toxicity by normalizing liver enzymes.',

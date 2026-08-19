@@ -17,25 +17,25 @@ export class HeroSectionComponent  {
     {
       image: 'assets/hero/bg1.png',
       title: 'Welcome to ArvinPlus',
-      subtitle: 'Your trusted partner for premium Health Suppliments.',
+      subtitle: 'Your trusted partner for premium ayurvedic health supplements.',
       button: 'Explore More'
     },
     {
       image: 'assets/hero/bg2.png',
-      title: 'High-Quality Health Suppliments',
-      subtitle: 'Delivering excellence with advanced formulations.',
+      title: 'Research-Backed Ayurvedic Supplements',
+      subtitle: 'Delivering excellence with GMP-certified, FSSAI-approved formulations.',
       button: 'View Products'
     },
     {
       image: 'assets/hero/bg3.png',
-      title: 'Trusted by Leading Industries',
-      subtitle: 'Reliability. Quality. Performance.',
+      title: 'Trusted by 10,000+ Customers',
+      subtitle: 'Reliability. Quality. Purity. Real wellness results across India.',
       button: 'About Us'
     },
     {
       image: 'assets/hero/bg4.png',
       title: 'Innovating for a Better Tomorrow',
-      subtitle: 'Modern Health Suppliments for modern businesses.',
+      subtitle: 'Liver detox, immunity, bone health and vitality — made simple.',
       button: 'Contact Us'
     }
   ];

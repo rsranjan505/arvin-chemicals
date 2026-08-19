@@ -12,8 +12,8 @@ export class PrivacyPolicyComponent implements OnInit {
 
   ngOnInit() {
     this.seo.setPageSeo({
-      title: 'Privacy Policy | ArvinPlus™',
-      description: 'ArvinPlus™ respects your privacy. Read our Privacy Policy to understand how we collect, use, and safeguard your personal information.',
+      title: 'Privacy Policy',
+      description: 'ArvinPlus™ respects your privacy. Read our Privacy Policy to understand how we collect, use, store, and safeguard your personal information when you visit our website or place an order.',
       keywords: 'privacy policy ArvinPlus, data protection, personal information, supplement privacy, ArvinPlus privacy',
       url: 'https://arvinplus.in/privacy-policy',
     });

@@ -14,17 +14,49 @@ const browserDistFolder = resolve(serverDistFolder, '../browser');
 const app = express();
 const angularApp = new AngularNodeAppEngine();
 
+app.use(express.json());
+
 /**
- * Example Express Rest API endpoints can be defined here.
- * Uncomment and define endpoints as necessary.
- *
- * Example:
- * ```ts
- * app.get('/api/**', (req, res) => {
- *   // Handle API request
- * });
- * ```
+ * Base URL of the ArvinPlus backend (Laravel) that owns the storefront
+ * order/payment APIs and the Razorpay webhook.
  */
+const STORE_API_URL = (process.env['STORE_API_URL'] || 'https://admin.arvinplus.in').replace(/\/+$/, '');
+
+const STORE_API_PATHS = ['/api/storefront', '/api/webhooks', '/storage'];
+
+/**
+ * Forward storefront API calls to the Laravel backend so the browser only ever
+ * talks to this same-origin SSR server (no CORS/preflight issues). Payment keys
+ * never leave the backend.
+ */
+app.use(STORE_API_PATHS, async (req, res) => {
+  try {
+    const url = `${STORE_API_URL}${req.originalUrl}`;
+    const body =
+      req.method === 'POST' || req.method === 'PUT' || req.method === 'PATCH'
+        ? JSON.stringify(req.body ?? {})
+        : undefined;
+
+    const response = await fetch(url, {
+      method: req.method,
+      headers: {
+        Accept: 'application/json',
+        ...(body ? { 'Content-Type': 'application/json' } : {}),
+      },
+      body,
+      signal: AbortSignal.timeout(15000),
+    });
+
+    const text = await response.text();
+
+    res.status(response.status);
+    res.setHeader('Content-Type', response.headers.get('content-type') || 'application/json');
+    res.send(text);
+  } catch (err) {
+    console.error('storefront api proxy error', err);
+    res.status(502).json({ success: false, message: 'Storefront API is temporarily unavailable.' });
+  }
+});
 
 /**
  * Serve static files from /browser

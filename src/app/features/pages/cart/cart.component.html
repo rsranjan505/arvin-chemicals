@@ -1,0 +1,96 @@
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-14">
+  <!-- Header -->
+  <div class="text-center mb-10">
+    <span class="inline-block text-green-700 font-semibold text-sm uppercase tracking-widest mb-2">Your Cart</span>
+    <h1 class="text-3xl md:text-4xl font-bold text-gray-900">Shopping Cart</h1>
+  </div>
+
+  <!-- Empty Cart -->
+  <div *ngIf="items.length === 0" class="text-center py-16 bg-white rounded-3xl border border-gray-100">
+    <div class="w-20 h-20 mx-auto rounded-full bg-green-50 flex items-center justify-center mb-6">
+      <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" class="w-10 h-10 text-green-700">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007z" />
+      </svg>
+    </div>
+    <h2 class="text-xl font-bold text-gray-900">Your cart is empty</h2>
+    <p class="text-gray-500 mt-2 mb-8">Browse our premium wellness collection to find what you need.</p>
+    <a routerLink="/" class="inline-block bg-green-700 hover:bg-green-600 text-white font-semibold px-8 py-3 rounded-xl transition-all duration-200 shadow-lg">
+      Start Shopping
+    </a>
+  </div>
+
+  <!-- Cart Content -->
+  <div *ngIf="items.length > 0" class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+    <!-- Items -->
+    <div class="lg:col-span-2 space-y-4">
+      <!-- Free shipping progress -->
+      <div class="bg-white rounded-2xl border border-gray-100 p-4">
+        <p class="text-sm text-gray-600 mb-2">
+          <span *ngIf="freeShippingRemaining > 0">
+            Add <span class="font-semibold text-green-700">₹{{ freeShippingRemaining }}</span> more to get <span class="font-semibold">FREE shipping</span>
+          </span>
+          <span *ngIf="freeShippingRemaining === 0" class="font-semibold text-green-700">You've unlocked FREE shipping!</span>
+        </p>
+        <div class="h-2 bg-gray-100 rounded-full overflow-hidden">
+          <div class="h-full bg-green-600 rounded-full transition-all duration-500" [style.width.%]="(subtotal / freeShippingThreshold) * 100 > 100 ? 100 : (subtotal / freeShippingThreshold) * 100"></div>
+        </div>
+      </div>
+
+      <div *ngFor="let item of items" class="bg-white rounded-2xl border border-gray-100 p-4 sm:p-5 flex gap-4 sm:gap-5">
+        <a [routerLink]="['/products', item.slug]" class="flex-shrink-0 w-24 h-24 sm:w-28 sm:h-28 bg-gray-50 rounded-xl overflow-hidden">
+          <img [src]="item.image" [alt]="item.name" class="w-full h-full object-cover" />
+        </a>
+        <div class="flex-1 min-w-0">
+          <div class="flex items-start justify-between gap-2">
+            <a [routerLink]="['/products', item.slug]" class="font-semibold text-gray-900 hover:text-green-700 transition-colors line-clamp-2">{{ item.name }}</a>
+            <button (click)="remove(item.slug)" class="flex-shrink-0 p-1.5 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors" title="Remove">
+              <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" class="w-4 h-4"><path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"/></svg>
+            </button>
+          </div>
+          <p class="text-xs text-gray-500 mt-0.5 line-clamp-1">{{ item.subtitle }}</p>
+          <div class="flex items-center justify-between mt-3">
+            <div class="flex items-center border border-gray-200 rounded-lg overflow-hidden">
+              <button (click)="decrease(item)" class="px-3 py-1.5 text-gray-600 hover:bg-gray-50 transition-colors">−</button>
+              <span class="px-4 py-1.5 text-sm font-semibold border-x border-gray-200">{{ item.quantity }}</span>
+              <button (click)="increase(item)" class="px-3 py-1.5 text-gray-600 hover:bg-gray-50 transition-colors">+</button>
+            </div>
+            <span class="font-bold text-gray-900">₹{{ item.price * item.quantity }}</span>
+          </div>
+        </div>
+      </div>
+
+      <a routerLink="/" class="inline-flex items-center gap-2 text-sm text-green-700 hover:text-green-600 font-medium">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" class="w-4 h-4"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"/></svg>
+        Continue Shopping
+      </a>
+    </div>
+
+    <!-- Order Summary -->
+    <div class="lg:col-span-1">
+      <div class="bg-white rounded-2xl border border-gray-100 p-6 lg:sticky lg:top-24">
+        <h2 class="text-lg font-bold text-gray-900 mb-5">Order Summary</h2>
+        <div class="space-y-3 text-sm">
+          <div class="flex justify-between text-gray-600">
+            <span>Subtotal</span>
+            <span class="font-medium text-gray-900">₹{{ subtotal }}</span>
+          </div>
+          <div class="flex justify-between text-gray-600">
+            <span>Shipping</span>
+            <span class="font-medium text-gray-900">
+              <span *ngIf="shipping === 0" class="text-green-700">FREE</span>
+              <span *ngIf="shipping > 0">₹{{ shipping }}</span>
+            </span>
+          </div>
+          <div class="border-t border-gray-100 pt-3 flex justify-between items-center">
+            <span class="font-semibold text-gray-900">Total</span>
+            <span class="text-xl font-bold text-gray-900">₹{{ total }}</span>
+          </div>
+        </div>
+        <a routerLink="/checkout" class="mt-6 block w-full bg-green-700 hover:bg-green-600 text-white font-semibold py-3.5 rounded-xl text-center transition-all duration-200 shadow-lg hover:shadow-xl">
+          Proceed to Checkout
+        </a>
+        <p class="text-xs text-gray-400 text-center mt-4">Secure payments powered by Razorpay</p>
+      </div>
+    </div>
+  </div>
+</div>

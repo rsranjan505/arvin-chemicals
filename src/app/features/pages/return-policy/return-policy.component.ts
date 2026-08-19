@@ -12,8 +12,8 @@ export class ReturnPolicyComponent implements OnInit {
 
   ngOnInit() {
     this.seo.setPageSeo({
-      title: 'Return & Refund Policy | ArvinPlus™',
-      description: 'ArvinPlus™ offers a 30-day return policy on eligible products. Learn about our refund process, eligibility criteria, and shipping costs for returns.',
+      title: 'Return & Refund Policy',
+      description: 'ArvinPlus™ offers a 30-day return policy on eligible, unopened products. Learn about our refund process, eligibility criteria, and shipping costs for returns. Full refund within 5–7 business days of approval.',
       keywords: 'return policy ArvinPlus, refund policy, supplement returns India, ayurvedic product refund, ArvinPlus return',
       url: 'https://arvinplus.in/return-policy',
     });

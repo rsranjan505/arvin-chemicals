@@ -26,10 +26,10 @@
       [style.transform]="'translateX(-' + currentIndex * 100 + 'vw)'"
     >
       <div
-        *ngFor="let slide of slides"
+        *ngFor="let slide of slides; let i = index"
         class="w-screen h-full flex-shrink-0 relative"
       >
-        <img [src]="slide.image" class="w-full h-full object-fill" />
+        <img [src]="slide.image" [alt]="slide.title + ' – ArvinPlus ayurvedic supplements'" class="w-full h-full object-fill" [loading]="i === 0 ? 'eager' : 'lazy'" />
         <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
         <div
           class="absolute inset-0 flex flex-col justify-center items-center px-6 sm:px-10 lg:px-28 text-white text-center"

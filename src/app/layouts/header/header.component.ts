@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { CartService } from '../../services/cart/cart.service';
 
 @Component({
   selector: 'app-header',
@@ -13,6 +14,16 @@ export class HeaderComponent implements OnInit {
   mobileOpen = false;
   dropdownOpen = false;
 
+  private cartService = inject(CartService);
+
+  cartCount = 0;
+
+  ngOnInit(): void {
+    this.cartService.items$.subscribe((items) => {
+      this.cartCount = items.reduce((sum, i) => sum + i.quantity, 0);
+    });
+  }
+
   toggleMenu() {
     this.mobileOpen = !this.mobileOpen;
   }
@@ -24,9 +35,6 @@ export class HeaderComponent implements OnInit {
   closeMenu() {
     this.mobileOpen = false;
   }
-
-  ngOnInit(): void {}
-
 
   searchOpen = false;
 

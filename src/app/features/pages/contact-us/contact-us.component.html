@@ -57,10 +57,9 @@
       <div class="pt-4">
         <h3 class="font-semibold text-gray-900 mb-3">Follow Us</h3>
         <div class="flex gap-3">
-          <a href="https://www.instagram.com/arvinplus.in?igsh=MXF5NjlwMml1amJvZQ%3D%3D&utm_source=qr" target="_blank" class="w-10 h-10 rounded-xl bg-gray-100 hover:bg-green-100 flex items-center justify-center transition-colors"><i class="fab fa-instagram text-gray-700 hover:text-green-700"></i></a>
-          <a href="https://www.youtube.com/@ArvinPlus" target="_blank" class="w-10 h-10 rounded-xl bg-gray-100 hover:bg-green-100 flex items-center justify-center transition-colors"><i class="fab fa-youtube text-gray-700 hover:text-green-700"></i></a>
-          <a routerLink="/home" class="w-10 h-10 rounded-xl bg-gray-100 hover:bg-green-100 flex items-center justify-center transition-colors"><i class="fab fa-facebook-f text-gray-700 hover:text-green-700"></i></a>
-          <a routerLink="/home" class="w-10 h-10 rounded-xl bg-gray-100 hover:bg-green-100 flex items-center justify-center transition-colors"><i class="fab fa-twitter text-gray-700 hover:text-green-700"></i></a>
+          <a href="https://www.facebook.com/share/1BMrUckKyE/?mibextid=wwXIfr" target="_blank" rel="noopener" aria-label="ArvinPlus on Facebook" class="w-10 h-10 rounded-xl bg-gray-100 hover:bg-green-100 flex items-center justify-center transition-colors"><i class="fab fa-facebook-f text-gray-700 hover:text-green-700"></i></a>
+          <a href="https://www.instagram.com/arvinplus.in?igsh=MXF5NjlwMml1amJvZQ%3D%3D&utm_source=qr" target="_blank" rel="noopener" aria-label="ArvinPlus on Instagram" class="w-10 h-10 rounded-xl bg-gray-100 hover:bg-green-100 flex items-center justify-center transition-colors"><i class="fab fa-instagram text-gray-700 hover:text-green-700"></i></a>
+          <a href="https://www.youtube.com/@ArvinPlus" target="_blank" rel="noopener" aria-label="ArvinPlus on YouTube" class="w-10 h-10 rounded-xl bg-gray-100 hover:bg-green-100 flex items-center justify-center transition-colors"><i class="fab fa-youtube text-gray-700 hover:text-green-700"></i></a>
         </div>
       </div>
     </div>
@@ -72,6 +71,24 @@
         (ngSubmit)="onSubmit()"
         class="bg-white rounded-3xl shadow-xl border border-gray-100 p-8 lg:p-10 space-y-6"
       >
+        <div
+          *ngIf="submitted"
+          class="rounded-xl border border-green-200 bg-green-50 px-4 py-3 text-sm text-green-800 flex items-start gap-3"
+          role="status"
+        >
+          <i class="bi bi-check-circle-fill text-green-600 text-lg"></i>
+          <span>Thank you! Your enquiry has been received. We will get back to you shortly.</span>
+        </div>
+
+        <div
+          *ngIf="submitError"
+          class="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-800 flex items-start gap-3"
+          role="alert"
+        >
+          <i class="bi bi-exclamation-circle-fill text-red-600 text-lg"></i>
+          <span>{{ submitError }}</span>
+        </div>
+
         <div>
           <label class="block text-gray-700 font-semibold text-sm mb-1.5">Full Name</label>
           <input
@@ -80,6 +97,12 @@
             class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-green-500 focus:border-green-500 focus:outline-none transition-shadow"
             placeholder="Enter your name"
           />
+          <p
+            *ngIf="contactForm.get('name')?.invalid && contactForm.get('name')?.touched"
+            class="mt-1.5 text-xs text-red-600"
+          >
+            Please enter your name.
+          </p>
         </div>
 
         <div>
@@ -90,16 +113,43 @@
             class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-green-500 focus:border-green-500 focus:outline-none transition-shadow"
             placeholder="Enter your email"
           />
+          <p
+            *ngIf="contactForm.get('email')?.invalid && contactForm.get('email')?.touched"
+            class="mt-1.5 text-xs text-red-600"
+          >
+            Please enter a valid email address.
+          </p>
         </div>
 
         <div>
           <label class="block text-gray-700 font-semibold text-sm mb-1.5">Phone Number</label>
           <input
             formControlName="phone"
-            type="text"
+            type="tel"
             class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-green-500 focus:border-green-500 focus:outline-none transition-shadow"
             placeholder="Enter your mobile number"
           />
+          <p
+            *ngIf="contactForm.get('phone')?.invalid && contactForm.get('phone')?.touched"
+            class="mt-1.5 text-xs text-red-600"
+          >
+            Please enter a valid phone number.
+          </p>
+        </div>
+
+        <div>
+          <label class="block text-gray-700 font-semibold text-sm mb-1.5">Subject</label>
+          <select
+            formControlName="subject"
+            class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-green-500 focus:border-green-500 focus:outline-none transition-shadow bg-white"
+          >
+            <option value="General Enquiry">General Enquiry</option>
+            <option value="Product Inquiry">Product Inquiry</option>
+            <option value="Order Support">Order Support</option>
+            <option value="Bulk Purchase">Bulk Purchase</option>
+            <option value="Partnership">Partnership</option>
+            <option value="Feedback">Feedback</option>
+          </select>
         </div>
 
         <div>
@@ -110,15 +160,31 @@
             class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-green-500 focus:border-green-500 focus:outline-none transition-shadow resize-none"
             placeholder="Write your message..."
           ></textarea>
+          <p
+            *ngIf="contactForm.get('message')?.invalid && contactForm.get('message')?.touched"
+            class="mt-1.5 text-xs text-red-600"
+          >
+            Please write a message.
+          </p>
         </div>
 
         <button
           type="submit"
-          class="w-full bg-green-700 hover:bg-green-600 text-white py-3.5 rounded-xl transition-all duration-200 font-semibold shadow-lg hover:shadow-xl text-sm"
+          [disabled]="submitting"
+          class="w-full bg-green-700 hover:bg-green-600 disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:bg-green-700 text-white py-3.5 rounded-xl transition-all duration-200 font-semibold shadow-lg hover:shadow-xl text-sm"
         >
           <span class="flex items-center justify-center gap-2">
-            Send Message
-            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" class="w-4 h-4"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5"/></svg>
+            <svg
+              *ngIf="submitting"
+              class="w-4 h-4 animate-spin"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+              <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
+            </svg>
+            {{ submitting ? 'Sending...' : 'Send Message' }}
+            <svg *ngIf="!submitting" fill="none" stroke="currentColor" viewBox="0 0 24 24" class="w-4 h-4"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5"/></svg>
           </span>
         </button>
       </form>

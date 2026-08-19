@@ -106,6 +106,46 @@ const routes: Routes = [
             '../../features/pages/product-details/product-details.component'
           ).then((m) => m.ProductDetailsComponent),
       },
+      {
+        path: 'cart',
+        pathMatch: 'full',
+        loadComponent: () =>
+          import('../../features/pages/cart/cart.component').then(
+            (m) => m.CartComponent
+          ),
+      },
+      {
+        path: 'checkout',
+        pathMatch: 'full',
+        loadComponent: () =>
+          import('../../features/pages/checkout/checkout.component').then(
+            (m) => m.CheckoutComponent
+          ),
+      },
+      {
+        path: 'order-success',
+        pathMatch: 'full',
+        loadComponent: () =>
+          import('../../features/pages/order-success/order-success.component').then(
+            (m) => m.OrderSuccessComponent
+          ),
+      },
+      {
+        path: 'blog',
+        pathMatch: 'full',
+        loadComponent: () =>
+          import('../../features/pages/blog/blog-list.component').then(
+            (m) => m.BlogListComponent
+          ),
+      },
+      {
+        path: 'blog/:slug',
+        pathMatch: 'full',
+        loadComponent: () =>
+          import('../../features/pages/blog/blog-detail.component').then(
+            (m) => m.BlogDetailComponent
+          ),
+      },
     ],
   },
 ];

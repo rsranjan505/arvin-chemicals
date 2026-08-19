@@ -12,8 +12,8 @@ export class ShippingPolicyComponent implements OnInit {
 
   ngOnInit() {
     this.seo.setPageSeo({
-      title: 'Shipping Policy | ArvinPlus™',
-      description: 'ArvinPlus™ shipping policy — fast delivery across India. Free shipping on eligible orders, tracking provided, and 1-2 business day processing.',
+      title: 'Shipping Policy',
+      description: 'ArvinPlus™ shipping policy — fast delivery across India. Free shipping on orders above ₹999, 1–2 business day processing, order tracking provided, and 5–7 business day delivery.',
       keywords: 'shipping policy ArvinPlus, supplement delivery India, free shipping ayurvedic, order tracking, ArvinPlus shipping',
       url: 'https://arvinplus.in/shipping-policy',
     });

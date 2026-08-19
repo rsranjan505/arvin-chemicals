@@ -12,8 +12,8 @@ export class ConcellationPolicyComponent implements OnInit {
 
   ngOnInit() {
     this.seo.setPageSeo({
-      title: 'Cancellation Policy | ArvinPlus™',
-      description: 'Learn about ArvinPlus™ order cancellation policy. Cancel within 24 hours for a full refund. Shipped orders are subject to our return policy.',
+      title: 'Cancellation Policy',
+      description: 'Learn about ArvinPlus™ order cancellation policy. Cancel within 24 hours of placing your order for a full refund. Already shipped orders are subject to our return policy.',
       keywords: 'cancellation policy ArvinPlus, order cancel, supplement order cancellation, ArvinPlus cancel order',
       url: 'https://arvinplus.in/cancellation-policy',
     });
