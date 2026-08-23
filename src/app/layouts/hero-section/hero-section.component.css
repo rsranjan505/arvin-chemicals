@@ -27,3 +27,49 @@
 .indicator-slider {
   animation: indicatorSteps 8s infinite;
 }
+
+/* Mobile touch/swipe support */
+@media (hover: none) and (pointer: coarse) {
+  .hero-slides-container {
+    touch-action: pan-y;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Prevent text selection on swipe */
+  .hero-slides-container * {
+    user-select: none;
+    -webkit-user-select: none;
+  }
+
+  /* Better button touch targets on mobile */
+  button[routerLink] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+/* Prevent layout shift on mobile */
+@media (max-width: 639px) {
+  .hero-section-content {
+    max-width: 100%;
+  }
+
+  /* Ensure images don't cause horizontal scroll */
+  .hero-slide img {
+    max-width: 100vw;
+  }
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .flex.transition-transform {
+    transition: none !important;
+  }
+
+  button[aria-label="Previous slide"],
+  button[aria-label="Next slide"],
+  .indicator-slider {
+    animation: none !important;
+    transition: none !important;
+  }
+}

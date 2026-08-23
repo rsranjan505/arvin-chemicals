@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { CartService } from '../../../../services/cart/cart.service';
 import {
   ProductService,
@@ -16,28 +16,51 @@ import {
 export class ProductListsComponent implements OnInit {
   private cartService = inject(CartService);
   private productService = inject(ProductService);
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
 
   products: ProductSummary[] = [];
 
   loading = true;
   error = false;
 
+  searchQuery = '';
+
   pageSize = 6;
   visibleCount = 6;
 
+  get filteredProducts(): ProductSummary[] {
+    if (!this.searchQuery) return this.products;
+    const q = this.searchQuery.toLowerCase();
+    return this.products.filter(
+      (p) =>
+        p.name.toLowerCase().includes(q) ||
+        p.subtitle.toLowerCase().includes(q) ||
+        (p.category ?? '').toLowerCase().includes(q)
+    );
+  }
+
   get visibleProducts() {
-    return this.products.slice(0, this.visibleCount);
+    return this.filteredProducts.slice(0, this.visibleCount);
   }
 
   get hasMore() {
-    return this.visibleCount < this.products.length;
+    return this.visibleCount < this.filteredProducts.length;
   }
 
   loadMore() {
     this.visibleCount += this.pageSize;
   }
 
+  clearSearch() {
+    this.router.navigate(['/products']);
+  }
+
   async ngOnInit() {
+    this.route.queryParamMap.subscribe((params) => {
+      this.searchQuery = (params.get('q') ?? '').trim();
+      this.visibleCount = this.pageSize;
+    });
     await this.load();
   }
 

@@ -36,8 +36,8 @@ export class ContactUsComponent implements OnInit {
   ngOnInit() {
     this.seo.setPageSeo({
       title: 'Contact Us',
-      description: 'Contact ArvinPlus™ for ayurvedic supplement inquiries, orders, bulk purchases or support. Call +91 99906 96316 or email support@arvinplus.in. Office: Lane No-1, Nathanpur Road, Dehradun (Uttarakhand) 248005, India.',
-      keywords: 'contact ArvinPlus, ayurvedic supplement inquiry, order supplements India, bulk herbal products, ArvinPlus customer support',
+      description: 'Contact ArvinPlus™ for health supplement inquiries, orders, bulk purchases or support. Call +91 99906 96316 or email support@arvinplus.in. Office: Lane No-1, Nathanpur Road, Dehradun (Uttarakhand) 248005, India.',
+      keywords: 'contact ArvinPlus, health supplement inquiry, order supplements India, bulk herbal products, ArvinPlus customer support',
       url: 'https://arvinplus.in/contact-us',
       jsonLd: {
         '@context': 'https://schema.org',

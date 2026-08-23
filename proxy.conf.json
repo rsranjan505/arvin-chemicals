@@ -1,17 +1,17 @@
 {
   "/api/storefront": {
-    "target": "http://127.0.0.1:8000",
-    "secure": false,
+    "target": "https://admin.arvinplus.in",
+    "secure": true,
     "changeOrigin": true
   },
   "/api/webhooks": {
-    "target": "http://127.0.0.1:8000",
-    "secure": false,
+    "target": "https://admin.arvinplus.in",
+    "secure": true,
     "changeOrigin": true
   },
   "/storage": {
-    "target": "http://127.0.0.1:8000",
-    "secure": false,
+    "target": "https://admin.arvinplus.in",
+    "secure": true,
     "changeOrigin": true
   }
 }

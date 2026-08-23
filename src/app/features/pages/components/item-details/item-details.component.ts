@@ -72,7 +72,7 @@ export class ItemDetailsComponent {
     this.seo.setPageSeo({
       title: product.meta_title || `${product.name}`,
       description: `${product.meta_description || `Buy ${product.name} — ${product.subtitle}.`} ${(product.description || '').substring(0, 110)} Free shipping across India. GMP certified, FSSAI approved.`,
-      keywords: `${product.name.toLowerCase()}, ${(product.benefits || []).slice(0, 3).join(', ').toLowerCase()}, ayurvedic supplements, herbal supplements India, ArvinPlus`,
+      keywords: `${product.name.toLowerCase()}, ${(product.benefits || []).slice(0, 3).join(', ').toLowerCase()}, health supplements, herbal supplements India, ArvinPlus`,
       image: product.image || images[0],
       url,
       type: 'product',

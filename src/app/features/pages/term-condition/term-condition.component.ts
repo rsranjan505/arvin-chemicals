@@ -13,7 +13,7 @@ export class TermConditionComponent implements OnInit {
   ngOnInit() {
     this.seo.setPageSeo({
       title: 'Terms & Conditions',
-      description: 'Read the Terms & Conditions for using the ArvinPlus™ website and purchasing our ayurvedic supplements. Covers product information, intellectual property, liability, and usage of the site.',
+      description: 'Read the Terms & Conditions for using the ArvinPlus™ website and purchasing our health supplements. Covers product information, intellectual property, liability, and usage of the site.',
       keywords: 'terms and conditions ArvinPlus, supplement purchase terms, ayurvedic product policy, ArvinPlus terms of service',
       url: 'https://arvinplus.in/terms-conditions',
     });

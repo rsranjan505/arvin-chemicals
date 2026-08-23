@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MainLayoutComponent } from '../../layouts/main-layout/main-layout.component';
+import { customerAuthGuard } from '../../../app/services/auth/customer-auth.guard';
 
 const routes: Routes = [
   {
@@ -99,12 +100,62 @@ const routes: Routes = [
       //   pathMatch: 'full',
       // },
       {
-        path: 'products/:slug',
+        path: 'products',
         pathMatch: 'full',
         loadComponent: () =>
           import(
-            '../../features/pages/product-details/product-details.component'
-          ).then((m) => m.ProductDetailsComponent),
+            '../../features/pages/products/products.page'
+          ).then((m) => m.ProductsPage),
+      },
+      {
+        path: 'blog/:slug',
+        pathMatch: 'full',
+        loadComponent: () =>
+          import(
+            '../../features/pages/blog/blog-detail.component'
+          ).then((m) => m.BlogDetailComponent),
+      },
+      {
+        path: 'account/login',
+        pathMatch: 'full',
+        loadComponent: () =>
+          import(
+            '../../features/pages/account/account-login.component'
+          ).then((m) => m.AccountLoginComponent),
+      },
+      {
+        path: 'account',
+        canActivate: [customerAuthGuard],
+        loadComponent: () =>
+          import(
+            '../../features/pages/account/account-layout.component'
+          ).then((m) => m.AccountLayoutComponent),
+        children: [
+          {
+            path: '',
+            pathMatch: 'full',
+            loadComponent: () =>
+              import(
+                '../../features/pages/account/dashboard.component'
+              ).then((m) => m.DashboardComponent),
+          },
+          {
+            path: 'orders',
+            pathMatch: 'full',
+            loadComponent: () =>
+              import(
+                '../../features/pages/account/orders.component'
+              ).then((m) => m.OrdersComponent),
+          },
+          {
+            path: 'profile',
+            pathMatch: 'full',
+            loadComponent: () =>
+              import(
+                '../../features/pages/account/profile.component'
+              ).then((m) => m.ProfileComponent),
+          },
+        ],
       },
       {
         path: 'cart',

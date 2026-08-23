@@ -18,9 +18,9 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.seo.setPageSeo({
-      title: 'Premium Ayurvedic Supplements for Liver Detox & Wellness',
-      description: 'Shop ArvinPlus™ research-backed ayurvedic supplements for liver detox, immunity, bone health and vitality. GMP certified, FSSAI approved, third-party lab tested. Free shipping across India on orders above ₹999.',
-      keywords: 'ayurvedic supplements, liver detox capsules, milk thistle, immunity boost, bone health supplements, natural wellness, ArvinPlus, herbal supplements India',
+      title: 'Premium health supplements for Liver Detox & Wellness',
+      description: 'Shop ArvinPlus™ research-backed health supplements for liver detox, immunity, bone health and vitality. GMP certified, FSSAI approved, third-party lab tested. Free shipping across India on orders above ₹999.',
+      keywords: 'health supplements, liver detox capsules, milk thistle, immunity boost, bone health supplements, natural wellness, ArvinPlus, herbal supplements India',
       url: 'https://arvinplus.in',
       image: '/assets/arvin-white.png',
       jsonLd: [
@@ -33,7 +33,7 @@ export class HomeComponent implements OnInit {
               name: 'What is ArvinPlus™?',
               acceptedAnswer: {
                 '@type': 'Answer',
-                text: 'ArvinPlus™ is a premium ayurvedic supplement brand based in Dehradun, India. We craft research-backed formulations for liver detox, immunity, bone health, vitamins and minerals, and overall vitality — made in GMP-certified, FSSAI-approved facilities.',
+                text: 'ArvinPlus™ is a premium health supplement brand based in Dehradun, India. We craft research-backed formulations for liver detox, immunity, bone health, vitamins and minerals, and overall vitality — made in GMP-certified, FSSAI-approved facilities.',
               },
             },
             {

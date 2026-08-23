@@ -18,7 +18,7 @@ export interface SeoData {
 
 @Injectable({ providedIn: 'root' })
 export class SeoService {
-  private siteName = 'ArvinPlus™ - Premium Ayurvedic Supplements';
+  private siteName = 'ArvinPlus™ - Premium health supplements';
   private defaultImage = '/assets/arvin-white.png';
   private baseUrl = 'https://arvinplus.in';
   private addedJsonLdScripts: HTMLScriptElement[] = [];

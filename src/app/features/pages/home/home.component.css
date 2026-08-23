@@ -1,0 +1,19 @@
+/* Certifications marquee */
+.cert-track {
+  animation: cert-marquee 30s linear infinite;
+}
+
+.cert-band:hover .cert-track {
+  animation-play-state: paused;
+}
+
+@keyframes cert-marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cert-track {
+    animation: none;
+  }
+}

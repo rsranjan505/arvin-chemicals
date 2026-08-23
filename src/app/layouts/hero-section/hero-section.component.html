@@ -1,24 +1,12 @@
-<section class="relative w-full overflow-hidden">
-  <div class="relative w-full h-[60vh] sm:h-[70vh] lg:h-[85vh] overflow-hidden">
-    <!-- Left Arrow -->
-    <button
-      (click)="prevSlide()"
-      class="absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 z-40 bg-white/20 hover:bg-white/40 backdrop-blur-sm text-white p-2.5 sm:p-3.5 rounded-full shadow-lg transition-all duration-300 hover:scale-105"
-    >
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 sm:w-6 sm:h-6">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
-      </svg>
-    </button>
-
-    <!-- Right Arrow -->
-    <button
-      (click)="nextSlide()"
-      class="absolute right-3 sm:right-6 top-1/2 -translate-y-1/2 z-40 bg-white/20 hover:bg-white/40 backdrop-blur-sm text-white p-2.5 sm:p-3.5 rounded-full shadow-lg transition-all duration-300 hover:scale-105"
-    >
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 sm:w-6 sm:h-6">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
-      </svg>
-    </button>
+<section class="relative w-full overflow-hidden bg-[#f1f5ec]">
+  <div
+    #heroContainer
+    class="relative w-full h-[62vh] min-h-[480px] sm:h-[70vh] lg:h-[78vh] overflow-hidden hero-slides-container"
+    (touchstart)="onTouchStart($event)"
+    (touchmove)="onTouchMove($event)"
+    (touchend)="onTouchEnd($event)"
+    tabindex="0"
+  >
 
     <!-- Slides -->
     <div
@@ -27,66 +15,287 @@
     >
       <div
         *ngFor="let slide of slides; let i = index"
-        class="w-screen h-full flex-shrink-0 relative"
+        class="w-screen h-full flex-shrink-0 relative overflow-hidden hero-slide"
       >
-        <img [src]="slide.image" [alt]="slide.title + ' – ArvinPlus ayurvedic supplements'" class="w-full h-full object-fill" [loading]="i === 0 ? 'eager' : 'lazy'" />
-        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
+
+        <!-- Hero Image -->
+        <img
+          [src]="slide.image"
+          [alt]="slide.title + ' – ArvinPlus health supplements'"
+          class="absolute inset-0 w-full h-full object-cover object-center"
+          [loading]="i === 0 ? 'eager' : 'lazy'"
+        />
+
+        <!-- Very subtle left-side readability layer - stronger on mobile for text readability -->
         <div
-          class="absolute inset-0 flex flex-col justify-center items-center px-6 sm:px-10 lg:px-28 text-white text-center"
+          class="absolute inset-0 bg-gradient-to-r from-[#eef5e9]/35 via-transparent to-transparent pointer-events-none sm:from-[#eef5e9]/45"
+        ></div>
+
+        <!-- Additional dark overlay on mobile for better text contrast -->
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#14532d]/10 pointer-events-none sm:hidden"></div>
+
+        <!-- Hero Content -->
+        <div
+          class="absolute inset-0 flex items-center"
         >
-          <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold drop-shadow-lg leading-tight">
-            {{ slide.title }}
-          </h1>
-          <p class="text-sm sm:text-lg md:text-xl lg:text-2xl mt-3 sm:mt-4 max-w-2xl drop-shadow-lg text-white/90">
-            {{ slide.subtitle }}
-          </p>
-          <!-- <button class="mt-6 sm:mt-8 bg-white text-green-900 font-semibold px-6 sm:px-8 py-2.5 sm:py-3.5 rounded-full hover:bg-green-50 transition-all duration-300 shadow-lg hover:shadow-xl text-sm sm:text-base">
-            {{ slide.button }}
-          </button> -->
+          <div
+            class="
+              w-full
+              px-4
+              sm:px-6
+              md:px-10
+              lg:px-16
+              xl:px-24
+            "
+          >
+            <div
+              class="
+                max-w-[90vw]
+                sm:max-w-[420px]
+                md:max-w-[480px]
+                lg:max-w-[540px]
+                text-left
+                translate-y-0
+                sm:-translate-y-2
+                lg:-translate-y-4
+                hero-section-content
+              "
+            >
+
+              <!-- Small label -->
+              <span
+                class="
+                  inline-block
+                  mb-2
+                  sm:mb-3
+                  text-[10px]
+                  sm:text-xs
+                  font-bold
+                  tracking-[0.15em]
+                  uppercase
+                  text-[#166534]
+                "
+              >
+                ArvinPlus Wellness
+              </span>
+
+              <!-- Main Heading -->
+              <h1
+                class="
+                  text-2xl
+                  sm:text-3xl
+                  md:text-4xl
+                  lg:text-5xl
+                  xl:text-6xl
+                  2xl:text-7xl
+                  font-extrabold
+                  leading-[1.1]
+                  tracking-tight
+                  text-[#14532d]
+                  drop-shadow-[0_2px_2px_rgba(255,255,255,0.45)]
+                "
+              >
+                {{ slide.title }}
+              </h1>
+
+              <!-- Subtitle -->
+              <p
+                class="
+                  mt-3
+                  sm:mt-4
+                  max-w-[90vw]
+                  sm:max-w-lg
+                  text-sm
+                  sm:text-base
+                  md:text-lg
+                  lg:text-xl
+                  xl:text-2xl
+                  leading-relaxed
+                  font-medium
+                  text-[#2d4a36]
+                "
+              >
+                {{ slide.subtitle }}
+              </p>
+
+              <!-- Optional CTA -->
+              <div class="mt-4 sm:mt-6 md:mt-8">
+                <button
+                  [routerLink]="'/our-collections'"
+                  class="
+                    inline-flex
+                    items-center
+                    gap-2
+                    rounded-full
+                    bg-[#166534]
+                    px-5
+                    sm:px-6
+                    md:px-8
+                    py-2.5
+                    sm:py-3
+                    md:py-3.5
+                    text-sm
+                    sm:text-base
+                    font-bold
+                    text-white
+                    shadow-lg
+                    transition-all
+                    duration-300
+                    hover:bg-[#14532d]
+                    hover:shadow-xl
+                    hover:-translate-y-0.5
+                    active:scale-[0.98]
+                    touch-manipulation
+                  "
+                >
+                  Shop Now
+
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="2"
+                    stroke="currentColor"
+                    class="w-4 h-4 sm:w-5 sm:h-5"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
+                    />
+                  </svg>
+                </button>
+              </div>
+
+            </div>
+          </div>
         </div>
+
       </div>
     </div>
-  </div>
 
-  <!-- Indicators -->
-  <div class="absolute bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2 flex gap-2.5 z-40">
+    <!-- Left Arrow - hidden on mobile, shown on tablet+ -->
+    <button
+      (click)="prevSlide()"
+      aria-label="Previous slide"
+      class="
+        absolute
+        left-4
+        sm:left-5
+        lg:left-6
+        top-1/2
+        -translate-y-1/2
+        z-40
+        rounded-full
+        bg-white/70
+        hover:bg-white/90
+        backdrop-blur-sm
+        text-[#14532d]
+        p-2.5
+        sm:p-3
+        shadow-md
+        transition-all
+        duration-300
+        hover:scale-105
+        hidden sm:flex
+      "
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="2"
+        stroke="currentColor"
+        class="w-5 h-5 sm:w-6 sm:h-6"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M15.75 19.5L8.25 12l7.5-7.5"
+        />
+      </svg>
+    </button>
+
+    <!-- Right Arrow - hidden on mobile, shown on tablet+ -->
+    <button
+      (click)="nextSlide()"
+      aria-label="Next slide"
+      class="
+        absolute
+        right-4
+        sm:right-5
+        lg:right-6
+        top-1/2
+        -translate-y-1/2
+        z-40
+        rounded-full
+        bg-white/70
+        hover:bg-white/90
+        backdrop-blur-sm
+        text-[#14532d]
+        p-2.5
+        sm:p-3
+        shadow-md
+        transition-all
+        duration-300
+        hover:scale-105
+        hidden sm:flex
+      "
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="2"
+        stroke="currentColor"
+        class="w-5 h-5 sm:w-6 sm:h-6"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M8.25 4.5l7.5 7.5-7.5 7.5"
+        />
+      </svg>
+    </button>
+
+    <!-- Mobile swipe hint indicators -->
+    <div class="sm:hidden absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-1.5 text-[#14532d]/60 animate-pulse">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" /></svg>
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" /></svg>
+    </div>
+
+    <!-- Indicators -->
     <div
-      *ngFor="let slide of slides; let i = index"
-      (click)="currentIndex = i"
-      class="rounded-full h-2.5 transition-all duration-300 cursor-pointer"
-      [ngClass]="i === currentIndex ? 'w-8 bg-white' : 'w-2.5 bg-white/50'"
-    ></div>
-  </div>
-</section>
-
-<!-- Trust Bar -->
-<section class="relative w-full bg-white border-b border-gray-100">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-0 md:gap-0">
-      <div class="flex items-center justify-center gap-2.5 py-3.5 sm:py-4 border-b md:border-b-0 md:border-r border-gray-100">
-        <svg class="w-4 h-4 sm:w-5 sm:h-5 text-green-700 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-        </svg>
-        <span class="text-[11px] sm:text-xs font-bold text-gray-700 tracking-wider whitespace-nowrap">CLINICALLY PROVEN</span>
-      </div>
-      <div class="flex items-center justify-center gap-2.5 py-3.5 sm:py-4 border-b md:border-b-0 md:border-r border-gray-100">
-        <svg class="w-4 h-4 sm:w-5 sm:h-5 text-green-700 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-        </svg>
-        <span class="text-[11px] sm:text-xs font-bold text-gray-700 tracking-wider whitespace-nowrap">NO SIDE EFFECTS</span>
-      </div>
-      <div class="flex items-center justify-center gap-2.5 py-3.5 sm:py-4 md:border-r border-gray-100">
-        <svg class="w-4 h-4 sm:w-5 sm:h-5 text-green-700 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-        </svg>
-        <span class="text-[11px] sm:text-xs font-bold text-gray-700 tracking-wider whitespace-nowrap">100% BIOAVAILABLE</span>
-      </div>
-      <div class="flex items-center justify-center gap-2.5 py-3.5 sm:py-4">
-        <svg class="w-4 h-4 sm:w-5 sm:h-5 text-green-700 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-        </svg>
-        <span class="text-[11px] sm:text-xs font-bold text-gray-700 tracking-wider whitespace-nowrap">ADVANCED NANOTECHNOLOGY</span>
-      </div>
+      class="
+        absolute
+        bottom-4
+        sm:bottom-6
+        left-1/2
+        -translate-x-1/2
+        flex
+        gap-1.5
+        sm:gap-2
+        z-40
+      "
+    >
+      <button
+        *ngFor="let slide of slides; let i = index"
+        (click)="currentIndex = i"
+        [attr.aria-label]="'Go to slide ' + (i + 1)"
+        class="
+          h-1.5
+          sm:h-2
+          rounded-full
+          transition-all
+          duration-300
+        "
+        [ngClass]="
+          i === currentIndex
+            ? 'w-6 sm:w-8 bg-[#166534]'
+            : 'w-1.5 sm:w-2 bg-[#166534]/35'
+        "
+      ></button>
     </div>
+
   </div>
 </section>

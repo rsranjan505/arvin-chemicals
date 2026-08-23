@@ -28,7 +28,7 @@ export class CartComponent implements OnInit {
 
     this.seo.setPageSeo({
       title: 'Shopping Cart',
-      description: 'Review the ayurvedic supplements in your ArvinPlus™ cart before checkout. Free shipping on orders above ₹999 across India.',
+      description: 'Review the health supplements in your ArvinPlus™ cart before checkout. Free shipping on orders above ₹999 across India.',
       url: 'https://arvinplus.in/cart',
       robots: 'noindex, nofollow',
     });

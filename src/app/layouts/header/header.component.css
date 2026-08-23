@@ -41,3 +41,27 @@
 .blink {
   animation: blink 1s infinite;
 }
+
+/* Announcement bar marquee */
+.announce-track {
+  animation: announce-scroll 22s linear infinite;
+}
+
+.announce-track:hover {
+  animation-play-state: paused;
+}
+
+@keyframes announce-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .announce-track {
+    animation: none;
+  }
+}

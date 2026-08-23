@@ -9,6 +9,6 @@ import { Component } from '@angular/core';
 })
 export class WhatsappButtonComponent {
   readonly waLink = `https://wa.me/919990696316?text=${encodeURIComponent(
-    'Hi ArvinPlus™ Team! I have a question about your ayurvedic supplements.'
+    'Hi ArvinPlus™ Team! I have a question about your health supplements.'
   )}`;
 }

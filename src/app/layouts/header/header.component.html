@@ -1,95 +1,190 @@
 <!-- Top Announcement Bar -->
-<div class="bg-gradient-to-r from-green-900 via-green-800 to-emerald-700 text-white text-center text-xs sm:text-sm py-2.5 px-4 tracking-wide">
-  <span class="font-medium">FREE SHIPPING</span> on orders above ₹999 &nbsp;|&nbsp; <span class="font-medium">AYUSH</span> approved supplements
+<div class="bg-gradient-to-r from-green-900 via-green-800 to-emerald-700 text-white text-sm sm:text-base py-2.5 tracking-wide overflow-hidden sticky top-0 z-50">
+  <div class="announce-track flex w-max whitespace-nowrap">
+    <!-- Group 1 -->
+    <div class="flex shrink-0 items-center">
+      <span class="mx-8"><span class="font-semibold">FREE SHIPPING</span> on orders above &#8377;999</span>
+      <span class="mx-2 opacity-50">&#10022;</span>
+      <span class="mx-8"><span class="font-semibold">FREE SHIPPING</span> on orders above &#8377;999</span>
+      <span class="mx-2 opacity-50">&#10022;</span>
+      <span class="mx-8"><span class="font-semibold">FREE SHIPPING</span> on orders above &#8377;999</span>
+      <span class="mx-2 opacity-50">&#10022;</span>
+      <span class="mx-8"><span class="font-semibold">FREE SHIPPING</span> on orders above &#8377;999</span>
+      <span class="mx-2 opacity-50">&#10022;</span>
+    </div>
+    <!-- Group 2 (duplicate for seamless loop) -->
+    <div class="flex shrink-0 items-center" aria-hidden="true">
+      <span class="mx-8"><span class="font-semibold">FREE SHIPPING</span> on orders above &#8377;999</span>
+      <span class="mx-2 opacity-50">&#10022;</span>
+      <span class="mx-8"><span class="font-semibold">FREE SHIPPING</span> on orders above &#8377;999</span>
+      <span class="mx-2 opacity-50">&#10022;</span>
+      <span class="mx-8"><span class="font-semibold">FREE SHIPPING</span> on orders above &#8377;999</span>
+      <span class="mx-2 opacity-50">&#10022;</span>
+      <span class="mx-8"><span class="font-semibold">FREE SHIPPING</span> on orders above &#8377;999</span>
+      <span class="mx-2 opacity-50">&#10022;</span>
+    </div>
+  </div>
 </div>
 
-<header class="py-3 lg:py-4 bg-white/95 backdrop-blur-md shadow-sm sticky top-0 z-50 border-b border-gray-100/50">
+<header class="py-3 lg:py-3.5 bg-white/95 backdrop-blur-md shadow-sm sticky top-11 z-50 border-b border-gray-100/50">
   <div class="flex justify-between items-center px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
     <!-- Left: Logo -->
-    <a routerLink="/" class="flex items-center gap-2">
-      <span class="text-xl sm:text-2xl lg:text-3xl font-bold text-green-900 tracking-tight"
-        >ARVIN PLUS<sup class="text-[10px] text-green-600">TM</sup></span
-      >
+    <a routerLink="/" class="flex items-center gap-3 group">
+      <div class="relative w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br from-green-200 to-emerald-700 flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300 overflow-hidden">
+        <img src="assets/logo-2.png" alt="ArvinPlus Logo" class="h-8 w-auto sm:h-9 object-contain" />
+        <div class="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+      </div>
+
+      <span class="flex items-start text-lg sm:text-2xl lg:text-3xl font-extrabold text-green-950 tracking-tight leading-none">
+        ARVIN&nbsp;PLUS<sup class="ml-0.5 text-[9px] sm:text-[11px] font-bold text-green-600 leading-none translate-y-0.5">TM</sup>
+      </span>
     </a>
 
     <!-- Center: Navigation -->
-    <nav class="hidden lg:flex items-center gap-1 text-gray-600">
+    <nav class="hidden lg:flex items-center gap-1.5 text-gray-700 ml-6">
       <a
         routerLink="/home"
-        routerLinkActive="text-green-900 font-semibold"
+        routerLinkActive="text-green-900 font-semibold bg-green-50"
         [routerLinkActiveOptions]="{exact:true}"
-        class="px-4 py-2 rounded-lg hover:text-green-900 hover:bg-green-50 font-medium text-sm transition-all duration-200"
+        class="px-4 py-2 rounded-lg hover:text-green-900 hover:bg-green-50 font-medium text-4sm transition-all duration-200"
         >Home</a
       >
+      <a
+        routerLink="/our-collections"
+        routerLinkActive="text-green-900 font-semibold bg-green-50"
+        [routerLinkActiveOptions]="{exact:true}"
+        class="px-4 py-2 rounded-lg hover:text-green-900 hover:bg-green-50 font-medium text-4sm transition-all duration-200"
+        >Our Collections</a
+      >
+
       <!-- <div class="relative group">
-        <button
-          class="flex items-center gap-1 px-4 py-2 rounded-lg hover:text-green-900 hover:bg-green-50 font-medium text-sm transition-all duration-200"
-        >
-          <span>Products</span>
+        <button class="flex items-center gap-1.5 px-4 py-2 rounded-lg hover:text-green-900 hover:bg-green-50 font-medium text-4sm transition-all duration-200">
+          <span>Our Products</span>
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-3.5 h-3.5 transition-transform duration-200 group-hover:rotate-180">
             <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
           </svg>
         </button>
         <div class="absolute left-0 top-full pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 translate-y-1 group-hover:translate-y-0">
-          <div class="bg-white rounded-xl shadow-xl border border-gray-100 p-3 w-48">
-            <ul class="space-y-1 text-sm text-gray-700">
-              <li><a class="block px-3 py-2 rounded-lg hover:bg-green-50 hover:text-green-900 font-medium transition-colors cursor-pointer">Vitamins</a></li>
-              <li><a class="block px-3 py-2 rounded-lg hover:bg-green-50 hover:text-green-900 font-medium transition-colors cursor-pointer">Minerals</a></li>
-              <li><a class="block px-3 py-2 rounded-lg hover:bg-green-50 hover:text-green-900 font-medium transition-colors cursor-pointer">Therapeutics</a></li>
-              <li><a class="block px-3 py-2 rounded-lg hover:bg-green-50 hover:text-green-900 font-medium transition-colors cursor-pointer">Combos</a></li>
+          <div class="bg-white rounded-xl shadow-xl border border-gray-100 p-2.5 min-w-[180px]">
+            <ul class="space-y-0.5 text-4sm text-gray-700">
+              <li><a routerLink="/our-collections" fragment="vitamins" class="block px-3 py-2.5 rounded-lg hover:bg-green-50 hover:text-green-900 font-medium transition-colors cursor-pointer">Vitamins</a></li>
+              <li><a routerLink="/our-collections" fragment="minerals" class="block px-3 py-2.5 rounded-lg hover:bg-green-50 hover:text-green-900 font-medium transition-colors cursor-pointer">Minerals</a></li>
+              <li><a routerLink="/our-collections" fragment="therapeutics" class="block px-3 py-2.5 rounded-lg hover:bg-green-50 hover:text-green-900 font-medium transition-colors cursor-pointer">Therapeutics</a></li>
+              <li><a routerLink="/our-collections" fragment="combos" class="block px-3 py-2.5 rounded-lg hover:bg-green-50 hover:text-green-900 font-medium transition-colors cursor-pointer">Combos</a></li>
             </ul>
           </div>
         </div>
       </div> -->
-
-      <a
-        routerLink="/our-collections"
-        routerLinkActive="text-green-900 font-semibold"
-        class="px-4 py-2 rounded-lg hover:text-green-900 hover:bg-green-50 font-medium text-sm transition-all duration-200"
-        >Our Products</a
-      >
-      <a
-        routerLink="/blog"
-        routerLinkActive="text-green-900 font-semibold"
-        class="px-4 py-2 rounded-lg hover:text-green-900 hover:bg-green-50 font-medium text-sm transition-all duration-200"
-        >Blog</a
-      >
       <a
         routerLink="/about-us"
-        routerLinkActive="text-green-900 font-semibold"
-        class="px-4 py-2 rounded-lg hover:text-green-900 hover:bg-green-50 font-medium text-sm transition-all duration-200"
+        routerLinkActive="text-green-900 font-semibold bg-green-50"
+        class="px-4 py-2 rounded-lg hover:text-green-900 hover:bg-green-50 font-medium text-4sm transition-all duration-200"
         >About Us</a
       >
       <a
         routerLink="/contact-us"
-        routerLinkActive="text-green-900 font-semibold"
-        class="px-4 py-2 rounded-lg hover:text-green-900 hover:bg-green-50 font-medium text-sm transition-all duration-200"
+        routerLinkActive="text-green-900 font-semibold bg-green-50"
+        class="px-4 py-2 rounded-lg hover:text-green-900 hover:bg-green-50 font-medium text-4sm transition-all duration-200"
         >Contact Us</a
       >
+
+      <a
+        routerLink="/blog"
+        routerLinkActive="text-green-900 font-semibold bg-green-50"
+        class="px-4 py-2 rounded-lg hover:text-green-900 hover:bg-green-50 font-medium text-4sm transition-all duration-200"
+        >Blog</a
+      >
+      
     </nav>
 
-    <div class="flex items-center gap-2">
-      <a routerLink="/cart" class="relative p-2.5 rounded-full text-green-800 hover:bg-green-50 transition-colors duration-200" title="Cart">
+    <div class="flex items-center gap-1 sm:gap-2.5" (click)="$event.stopPropagation()">
+      <!-- Account -->
+      <a
+        *ngIf="!customer(); else accountMenu"
+        routerLink="/account/login"
+        class="hidden sm:inline-flex items-center gap-2 px-3.5 py-2 rounded-lg text-sm font-semibold text-white bg-green-800 hover:bg-green-700 transition-colors duration-200"
+        title="Customer login"
+      >
+        <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" class="w-4 h-4"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/></svg>
+        Login
+      </a>
+
+      <ng-template #accountMenu>
+        <div class="relative">
+          <button
+            type="button"
+            (click)="toggleAccountMenu()"
+            title="My Account"
+            class="w-10 h-10 rounded-full bg-gradient-to-br from-green-800 to-emerald-600 text-white text-sm font-bold flex items-center justify-center shadow-md hover:shadow-lg transition-all duration-200 ring-2 ring-green-100"
+          >
+            {{ initials() }}
+          </button>
+
+          <div *ngIf="accountMenuOpen" class="absolute right-0 top-full mt-2 w-60 bg-white rounded-xl shadow-xl border border-gray-100 p-2 z-50 animate-slide-down">
+            <div class="px-3 py-2.5 border-b border-gray-100 mb-1">
+              <p class="text-sm font-bold text-gray-900 truncate">{{ customer()?.name }}</p>
+              <p class="text-xs text-gray-500 truncate">{{ customer()?.email }}</p>
+            </div>
+            <a routerLink="/account" (click)="accountMenuOpen = false" class="flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm font-medium text-gray-700 hover:text-green-900 hover:bg-green-50 transition-colors">
+              <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" class="w-4 h-4"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z"/></svg>
+              Dashboard
+            </a>
+            <a routerLink="/account/orders" (click)="accountMenuOpen = false" class="flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm font-medium text-gray-700 hover:text-green-900 hover:bg-green-50 transition-colors">
+              <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" class="w-4 h-4"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25z"/></svg>
+              My Orders
+            </a>
+            <a routerLink="/account/profile" (click)="accountMenuOpen = false" class="flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm font-medium text-gray-700 hover:text-green-900 hover:bg-green-50 transition-colors">
+              <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" class="w-4 h-4"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/></svg>
+              Profile
+            </a>
+            <div class="border-t border-gray-100 my-1"></div>
+            <button type="button" (click)="logout()" class="w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm font-medium text-red-600 hover:bg-red-50 transition-colors">
+              <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" class="w-4 h-4"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9"/></svg>
+              Log out
+            </button>
+          </div>
+        </div>
+      </ng-template>
+
+      <a routerLink="/cart" class="relative p-2.5 rounded-lg text-green-800 hover:bg-green-50 transition-colors duration-200 group" title="Cart">
         <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" class="w-5 h-5">
           <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"/>
         </svg>
         <span *ngIf="cartCount > 0" class="absolute -top-0.5 -right-0.5 min-w-[18px] h-[18px] px-1 rounded-full bg-red-600 text-white text-[10px] font-bold flex items-center justify-center">{{ cartCount }}</span>
       </a>
 
+      <!-- Desktop expanding search -->
       <div class="relative hidden md:block">
-        <input
-          *ngIf="searchOpen"
-          type="text"
-          placeholder="Search products..."
-          (click)="$event.stopPropagation()"
-          class="absolute right-12 top-1/2 -translate-y-1/2 w-0 opacity-0 transition-all duration-300 ease-in-out px-4 py-2 rounded-full bg-gray-50 border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent shadow-sm"
-          [ngClass]="{
-            'w-64 opacity-100 px-4': searchOpen
-          }"
-        />
+        <div
+          class="absolute right-12 top-1/2 -translate-y-1/2 transition-all duration-300 ease-out overflow-hidden"
+          [ngClass]="searchOpen ? 'w-72 lg:w-80 opacity-100 pointer-events-auto' : 'w-0 opacity-0 pointer-events-none'"
+        >
+          <div class="relative">
+            <input
+              #searchInput
+              type="text"
+              placeholder="Search supplements..."
+              [value]="searchTerm"
+              (input)="searchTerm = $any($event.target).value"
+              (keydown.enter)="submitSearch()"
+              class="w-full py-2.5 pl-4 pr-10 text-sm bg-green-50/70 border border-green-200 rounded-full text-gray-800 placeholder-gray-400 shadow-sm focus:outline-none focus:bg-white focus:border-green-500 focus:ring-4 focus:ring-green-500/15 transition-all duration-200"
+            />
+            <button
+              *ngIf="searchTerm"
+              type="button"
+              (click)="clearSearchTerm()"
+              title="Clear"
+              class="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 rounded-full bg-gray-200 hover:bg-gray-300 text-gray-500 hover:text-gray-700 flex items-center justify-center transition-colors duration-150"
+            >
+              <svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" class="w-2.5 h-2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+            </button>
+          </div>
+        </div>
         <button
-          class="p-2.5 rounded-full text-green-800 hover:bg-green-50 transition-colors duration-200"
+          type="button"
           (click)="toggleSearch()"
+          title="Search"
+          class="p-2.5 rounded-lg text-green-800 hover:bg-green-50 transition-colors duration-200 relative z-10"
         >
           <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" class="w-5 h-5">
             <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35M10 18a8 8 0 100-16 8 8 0 000 16z"></path>
@@ -97,23 +192,79 @@
         </button>
       </div>
 
-      <button class="lg:hidden p-2.5 rounded-full text-green-800 hover:bg-green-50 transition-colors duration-200" (click)="toggleMenu()">
+      <button class="md:hidden p-2.5 rounded-lg text-green-800 hover:bg-green-50 transition-colors duration-200" (click)="toggleSearch()" title="Search">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" class="w-5 h-5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35M10 18a8 8 0 100-16 8 8 0 000 16z"></path>
+        </svg>
+      </button>
+
+      <button class="lg:hidden p-2.5 rounded-lg text-green-800 hover:bg-green-50 transition-colors duration-200" (click)="toggleMenu()">
         <i class="text-xl" [ngClass]="['bi', mobileOpen ? 'bi-x-lg' : 'bi-list']"></i>
       </button>
     </div>
   </div>
 
+  <!-- Mobile Search -->
+  <div *ngIf="searchOpen" class="md:hidden px-4 pb-3 pt-1 animate-slide-down" (click)="$event.stopPropagation()">
+    <div class="relative">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" class="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-green-600 pointer-events-none">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35M10 18a8 8 0 100-16 8 8 0 000 16z"></path>
+      </svg>
+      <input
+        #mobileSearchInput
+        type="text"
+        placeholder="Search supplements..."
+        [value]="searchTerm"
+        (input)="searchTerm = $any($event.target).value"
+        (keydown.enter)="submitSearch()"
+        class="w-full py-2.5 pl-11 pr-10 text-sm bg-green-50/70 border border-green-200 rounded-full text-gray-800 placeholder-gray-400 shadow-sm focus:outline-none focus:bg-white focus:border-green-500 focus:ring-4 focus:ring-green-500/15 transition-all duration-200"
+      />
+      <button
+        *ngIf="searchTerm"
+        type="button"
+        (click)="clearSearchTerm()"
+        title="Clear"
+        class="absolute right-3.5 top-1/2 -translate-y-1/2 w-5 h-5 rounded-full bg-gray-200 hover:bg-gray-300 text-gray-500 hover:text-gray-700 flex items-center justify-center transition-colors duration-150"
+      >
+        <svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" class="w-2.5 h-2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+    </div>
+  </div>
+
   <!-- Mobile Menu -->
-  <div *ngIf="mobileOpen" class="lg:hidden" (click)="closeMenu()">
-    <div class="bg-white border-t border-gray-100 shadow-lg" (click)="$event.stopPropagation()">
+  <div *ngIf="mobileOpen" class="lg:hidden animate-slide-down" (click)="closeMenu()">
+    <div class="bg-white border-t border-gray-100 shadow-xl" (click)="$event.stopPropagation()">
       <nav class="px-4 py-3 flex flex-col gap-1 text-gray-700">
-        <a routerLink="/home" class="px-3 py-2.5 rounded-lg hover:bg-green-50 hover:text-green-900 font-medium text-sm transition-colors" (click)="closeMenu()">Home</a>
-        <!-- <a routerLink="/products" class="px-3 py-2.5 rounded-lg hover:bg-green-50 hover:text-green-900 font-medium text-sm transition-colors" (click)="closeMenu()">Products</a> -->
-        <a routerLink="/our-collections" class="px-3 py-2.5 rounded-lg hover:bg-green-50 hover:text-green-900 font-medium text-sm transition-colors" (click)="closeMenu()">Our Products</a>
-        <a routerLink="/blog" class="px-3 py-2.5 rounded-lg hover:bg-green-50 hover:text-green-900 font-medium text-sm transition-colors" (click)="closeMenu()">Blog</a>
-        <a routerLink="/about-us" class="px-3 py-2.5 rounded-lg hover:bg-green-50 hover:text-green-900 font-medium text-sm transition-colors" (click)="closeMenu()">About Us</a>
-        <a routerLink="/contact-us" class="px-3 py-2.5 rounded-lg hover:bg-green-50 hover:text-green-900 font-medium text-sm transition-colors" (click)="closeMenu()">Contact Us</a>
+        <a *ngIf="!customer(); else mobileAccount" routerLink="/account/login" class="flex items-center gap-2.5 px-3 py-2.5 rounded-lg bg-green-800 text-white font-semibold transition-colors" (click)="closeMenu()">
+          <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" class="w-4 h-4"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/></svg>
+          Customer Login
+        </a>
+        <ng-template #mobileAccount>
+          <a routerLink="/account" class="px-3 py-2.5 rounded-lg hover:bg-green-50 hover:text-green-900 font-semibold text-green-900 transition-colors" (click)="closeMenu()">My Account</a>
+        </ng-template>
+         <a routerLink="/home" class="px-3 py-2.5 rounded-lg hover:bg-green-50 hover:text-green-900 font-medium text-4sm transition-colors" (click)="closeMenu()">Home</a>
+          <a routerLink="/our-collections" class="px-3 py-2.5 rounded-lg hover:bg-green-50 hover:text-green-900 font-medium text-4sm transition-colors" (click)="closeMenu()">Our Collections</a>
+        <!-- <div class="border-t border-gray-100 my-1"></div>
+        <a routerLink="/home" class="px-3 py-2.5 rounded-lg hover:bg-green-50 hover:text-green-900 font-medium text-4sm transition-colors" (click)="closeMenu()">Home</a>
+        <div class="border-t border-gray-100 my-1"></div>
+        <a routerLink="/our-collections" fragment="vitamins" class="px-3 py-2.5 rounded-lg hover:bg-green-50 hover:text-green-900 font-medium text-4sm transition-colors pl-6" (click)="closeMenu()">Vitamins</a>
+        <a routerLink="/our-collections" fragment="minerals" class="px-3 py-2.5 rounded-lg hover:bg-green-50 hover:text-green-900 font-medium text-4sm transition-colors pl-6" (click)="closeMenu()">Minerals</a>
+        <a routerLink="/our-collections" fragment="therapeutics" class="px-3 py-2.5 rounded-lg hover:bg-green-50 hover:text-green-900 font-medium text-4sm transition-colors pl-6" (click)="closeMenu()">Therapeutics</a>
+        <a routerLink="/our-collections" fragment="combos" class="px-3 py-2.5 rounded-lg hover:bg-green-50 hover:text-green-900 font-medium text-4sm transition-colors pl-6" (click)="closeMenu()">Combos</a>
+        <div class="border-t border-gray-100 my-1"></div> -->
+        <a routerLink="/about-us" class="px-3 py-2.5 rounded-lg hover:bg-green-50 hover:text-green-900 font-medium text-4sm transition-colors" (click)="closeMenu()">About Us</a>
+        <a routerLink="/contact-us" class="px-3 py-2.5 rounded-lg hover:bg-green-50 hover:text-green-900 font-medium text-4sm transition-colors" (click)="closeMenu()">Contact Us</a>
+        <a routerLink="/blog" class="px-3 py-2.5 rounded-lg hover:bg-green-50 hover:text-green-900 font-medium text-4sm transition-colors" (click)="closeMenu()">Blog</a>
+
       </nav>
     </div>
   </div>
 </header>
+
+<style>
+@keyframes slide-down {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-slide-down { animation: slide-down 0.25s ease-out; }
+</style>

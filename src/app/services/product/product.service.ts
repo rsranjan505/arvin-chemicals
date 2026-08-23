@@ -43,6 +43,11 @@ interface ProductResponse {
   product?: ProductDetail;
 }
 
+function normalizeInStock(value: unknown): boolean {
+  if (value === null || value === undefined) return true;
+  return value === true || value === 1 || value === '1' || value === 'true';
+}
+
 @Injectable({
   providedIn: 'root',
 })
@@ -61,6 +66,7 @@ export class ProductService {
 
       return (data.products ?? []).map((product) => ({
         ...product,
+        in_stock: normalizeInStock(product.in_stock),
         image: resolveImageUrl(product.image),
       }));
     } catch {
@@ -87,6 +93,7 @@ export class ProductService {
 
       return {
         ...data.product,
+        in_stock: normalizeInStock(data.product.in_stock),
         image: resolveImageUrl(data.product.image),
         images: (data.product.images ?? []).map((img) => resolveImageUrl(img) ?? ''),
       };
