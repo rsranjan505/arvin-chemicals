@@ -9,6 +9,10 @@ export interface ProductSummary {
   slug: string;
   price: number;
   sale_price: number | null;
+  has_discount?: boolean;
+  discount_price?: number | null;
+  discount_type?: 'percentage' | 'fixed' | null;
+  discount_value?: number | null;
   capsule: number | null;
   rating: number;
   image: string | null;

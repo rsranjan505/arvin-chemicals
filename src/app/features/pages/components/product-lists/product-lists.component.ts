@@ -83,7 +83,22 @@ export class ProductListsComponent implements OnInit {
   }
 
   displayPrice(product: ProductSummary): number {
+    if (product.has_discount && product.discount_price != null) {
+      return product.discount_price;
+    }
     return product.sale_price ?? product.price;
+  }
+
+  discountPercent(product: ProductSummary): number | null {
+    if (
+      !product.has_discount ||
+      product.discount_price == null ||
+      product.price <= 0 ||
+      product.discount_price >= product.price
+    ) {
+      return null;
+    }
+    return Math.round(((product.price - product.discount_price) / product.price) * 100);
   }
 
   addToCart(product: ProductSummary) {

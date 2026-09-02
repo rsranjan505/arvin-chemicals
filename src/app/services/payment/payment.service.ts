@@ -18,6 +18,7 @@ export interface OrderDetails {
   city: string;
   state: string;
   pincode: string;
+  payment_method?: 'razorpay' | 'cod';
 }
 
 export interface CreateOrderResponse {
@@ -30,6 +31,7 @@ export interface CreateOrderResponse {
   amount_paise: number;
   amount: number;
   currency: string;
+  payment_method: string;
 }
 
 export interface VerifyPaymentResponse {
@@ -52,6 +54,7 @@ export interface OrderLookupResponse {
   order_number: string;
   status: string;
   payment_status: string;
+  payment_method: string;
   subtotal: number;
   shipping: number;
   grand_total: number;
@@ -142,6 +145,7 @@ export class PaymentService {
         order_number: '',
         status: '',
         payment_status: '',
+        payment_method: '',
         subtotal: 0,
         shipping: 0,
         grand_total: 0,

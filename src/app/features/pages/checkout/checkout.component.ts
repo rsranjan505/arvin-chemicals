@@ -1,9 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, OnDestroy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { CartItem, CartService } from '../../../services/cart/cart.service';
 import { PaymentService } from '../../../services/payment/payment.service';
+import { ShippingService, DeliveryEstimateResponse } from '../../../services/shipping/shipping.service';
 import { SeoService } from '../../../services/seo/seo.service';
 
 @Component({
@@ -12,9 +13,10 @@ import { SeoService } from '../../../services/seo/seo.service';
   templateUrl: './checkout.component.html',
   styleUrl: './checkout.component.css',
 })
-export class CheckoutComponent implements OnInit {
+export class CheckoutComponent implements OnInit, OnDestroy {
   private cartService = inject(CartService);
   private paymentService = inject(PaymentService);
+  private shippingService = inject(ShippingService);
   private router = inject(Router);
   private seo = inject(SeoService);
 
@@ -36,6 +38,13 @@ export class CheckoutComponent implements OnInit {
 
   processing = false;
   errorMessage = '';
+  paymentMethod: 'razorpay' | 'cod' = 'razorpay';
+
+  deliveryEstimate: DeliveryEstimateResponse | null = null;
+  deliveryLoading = false;
+  codAvailable = false;
+  private pincodeTimer: any = null;
+  private lastCheckedPincode = '';
 
   ngOnInit() {
     this.cartService.items$.subscribe((items) => {
@@ -49,6 +58,55 @@ export class CheckoutComponent implements OnInit {
       url: 'https://arvinplus.in/checkout',
       robots: 'noindex, nofollow',
     });
+  }
+
+  ngOnDestroy() {
+    if (this.pincodeTimer) {
+      clearTimeout(this.pincodeTimer);
+    }
+  }
+
+  onPincodeChange() {
+    this.deliveryEstimate = null;
+    this.codAvailable = false;
+
+    if (this.pincodeTimer) {
+      clearTimeout(this.pincodeTimer);
+    }
+
+    if (!/^\d{6}$/.test(this.form.pincode)) {
+      this.lastCheckedPincode = '';
+      return;
+    }
+
+    if (this.form.pincode === this.lastCheckedPincode) {
+      return;
+    }
+
+    this.deliveryLoading = true;
+
+    this.pincodeTimer = setTimeout(async () => {
+      try {
+        this.lastCheckedPincode = this.form.pincode;
+        this.deliveryEstimate = await this.shippingService.getDeliveryEstimate(this.form.pincode);
+        this.codAvailable = this.deliveryEstimate.couriers.some(c => c.cod_available);
+        if (this.paymentMethod === 'cod' && !this.codAvailable) {
+          this.paymentMethod = 'razorpay';
+        }
+      } catch {
+        this.deliveryEstimate = {
+          success: false,
+          pincode: this.form.pincode,
+          estimated_days: null,
+          estimated_date: null,
+          couriers: [],
+          message: 'Could not fetch delivery estimate.',
+        };
+        this.codAvailable = false;
+      } finally {
+        this.deliveryLoading = false;
+      }
+    }, 500);
   }
 
   get shipping(): number {
@@ -93,7 +151,21 @@ export class CheckoutComponent implements OnInit {
         city: this.form.city,
         state: this.form.state,
         pincode: this.form.pincode,
+        payment_method: this.paymentMethod,
       });
+
+      if (this.paymentMethod === 'cod') {
+        this.processing = false;
+        this.cartService.clear();
+        this.router.navigate(['/order-success'], {
+          queryParams: {
+            orderId: order.order_id,
+            orderNumber: order.order_number,
+            token: order.order_token,
+          },
+        });
+        return;
+      }
 
       await this.paymentService.checkout({
         order: {

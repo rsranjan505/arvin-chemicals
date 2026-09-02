@@ -1,7 +1,7 @@
 <section class="relative w-full overflow-hidden bg-[#f1f5ec]">
   <div
     #heroContainer
-    class="relative w-full h-[62vh] min-h-[480px] sm:h-[70vh] lg:h-[78vh] overflow-hidden hero-slides-container"
+    class="relative w-full h-[50vh] min-h-[320px] sm:h-[55vh] sm:min-h-[400px] md:h-[65vh] md:min-h-[450px] lg:h-[78vh] overflow-hidden hero-slides-container"
     (touchstart)="onTouchStart($event)"
     (touchmove)="onTouchMove($event)"
     (touchend)="onTouchEnd($event)"
@@ -22,7 +22,7 @@
         <img
           [src]="slide.image"
           [alt]="slide.title + ' – ArvinPlus health supplements'"
-          class="absolute inset-0 w-full h-full object-cover object-center"
+          class="absolute inset-0 w-full h-full object-cover object-[center_30%] sm:object-center md:object-center lg:object-center"
           [loading]="i === 0 ? 'eager' : 'lazy'"
         />
 

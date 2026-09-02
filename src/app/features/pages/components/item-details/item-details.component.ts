@@ -30,6 +30,27 @@ export class ItemDetailsComponent {
 
   added = false;
 
+  displayPrice(): number {
+    if (!this.product) return 0;
+    if (this.product.has_discount && this.product.discount_price != null) {
+      return this.product.discount_price;
+    }
+    return this.product.sale_price ?? this.product.price;
+  }
+
+  discountPercent(): number | null {
+    if (!this.product) return null;
+    if (
+      !this.product.has_discount ||
+      this.product.discount_price == null ||
+      this.product.price <= 0 ||
+      this.product.discount_price >= this.product.price
+    ) {
+      return null;
+    }
+    return Math.round(((this.product.price - this.product.discount_price) / this.product.price) * 100);
+  }
+
   ngOnInit() {
     this.route.paramMap.subscribe(async (params) => {
       const slug = params.get('slug');
@@ -67,7 +88,9 @@ export class ItemDetailsComponent {
 
   private setSeo(product: ProductDetail, images: string[]) {
     const url = `https://arvinplus.in/products/${product.slug}`;
-    const price = product.sale_price ?? product.price;
+    const price = (product.has_discount && product.discount_price != null)
+      ? product.discount_price
+      : product.sale_price ?? product.price;
 
     this.seo.setPageSeo({
       title: product.meta_title || `${product.name}`,
@@ -145,7 +168,7 @@ export class ItemDetailsComponent {
       slug: this.product.slug,
       name: this.product.name,
       subtitle: this.product.subtitle,
-      price: this.product.sale_price ?? this.product.price,
+      price: this.displayPrice(),
       capsule: this.product.capsule ?? 0,
       image: this.product.image || (this.product.images?.[0] ?? ''),
     });

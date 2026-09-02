@@ -27,7 +27,7 @@
       <div class="bg-white rounded-2xl border border-gray-100 p-4">
         <p class="text-sm text-gray-600 mb-2">
           <span *ngIf="freeShippingRemaining > 0">
-            Add <span class="font-semibold text-green-700">₹{{ freeShippingRemaining }}</span> more to get <span class="font-semibold">FREE shipping</span>
+            Add <span class="font-semibold text-green-700">₹{{ freeShippingRemaining | number:'1.2-2' }}</span> more to get <span class="font-semibold">FREE shipping</span>
           </span>
           <span *ngIf="freeShippingRemaining === 0" class="font-semibold text-green-700">You've unlocked FREE shipping!</span>
         </p>
@@ -54,7 +54,7 @@
               <span class="px-4 py-1.5 text-sm font-semibold border-x border-gray-200">{{ item.quantity }}</span>
               <button (click)="increase(item)" class="px-3 py-1.5 text-gray-600 hover:bg-gray-50 transition-colors">+</button>
             </div>
-            <span class="font-bold text-gray-900">₹{{ item.price * item.quantity }}</span>
+            <span class="font-bold text-gray-900">₹{{ item.price * item.quantity | number:'1.2-2' }}</span>
           </div>
         </div>
       </div>
@@ -72,18 +72,18 @@
         <div class="space-y-3 text-sm">
           <div class="flex justify-between text-gray-600">
             <span>Subtotal</span>
-            <span class="font-medium text-gray-900">₹{{ subtotal }}</span>
+            <span class="font-medium text-gray-900">₹{{ subtotal | number:'1.2-2' }}</span>
           </div>
           <div class="flex justify-between text-gray-600">
             <span>Shipping</span>
             <span class="font-medium text-gray-900">
               <span *ngIf="shipping === 0" class="text-green-700">FREE</span>
-              <span *ngIf="shipping > 0">₹{{ shipping }}</span>
+              <span *ngIf="shipping > 0">₹{{ shipping | number:'1.2-2' }}</span>
             </span>
           </div>
           <div class="border-t border-gray-100 pt-3 flex justify-between items-center">
             <span class="font-semibold text-gray-900">Total</span>
-            <span class="text-xl font-bold text-gray-900">₹{{ total }}</span>
+            <span class="text-xl font-bold text-gray-900">₹{{ total | number:'1.2-2' }}</span>
           </div>
         </div>
         <a routerLink="/checkout" class="mt-6 block w-full bg-green-700 hover:bg-green-600 text-white font-semibold py-3.5 rounded-xl text-center transition-all duration-200 shadow-lg hover:shadow-xl">

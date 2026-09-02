@@ -57,6 +57,30 @@
   /* Ensure images don't cause horizontal scroll */
   .hero-slide img {
     max-width: 100vw;
+    object-position: center 30%;
+  }
+
+  .hero-slide {
+    width: 100vw;
+    min-width: 100vw;
+  }
+}
+
+/* Tablet adjustments */
+@media (min-width: 640px) and (max-width: 1023px) {
+  .hero-slide img {
+    object-position: center center;
+  }
+}
+
+/* Mobile - ensure proper containment */
+@media (max-width: 639px) {
+  .hero-slides-container {
+    overflow: hidden;
+  }
+
+  .hero-slides-container > .flex {
+    width: 400vw;
   }
 }
 

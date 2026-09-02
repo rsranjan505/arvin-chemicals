@@ -42,6 +42,10 @@
         <!-- Left: Image Section -->
         <div class="lg:w-[40%] bg-gradient-to-br from-gray-50 to-white p-6 sm:p-8 lg:p-10 flex flex-col items-center">
           <div class="relative w-full aspect-square max-w-md mx-auto overflow-hidden rounded-2xl bg-white cursor-crosshair" (mousemove)="onMouseMove($event)" (mouseleave)="onMouseLeave()" (click)="openModal()">
+            <span *ngIf="discountPercent() as pct" class="absolute top-4 left-4 z-20 flex flex-col items-center justify-center bg-[#1B3764] text-white px-3.5 py-2.5 rounded-xl shadow-lg leading-none">
+              <span class="text-xl font-extrabold">{{ pct }}%</span>
+              <span class="text-[11px] font-bold uppercase tracking-widest mt-1">Off</span>
+            </span>
             <img *ngIf="selectedImage" [src]="selectedImage" alt="{{ product.name }}" class="w-full h-full object-contain drop-shadow-lg transition-transform duration-75 zoom-image" [ngStyle]="zoomStyle" />
             <div *ngIf="!selectedImage" class="w-full h-full flex items-center justify-center bg-gray-100 text-gray-400 text-sm">No image</div>
           </div>
@@ -83,8 +87,8 @@
             <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
               <div>
                 <div class="flex items-baseline gap-2">
-                  <span class="text-3xl font-bold text-gray-900">₹{{ product.sale_price ?? product.price }}</span>
-                  <span *ngIf="product.sale_price" class="text-lg text-gray-400 line-through">₹{{ product.price }}</span>
+                  <span class="text-3xl font-bold" [ngClass]="discountPercent() ? 'text-red-600' : 'text-gray-900'">₹{{ displayPrice() }}</span>
+                  <span *ngIf="discountPercent()" class="text-lg text-gray-400 line-through">₹{{ product.price }}</span>
                 </div>
                 <p class="text-sm text-gray-500 mt-1">Inclusive of all taxes</p>
                 <p *ngIf="!product.in_stock" class="text-sm font-semibold text-red-500 mt-1">Currently out of stock</p>

@@ -31,10 +31,11 @@
           <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
         </svg>
       </div>
-      <span class="inline-block text-green-700 font-semibold text-sm uppercase tracking-widest mb-2">Payment Successful</span>
+      <span class="inline-block text-green-700 font-semibold text-sm uppercase tracking-widest mb-2">{{ order.payment_method === 'cod' ? 'Order Confirmed' : 'Payment Successful' }}</span>
       <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-3">Thank You, Your Order Is Confirmed!</h1>
       <p class="text-gray-500 mb-6">
-        A confirmation email is on its way. We'll notify you once your order ships.
+        <span *ngIf="order.payment_method === 'cod'">Your order will be shipped soon. Please keep the exact amount ready for cash payment on delivery.</span>
+        <span *ngIf="order.payment_method !== 'cod'">A confirmation email is on its way. We'll notify you once your order ships.</span>
       </p>
       <div class="inline-flex flex-wrap items-center justify-center gap-x-8 gap-y-2 text-sm">
         <div class="text-left">
@@ -51,7 +52,7 @@
         </div>
         <div class="text-left">
           <p class="text-xs text-gray-400 uppercase tracking-wide">Payment Status</p>
-          <p class="font-semibold text-green-700 capitalize">{{ order.payment_status }}</p>
+          <p class="font-semibold text-green-700 capitalize">{{ order.payment_method === 'cod' ? 'Pay on Delivery' : order.payment_status }}</p>
         </div>
       </div>
     </div>
@@ -80,7 +81,7 @@
           </span>
         </div>
         <div class="border-t border-gray-100 pt-3 flex justify-between items-center">
-          <span class="font-semibold text-gray-900">Total Paid</span>
+          <span class="font-semibold text-gray-900">{{ order.payment_method === 'cod' ? 'Total' : 'Total Paid' }}</span>
           <span class="text-xl font-bold text-gray-900">{{ formatAmount(order.grand_total) }}</span>
         </div>
       </div>

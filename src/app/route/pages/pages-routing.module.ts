@@ -108,6 +108,14 @@ const routes: Routes = [
           ).then((m) => m.ProductsPage),
       },
       {
+        path: 'products/:slug',
+        pathMatch: 'full',
+        loadComponent: () =>
+          import(
+            '../../features/pages/product-details/product-details.component'
+          ).then((m) => m.ProductDetailsComponent),
+      },
+      {
         path: 'blog/:slug',
         pathMatch: 'full',
         loadComponent: () =>
@@ -187,14 +195,6 @@ const routes: Routes = [
         loadComponent: () =>
           import('../../features/pages/blog/blog-list.component').then(
             (m) => m.BlogListComponent
-          ),
-      },
-      {
-        path: 'blog/:slug',
-        pathMatch: 'full',
-        loadComponent: () =>
-          import('../../features/pages/blog/blog-detail.component').then(
-            (m) => m.BlogDetailComponent
           ),
       },
     ],
