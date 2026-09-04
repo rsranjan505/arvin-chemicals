@@ -76,7 +76,7 @@
             <span class="text-xl lg:text-2xl font-extrabold">{{ pct }}%</span>
             <span class="text-[11px] lg:text-xs font-bold uppercase tracking-widest mt-1">Off</span>
           </span>
-          <img *ngIf="product.image" [src]="product.image" [alt]="product.name" loading="lazy" class="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.6]" [class.grayscale]="!product.in_stock" [class.opacity-70]="!product.in_stock" />
+          <img *ngIf="product.image" [src]="product.image" [alt]="product.name" loading="lazy" class="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.6]" />
           <div *ngIf="!product.image" class="h-full w-full flex items-center justify-center bg-gray-100 text-gray-400 text-xs">No image</div>
           <!-- Out of Stock Badge -->
           <span *ngIf="!product.in_stock" class="absolute top-0 right-0 z-20 flex items-center gap-1.5 bg-red-900/90 backdrop-blur-sm text-white text-xs lg:text-sm font-bold uppercase tracking-wider px-4 py-2.5 rounded-bl-2xl shadow-lg">

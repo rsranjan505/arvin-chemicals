@@ -56,10 +56,11 @@ export class HeroSectionComponent implements AfterViewInit, OnDestroy {
   @ViewChild('heroContainer') heroContainer!: ElementRef<HTMLDivElement>;
 
   ngAfterViewInit(): void {
-    this.isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    if (typeof window !== 'undefined') {
+      this.isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    }
     this.startAutoSlide();
 
-    // Pause auto-slide on hover/focus (desktop)
     this.heroContainer?.nativeElement.addEventListener('mouseenter', () => this.stopAutoSlide());
     this.heroContainer?.nativeElement.addEventListener('mouseleave', () => this.startAutoSlide());
     this.heroContainer?.nativeElement.addEventListener('focusin', () => this.stopAutoSlide());

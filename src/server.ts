@@ -70,6 +70,13 @@ app.use(
 );
 
 /**
+ * Serve sitemap.xml at the root path for SEO crawlers.
+ */
+app.get('/sitemap.xml', (_req, res) => {
+  res.sendFile(resolve(browserDistFolder, 'assets/sitemap.xml'));
+});
+
+/**
  * Handle all other requests by rendering the Angular application.
  */
 app.use('/**', (req, res, next) => {
