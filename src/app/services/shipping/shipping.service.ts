@@ -29,6 +29,7 @@ export class ShippingService {
       {
         method: 'GET',
         headers: { Accept: 'application/json' },
+        signal: AbortSignal.timeout(10000),
       }
     );
     const data = await res.json();

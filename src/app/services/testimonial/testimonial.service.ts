@@ -23,6 +23,7 @@ export class TestimonialService {
     const res = await fetch(`${environment.apiUrl}/api/storefront/testimonials`, {
       method: 'GET',
       headers: { Accept: 'application/json' },
+      signal: AbortSignal.timeout(10000),
     });
     const data = (await res.json()) as TestimonialsResponse;
 

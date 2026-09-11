@@ -1,5 +1,5 @@
-import { CommonModule } from '@angular/common';
-import { Component, inject, HostListener } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { Component, inject, HostListener, PLATFORM_ID } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import {
   ProductService,
@@ -20,6 +20,7 @@ export class ItemDetailsComponent {
 
   private productService = inject(ProductService);
   private cartService = inject(CartService);
+  private platformId = inject(PLATFORM_ID);
 
   product: ProductDetail | null = null;
 
@@ -52,6 +53,9 @@ export class ItemDetailsComponent {
   }
 
   ngOnInit() {
+    if (!isPlatformBrowser(this.platformId)) {
+      return;
+    }
     this.route.paramMap.subscribe(async (params) => {
       const slug = params.get('slug');
 

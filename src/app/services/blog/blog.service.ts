@@ -57,6 +57,7 @@ export class BlogService {
     const res = await fetch(`${environment.apiUrl}/api/storefront/blog/posts?${params.toString()}`, {
       method: 'GET',
       headers: { Accept: 'application/json' },
+      signal: AbortSignal.timeout(10000),
     });
     const data = await res.json();
 
@@ -77,6 +78,7 @@ export class BlogService {
     const res = await fetch(`${environment.apiUrl}/api/storefront/blog/posts/${encodeURIComponent(slug)}`, {
       method: 'GET',
       headers: { Accept: 'application/json' },
+      signal: AbortSignal.timeout(10000),
     });
     const data = await res.json();
 
@@ -105,6 +107,7 @@ export class BlogService {
     const res = await fetch(`${environment.apiUrl}/api/storefront/blog/categories`, {
       method: 'GET',
       headers: { Accept: 'application/json' },
+      signal: AbortSignal.timeout(10000),
     });
     const data = await res.json();
 

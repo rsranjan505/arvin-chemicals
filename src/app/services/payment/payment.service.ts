@@ -101,6 +101,7 @@ export class PaymentService {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(details),
+      signal: AbortSignal.timeout(10000),
     });
     const data = await res.json();
     if (!res.ok) {
@@ -121,6 +122,7 @@ export class PaymentService {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload),
+      signal: AbortSignal.timeout(10000),
     });
     const data = await res.json();
     if (!res.ok) {
@@ -135,6 +137,7 @@ export class PaymentService {
       {
         method: 'GET',
         headers: { Accept: 'application/json' },
+        signal: AbortSignal.timeout(10000),
       }
     );
     const data = await res.json();

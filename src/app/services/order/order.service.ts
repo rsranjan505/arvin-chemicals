@@ -35,6 +35,7 @@ export class OrderService {
     try {
       const res = await fetch(`${this.apiUrl}/api/storefront/account/orders`, {
         headers: { Accept: 'application/json', Authorization: `Bearer ${this.auth.token}` },
+        signal: AbortSignal.timeout(10000),
       });
 
       if (res.status === 401) {
@@ -60,6 +61,7 @@ export class OrderService {
     try {
       const res = await fetch(`${this.apiUrl}/api/storefront/account/orders/${id}`, {
         headers: { Accept: 'application/json', Authorization: `Bearer ${this.auth.token}` },
+        signal: AbortSignal.timeout(10000),
       });
 
       if (res.status === 401) {

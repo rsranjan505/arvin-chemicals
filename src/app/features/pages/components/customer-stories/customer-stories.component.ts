@@ -1,5 +1,5 @@
-import { CommonModule, NgFor } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { CommonModule, isPlatformBrowser, NgFor } from '@angular/common';
+import { Component, OnInit, PLATFORM_ID, inject } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Testimonial, TestimonialService } from '../../../../services/testimonial/testimonial.service';
 
@@ -15,12 +15,17 @@ export class CustomerStoriesComponent implements OnInit {
   selectedVideo: SafeResourceUrl | null = null;
   selectedName = '';
 
+  private platformId = inject(PLATFORM_ID);
+
   constructor(
     private sanitizer: DomSanitizer,
     private testimonialService: TestimonialService
   ) {}
 
   ngOnInit(): void {
+    if (!isPlatformBrowser(this.platformId)) {
+      return;
+    }
     this.loadTestimonials();
   }
 

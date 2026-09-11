@@ -1,5 +1,5 @@
-import { CommonModule } from '@angular/common';
-import { Component, inject, OnInit } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { Component, inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { CartService } from '../../../../services/cart/cart.service';
 import {
@@ -18,6 +18,7 @@ export class ProductListsComponent implements OnInit {
   private productService = inject(ProductService);
   private route = inject(ActivatedRoute);
   private router = inject(Router);
+  private platformId = inject(PLATFORM_ID);
 
   products: ProductSummary[] = [];
 
@@ -57,6 +58,9 @@ export class ProductListsComponent implements OnInit {
   }
 
   async ngOnInit() {
+    if (!isPlatformBrowser(this.platformId)) {
+      return;
+    }
     this.route.queryParamMap.subscribe((params) => {
       this.searchQuery = (params.get('q') ?? '').trim();
       this.visibleCount = this.pageSize;

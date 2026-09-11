@@ -49,6 +49,7 @@ export class CustomerAuthService {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
         body: JSON.stringify({ email: email.trim() }),
+        signal: AbortSignal.timeout(10000),
       });
       const data = await res.json();
 
@@ -73,6 +74,7 @@ export class CustomerAuthService {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
         body: JSON.stringify({ email: email.trim(), otp }),
+        signal: AbortSignal.timeout(10000),
       });
       const data = await res.json();
 
@@ -97,6 +99,7 @@ export class CustomerAuthService {
     try {
       const res = await fetch(`${this.apiUrl}/api/storefront/account/me`, {
         headers: this.authHeaders(),
+        signal: AbortSignal.timeout(10000),
       });
 
       if (res.status === 401) {
@@ -120,6 +123,7 @@ export class CustomerAuthService {
         method: 'PUT',
         headers: { ...this.authHeaders(), 'Content-Type': 'application/json' },
         body: JSON.stringify({ name, mobile }),
+        signal: AbortSignal.timeout(10000),
       });
       const data = await res.json();
 
@@ -145,6 +149,7 @@ export class CustomerAuthService {
       fetch(`${this.apiUrl}/api/storefront/account/logout`, {
         method: 'POST',
         headers: this.authHeaders(),
+        signal: AbortSignal.timeout(10000),
       }).catch(() => undefined);
     }
     this.clearSession();
