@@ -157,6 +157,9 @@ export class CheckoutComponent implements OnInit, OnDestroy {
       if (this.paymentMethod === 'cod') {
         this.processing = false;
         this.cartService.clear();
+        // for google ads product purchase
+        this.trackPurchase(order);
+
         this.router.navigate(['/order-success'], {
           queryParams: {
             orderId: order.order_id,
@@ -186,6 +189,9 @@ export class CheckoutComponent implements OnInit, OnDestroy {
 
           if (result.success) {
             this.cartService.clear();
+            // for google ads product purchase
+            this.trackPurchase(order);
+
             this.router.navigate(['/order-success'], {
               queryParams: {
                 orderId: order.order_id,
@@ -205,5 +211,22 @@ export class CheckoutComponent implements OnInit, OnDestroy {
       this.processing = false;
       this.errorMessage = e?.message || 'Something went wrong. Please try again.';
     }
+  }
+
+  trackPurchase(order: any): void {
+
+    const gtag = (window as any).gtag;
+
+    if (!gtag) {
+      console.error('Google Analytics gtag not loaded');
+      return;
+    }
+
+    gtag('event', 'purchase', {
+      transaction_id: order.order_id,
+      value: Number(order.amount),
+      currency: order.currency || 'INR'
+    });
+
   }
 }
