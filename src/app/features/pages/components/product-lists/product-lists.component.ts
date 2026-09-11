@@ -1,5 +1,5 @@
 import { CommonModule, isPlatformBrowser } from '@angular/common';
-import { Component, inject, OnInit, PLATFORM_ID } from '@angular/core';
+import { Component, inject, Input, OnInit, PLATFORM_ID } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { CartService } from '../../../../services/cart/cart.service';
 import {
@@ -20,7 +20,10 @@ export class ProductListsComponent implements OnInit {
   private router = inject(Router);
   private platformId = inject(PLATFORM_ID);
 
-  products: ProductSummary[] = [];
+  // When a route resolver has pre-fetched the catalogue (as on /products and
+  // /our-collections) the data arrives synchronously, which lets SSR / pre-render
+  // emit the full product list instead of the loading skeleton.
+  @Input() products: ProductSummary[] = [];
 
   loading = true;
   error = false;
@@ -58,13 +61,16 @@ export class ProductListsComponent implements OnInit {
   }
 
   async ngOnInit() {
-    if (!isPlatformBrowser(this.platformId)) {
-      return;
-    }
     this.route.queryParamMap.subscribe((params) => {
       this.searchQuery = (params.get('q') ?? '').trim();
       this.visibleCount = this.pageSize;
     });
+
+    if (this.products.length > 0) {
+      this.loading = false;
+      return;
+    }
+
     await this.load();
   }
 

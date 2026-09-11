@@ -1,8 +1,12 @@
 import { CommonModule, isPlatformBrowser } from '@angular/common';
-import { Component, inject, HostListener, PLATFORM_ID } from '@angular/core';
+import {
+  Component,
+  inject,
+  HostListener,
+  PLATFORM_ID,
+} from '@angular/core';
 import { RouterLink } from '@angular/router';
 import {
-  ProductService,
   ProductDetail,
 } from '../../../../services/product/product.service';
 import { ActivatedRoute } from '@angular/router';
@@ -18,7 +22,6 @@ import { CartService } from '../../../../services/cart/cart.service';
 export class ItemDetailsComponent {
   constructor(private route: ActivatedRoute, private seo: SeoService) {}
 
-  private productService = inject(ProductService);
   private cartService = inject(CartService);
   private platformId = inject(PLATFORM_ID);
 
@@ -53,41 +56,38 @@ export class ItemDetailsComponent {
   }
 
   ngOnInit() {
-    if (!isPlatformBrowser(this.platformId)) {
+    // Product data is resolved by the route resolver before activation, so it
+    // is already available synchronously here. This lets SSR / pre-render emit
+    // the full product content, meta tags and JSON-LD in the first HTML.
+    this.applyProduct(this.route.snapshot.data['product'] as ProductDetail | null);
+
+    // During in-app navigation between products the component instance is
+    // reused, so the browser must react to subsequent route data changes.
+    if (isPlatformBrowser(this.platformId)) {
+      this.route.data.subscribe((data) => {
+        this.applyProduct(data['product'] as ProductDetail | null);
+      });
+    }
+  }
+
+  private applyProduct(product: ProductDetail | null): void {
+    this.loading = false;
+
+    if (!product) {
+      this.notFound = true;
+      this.product = null;
       return;
     }
-    this.route.paramMap.subscribe(async (params) => {
-      const slug = params.get('slug');
 
-      if (!slug) return;
-
-      this.loading = true;
-      this.notFound = false;
-
-      try {
-        const product = await this.productService.getProductBySlug(slug);
-
-        if (!product) {
-          this.notFound = true;
-          this.product = null;
-          return;
-        }
-
-        this.product = product;
-        const images = product.images?.length
-          ? product.images
-          : product.image
-            ? [product.image]
-            : [];
-        this.selectedImage = images[0] || '';
-        this.setSeo(product, images);
-      } catch {
-        this.notFound = true;
-        this.product = null;
-      } finally {
-        this.loading = false;
-      }
-    });
+    this.notFound = false;
+    this.product = product;
+    const images = product.images?.length
+      ? product.images
+      : product.image
+        ? [product.image]
+        : [];
+    this.selectedImage = images[0] || '';
+    this.setSeo(product, images);
   }
 
   private setSeo(product: ProductDetail, images: string[]) {

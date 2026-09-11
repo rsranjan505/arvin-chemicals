@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CustomerAuthService } from '../../../services/auth/customer-auth.service';
+import { SeoService } from '../../../services/seo/seo.service';
 
 @Component({
   selector: 'app-account-login',
@@ -14,6 +15,7 @@ export class AccountLoginComponent implements OnDestroy {
   private auth = inject(CustomerAuthService);
   private router = inject(Router);
   private route = inject(ActivatedRoute);
+  private seo = inject(SeoService);
 
   step: 'email' | 'otp' = 'email';
 
@@ -28,6 +30,15 @@ export class AccountLoginComponent implements OnDestroy {
 
   resendSeconds = 0;
   private timer: ReturnType<typeof setInterval> | null = null;
+
+  ngOnInit() {
+    this.seo.setPageSeo({
+      title: 'Account Login',
+      description: 'Login to your ArvinPlus™ account to track orders, manage addresses and reorder your favourite health supplements.',
+      url: 'https://arvinplus.in/account/login',
+      robots: 'noindex, nofollow',
+    });
+  }
 
   ngOnDestroy() {
     this.stopTimer();

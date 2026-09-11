@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CustomerAuthService } from '../../../services/auth/customer-auth.service';
+import { SeoService } from '../../../services/seo/seo.service';
 
 @Component({
   selector: 'app-account-profile',
@@ -13,6 +14,7 @@ import { CustomerAuthService } from '../../../services/auth/customer-auth.servic
 export class ProfileComponent implements OnInit {
   private auth = inject(CustomerAuthService);
   private router = inject(Router);
+  private seo = inject(SeoService);
 
   customer = this.auth.customer;
 
@@ -24,6 +26,12 @@ export class ProfileComponent implements OnInit {
   error = '';
 
   ngOnInit() {
+    this.seo.setPageSeo({
+      title: 'My Profile',
+      description: 'Update your ArvinPlus™ account profile — name and mobile number for faster checkout and order updates.',
+      url: 'https://arvinplus.in/account/profile',
+      robots: 'noindex, nofollow',
+    });
     this.name = this.customer()?.name ?? '';
     this.mobile = this.customer()?.mobile ?? '';
     this.auth.refreshCustomer().then(() => {

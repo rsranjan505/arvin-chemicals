@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { HeroSectionComponent } from "../../../layouts/hero-section/hero-section.component";
 import { ProductListsComponent } from "../components/product-lists/product-lists.component";
 import { CustomerStoriesComponent } from "../components/customer-stories/customer-stories.component";
 import { HomeBlogComponent } from "../components/home-blog/home-blog.component";
 import { RouterLink } from '@angular/router';
 import { SeoService } from '../../../services/seo/seo.service';
+import { ProductSummary } from '../../../services/product/product.service';
 
 @Component({
   standalone: true,
@@ -14,9 +16,14 @@ import { SeoService } from '../../../services/seo/seo.service';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
-  constructor(private seo: SeoService) {}
+  constructor(private seo: SeoService, private route: ActivatedRoute) {}
+
+  // Resolved by the browser before activation; SSR / pre-render therefore
+  // emits the featured products in the first HTML instead of skeletons.
+  products: ProductSummary[] = [];
 
   ngOnInit() {
+    this.products = this.route.snapshot.data['products'] as ProductSummary[];
     this.seo.setPageSeo({
       title: 'Premium health supplements for Liver Detox & Wellness',
       description: 'Shop ArvinPlus™ research-backed health supplements for liver detox, immunity, bone health and vitality. GMP certified, FSSAI approved, third-party lab tested. Free shipping across India on orders above ₹999.',

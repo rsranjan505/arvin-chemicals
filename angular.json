@@ -16,6 +16,10 @@
             "outputPath": "dist/arvin-chemicals",
             "index": "src/index.html",
             "browser": "src/main.ts",
+            "server": "src/main.server.ts",
+            "ssr": {
+              "entry": "src/server.ts"
+            },
             "polyfills": [
               "zone.js"
             ],
@@ -54,6 +58,10 @@
                   "maximumError": "8kB"
                 }
               ],
+              "prerender": {
+                "routesFile": "prerender-routes.txt",
+                "discoverRoutes": false
+              },
               "outputHashing": "all",
               "optimization": {
                 "scripts": true,

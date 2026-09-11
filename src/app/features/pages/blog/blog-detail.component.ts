@@ -1,7 +1,7 @@
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { Component, inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { BlogPostDetail, BlogService, BlogPostSummary } from '../../../services/blog/blog.service';
+import { BlogPostDetail, BlogPostSummary } from '../../../services/blog/blog.service';
 import { SeoService } from '../../../services/seo/seo.service';
 
 @Component({
@@ -12,7 +12,6 @@ import { SeoService } from '../../../services/seo/seo.service';
 })
 export class BlogDetailComponent implements OnInit {
   private route = inject(ActivatedRoute);
-  private blogService = inject(BlogService);
   private seo = inject(SeoService);
   private platformId = inject(PLATFORM_ID);
 
@@ -23,51 +22,41 @@ export class BlogDetailComponent implements OnInit {
   post: BlogPostDetail | null = null;
   related: BlogPostSummary[] = [];
 
-  get isBrowser(): boolean {
-    return isPlatformBrowser(this.platformId);
-  }
-
   encode(value: string): string {
     return encodeURIComponent(value);
   }
 
   ngOnInit() {
-    this.route.paramMap.subscribe((params) => {
-      const slug = params.get('slug');
+    // Post data is resolved by the route resolver before activation, so it is
+    // available synchronously here. SSR / pre-render therefore emits the full
+    // article content, meta tags and JSON-LD in the first HTML.
+    this.applyPost(this.route.snapshot.data['post'] as BlogPostDetail | null);
 
-      if (!slug) {
-        this.failed = true;
-        this.loading = false;
-        return;
-      }
-
-      this.reset();
-
-      // The API fetch only runs in the browser (SSR renders the loading state).
-      if (!isPlatformBrowser(this.platformId)) {
-        return;
-      }
-
-      this.blogService.getPostBySlug(slug).then((res) => {
-        this.loading = false;
-        if (res.success && res.post) {
-          this.post = res.post;
-          this.related = res.post.related || [];
-          this.applySeo();
-        } else {
-          this.failed = true;
-          this.errorMessage = res.message || 'Post not found.';
-        }
+    // In-app navigation between posts reuses this instance; only the browser
+    // needs to react to subsequent route data changes.
+    if (isPlatformBrowser(this.platformId)) {
+      this.route.data.subscribe((data) => {
+        this.applyPost(data['post'] as BlogPostDetail | null);
       });
-    });
+    }
   }
 
-  private reset() {
-    this.loading = true;
+  private applyPost(post: BlogPostDetail | null): void {
+    this.loading = false;
+
+    if (!post) {
+      this.failed = true;
+      this.errorMessage = 'Article not found.';
+      this.post = null;
+      this.related = [];
+      return;
+    }
+
     this.failed = false;
     this.errorMessage = '';
-    this.post = null;
-    this.related = [];
+    this.post = post;
+    this.related = post.related || [];
+    this.applySeo();
   }
 
   private applySeo() {

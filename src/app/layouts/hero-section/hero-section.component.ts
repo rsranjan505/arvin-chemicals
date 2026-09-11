@@ -1,5 +1,5 @@
 
-import { CommonModule } from '@angular/common';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import {
   Component,
   HostListener,
@@ -7,6 +7,8 @@ import {
   ViewChild,
   AfterViewInit,
   OnDestroy,
+  PLATFORM_ID,
+  inject,
 } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
@@ -19,6 +21,8 @@ import { RouterLink } from '@angular/router';
   styleUrls: ['./hero-section.component.css'],
 })
 export class HeroSectionComponent implements AfterViewInit, OnDestroy {
+
+  private platformId = inject(PLATFORM_ID);
 
   slides = [
     {
@@ -59,6 +63,13 @@ export class HeroSectionComponent implements AfterViewInit, OnDestroy {
     if (typeof window !== 'undefined') {
       this.isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
     }
+
+    // During SSR/pre-render the app must settle immediately; timers and DOM
+    // listeners are browser-only.
+    if (!isPlatformBrowser(this.platformId)) {
+      return;
+    }
+
     this.startAutoSlide();
 
     this.heroContainer?.nativeElement.addEventListener('mouseenter', () => this.stopAutoSlide());

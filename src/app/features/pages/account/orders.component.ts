@@ -2,6 +2,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { OrderService, CustomerOrder, OrderUnauthorizedError } from '../../../services/order/order.service';
+import { SeoService } from '../../../services/seo/seo.service';
 
 @Component({
   selector: 'app-account-orders',
@@ -11,6 +12,7 @@ import { OrderService, CustomerOrder, OrderUnauthorizedError } from '../../../se
 })
 export class OrdersComponent implements OnInit {
   private orderService = inject(OrderService);
+  private seo = inject(SeoService);
 
   readonly currentStatuses = ['pending', 'confirmed', 'processing', 'packed', 'shipped'];
   readonly previousStatuses = ['delivered', 'cancelled'];
@@ -26,6 +28,12 @@ export class OrdersComponent implements OnInit {
   expandedId: number | null = null;
 
   ngOnInit() {
+    this.seo.setPageSeo({
+      title: 'My Orders',
+      description: 'Track your ArvinPlus™ orders — view current and previous order status, payment and totals.',
+      url: 'https://arvinplus.in/account/orders',
+      robots: 'noindex, nofollow',
+    });
     this.load();
   }
 

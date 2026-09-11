@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { CustomerAuthService, Customer } from '../../../services/auth/customer-auth.service';
 import { OrderService, CustomerOrder } from '../../../services/order/order.service';
+import { SeoService } from '../../../services/seo/seo.service';
 
 @Component({
   selector: 'app-account-dashboard',
@@ -13,6 +14,7 @@ import { OrderService, CustomerOrder } from '../../../services/order/order.servi
 export class DashboardComponent implements OnInit {
   private auth = inject(CustomerAuthService);
   private orderService = inject(OrderService);
+  private seo = inject(SeoService);
 
   customer = this.auth.customer;
 
@@ -24,6 +26,12 @@ export class DashboardComponent implements OnInit {
   readonly currentStatuses = ['pending', 'confirmed', 'processing', 'packed', 'shipped'];
 
   ngOnInit() {
+    this.seo.setPageSeo({
+      title: 'My Account Dashboard',
+      description: 'View your ArvinPlus™ order history, current orders and spending summary.',
+      url: 'https://arvinplus.in/account',
+      robots: 'noindex, nofollow',
+    });
     this.load();
   }
 

@@ -41,11 +41,6 @@ export class BlogListComponent implements OnInit {
       url: 'https://arvinplus.in/blog',
     });
 
-    // API calls run in the browser only; SSR renders the loading state.
-    if (!isPlatformBrowser(this.platformId)) {
-      return;
-    }
-
     Promise.all([this.loadCategories(), this.loadPosts()]);
   }
 

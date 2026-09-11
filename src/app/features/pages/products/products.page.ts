@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { ProductListsComponent } from '../components/product-lists/product-lists.component';
 import { SeoService } from '../../../services/seo/seo.service';
+import { ProductSummary } from '../../../services/product/product.service';
 
 @Component({
   selector: 'app-products',
@@ -9,9 +11,15 @@ import { SeoService } from '../../../services/seo/seo.service';
   styleUrl: './products.page.css'
 })
 export class ProductsPage implements OnInit {
-  constructor(private seo: SeoService) {}
+  constructor(private seo: SeoService, private route: ActivatedRoute) {}
+
+  products: ProductSummary[] = [];
 
   ngOnInit() {
+    this.products = this.route.snapshot.data['products'] as ProductSummary[];
+    this.route.data.subscribe((data) => {
+      this.products = data['products'] as ProductSummary[];
+    });
     this.seo.setPageSeo({
       title: 'All Products',
       description: 'Browse the full range of ArvinPlus™ premium health supplements — Liver Detox, Zinc, Iron, Vitamin K2 MK-7, Magnesium Glycinate, Selenium Plus and more. GMP certified, FSSAI approved, free shipping on orders above ₹999.',
