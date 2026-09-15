@@ -20,20 +20,24 @@ export interface TestimonialsResponse {
 })
 export class TestimonialService {
   async getTestimonials(): Promise<Testimonial[]> {
-    const res = await fetch(`${environment.apiUrl}/api/storefront/testimonials`, {
-      method: 'GET',
-      headers: { Accept: 'application/json' },
-      signal: AbortSignal.timeout(10000),
-    });
-    const data = (await res.json()) as TestimonialsResponse;
+    try {
+      const res = await fetch(`${environment.apiUrl}/api/storefront/testimonials`, {
+        method: 'GET',
+        headers: { Accept: 'application/json' },
+        signal: AbortSignal.timeout(10000),
+      });
+      const data = (await res.json()) as TestimonialsResponse;
 
-    if (!res.ok) {
+      if (!res.ok) {
+        return [];
+      }
+
+      return (data.testimonials ?? []).map((t) => ({
+        ...t,
+        image_url: resolveImageUrl(t.image_url),
+      }));
+    } catch {
       return [];
     }
-
-    return (data.testimonials ?? []).map((t) => ({
-      ...t,
-      image_url: resolveImageUrl(t.image_url),
-    }));
   }
 }

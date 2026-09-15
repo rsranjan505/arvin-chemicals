@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, OnInit, OnDestroy } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit, OnDestroy } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { CartItem, CartService } from '../../../services/cart/cart.service';
@@ -19,6 +20,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
   private shippingService = inject(ShippingService);
   private router = inject(Router);
   private seo = inject(SeoService);
+  private destroyRef = inject(DestroyRef);
 
   items: CartItem[] = [];
   subtotal = 0;
@@ -47,7 +49,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
   private lastCheckedPincode = '';
 
   ngOnInit() {
-    this.cartService.items$.subscribe((items) => {
+    this.cartService.items$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((items) => {
       this.items = items;
       this.subtotal = this.cartService.getSubtotal();
     });

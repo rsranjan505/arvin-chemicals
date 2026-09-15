@@ -24,25 +24,36 @@ export interface DeliveryEstimateResponse {
 })
 export class ShippingService {
   async getDeliveryEstimate(pincode: string): Promise<DeliveryEstimateResponse> {
-    const res = await fetch(
-      `${environment.apiUrl}/api/storefront/delivery-estimate?pincode=${encodeURIComponent(pincode)}`,
-      {
-        method: 'GET',
-        headers: { Accept: 'application/json' },
-        signal: AbortSignal.timeout(10000),
+    try {
+      const res = await fetch(
+        `${environment.apiUrl}/api/storefront/delivery-estimate?pincode=${encodeURIComponent(pincode)}`,
+        {
+          method: 'GET',
+          headers: { Accept: 'application/json' },
+          signal: AbortSignal.timeout(10000),
+        }
+      );
+      const data = await res.json();
+      if (!res.ok) {
+        return {
+          success: false,
+          pincode,
+          estimated_days: null,
+          estimated_date: null,
+          couriers: [],
+          message: data?.message || 'Could not fetch delivery estimate.',
+        };
       }
-    );
-    const data = await res.json();
-    if (!res.ok) {
+      return data;
+    } catch {
       return {
         success: false,
         pincode,
         estimated_days: null,
         estimated_date: null,
         couriers: [],
-        message: data?.message || 'Could not fetch delivery estimate.',
+        message: 'Network error. Please try again.',
       };
     }
-    return data;
   }
 }

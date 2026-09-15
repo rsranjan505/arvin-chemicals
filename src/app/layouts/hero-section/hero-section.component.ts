@@ -28,24 +28,28 @@ export class HeroSectionComponent implements AfterViewInit, OnDestroy {
     {
       image: 'assets/hero/bg1.png',
       title: 'Welcome to ArvinPlus',
+      alt: 'ArvinPlus Hero Image 1',
       subtitle: 'Your trusted partner for premium health supplements.',
       button: 'Explore More'
     },
     {
       image: 'assets/hero/bg2.png',
       title: 'Research-Backed health supplements',
+      alt: 'ArvinPlus Hero Image 2',
       subtitle: 'Delivering excellence with GMP-certified, FSSAI-approved formulations.',
       button: 'View Products'
     },
     {
       image: 'assets/hero/bg3.png',
       title: 'Trusted by 10,000+ Customers',
+      alt: 'ArvinPlus Hero Image 3',
       subtitle: 'Reliability. Quality. Purity. Real wellness results across India.',
       button: 'About Us'
     },
     {
       image: 'assets/hero/bg4.png',
       title: 'Innovating for a Better Tomorrow',
+      alt: 'ArvinPlus Hero Image 4',
       subtitle: 'Liver detox, immunity, bone health and vitality — made simple.',
       button: 'Contact Us'
     }
@@ -119,7 +123,7 @@ export class HeroSectionComponent implements AfterViewInit, OnDestroy {
     const deltaY = Math.abs(touchY - event.changedTouches[0].screenY);
 
     // If horizontal swipe is more dominant, prevent default
-    if (deltaX > deltaY && deltaX > 10) {
+    if (deltaX > deltaY && deltaX > 30) {
       event.preventDefault();
     }
   }

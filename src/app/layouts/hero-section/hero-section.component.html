@@ -24,6 +24,8 @@
           [alt]="slide.title + ' – ArvinPlus health supplements'"
           class="absolute inset-0 w-full h-full object-cover object-[center_30%] sm:object-center md:object-center lg:object-center"
           [loading]="i === 0 ? 'eager' : 'lazy'"
+          [decoding]="i === 0 ? 'sync' : 'async'"
+          fetchpriority="high"
         />
 
         <!-- Very subtle left-side readability layer - stronger on mobile for text readability -->

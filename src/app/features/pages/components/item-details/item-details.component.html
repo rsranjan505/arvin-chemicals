@@ -1,6 +1,6 @@
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12">
   <!-- Loading Skeleton -->
-  <div *ngIf="loading" class="animate-pulse">
+  <div *ngIf="initialLoad || loading" class="animate-pulse">
     <div class="h-4 bg-gray-200 w-1/3 rounded mb-8"></div>
     <div class="bg-white rounded-3xl border border-gray-100 overflow-hidden">
       <div class="flex flex-col lg:flex-row">
@@ -20,14 +20,14 @@
   </div>
 
   <!-- Not Found -->
-  <div *ngIf="!loading && notFound" class="py-24 text-center">
+  <div *ngIf="!initialLoad && !loading && notFound" class="py-24 text-center">
     <h1 class="text-2xl font-bold text-gray-900 mb-3">Product Not Found</h1>
     <p class="text-gray-500 mb-6">The product you're looking for doesn't exist or is no longer available.</p>
     <a routerLink="/our-collections" class="inline-flex items-center justify-center bg-green-700 hover:bg-green-600 text-white font-semibold px-8 py-3 rounded-xl transition-all duration-200">Browse All Products</a>
   </div>
 
   <!-- Product Detail -->
-  <ng-container *ngIf="!loading && product">
+  <ng-container *ngIf="!initialLoad && !loading && product">
     <!-- Breadcrumb -->
     <nav class="flex items-center gap-2 text-sm text-gray-500 mb-8">
       <a routerLink="/" class="hover:text-green-700 transition-colors">Home</a>

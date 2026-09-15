@@ -1,13 +1,17 @@
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import {
   Component,
+  DestroyRef,
   inject,
   HostListener,
+  OnDestroy,
   PLATFORM_ID,
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { RouterLink } from '@angular/router';
 import {
   ProductDetail,
+  ProductService,
 } from '../../../../services/product/product.service';
 import { ActivatedRoute } from '@angular/router';
 import { SeoService } from '../../../../services/seo/seo.service';
@@ -19,20 +23,33 @@ import { CartService } from '../../../../services/cart/cart.service';
   templateUrl: './item-details.component.html',
   styleUrl: './item-details.component.css',
 })
-export class ItemDetailsComponent {
+export class ItemDetailsComponent implements OnDestroy {
   constructor(private route: ActivatedRoute, private seo: SeoService) {}
 
   private cartService = inject(CartService);
+  private productService = inject(ProductService);
   private platformId = inject(PLATFORM_ID);
+  private destroyRef = inject(DestroyRef);
 
   product: ProductDetail | null = null;
 
-  loading = true;
+  initialLoad = true;
+  loading = false;
   notFound = false;
 
   selectedImage: string = '';
 
   added = false;
+  private addedTimer: ReturnType<typeof setTimeout> | null = null;
+
+  ngOnDestroy() {
+    if (isPlatformBrowser(this.platformId)) {
+      document.body.style.overflow = '';
+    }
+    if (this.addedTimer) {
+      clearTimeout(this.addedTimer);
+    }
+  }
 
   displayPrice(): number {
     if (!this.product) return 0;
@@ -59,19 +76,51 @@ export class ItemDetailsComponent {
     // Product data is resolved by the route resolver before activation, so it
     // is already available synchronously here. This lets SSR / pre-render emit
     // the full product content, meta tags and JSON-LD in the first HTML.
-    this.applyProduct(this.route.snapshot.data['product'] as ProductDetail | null);
+    const resolved = this.route.snapshot.data['product'] as ProductDetail | null;
+    if (resolved) {
+      this.applyProduct(resolved);
+    } else {
+      // Resolver returned null — attempt an independent fetch as fallback
+      this.fetchFromSlug();
+    }
 
     // During in-app navigation between products the component instance is
     // reused, so the browser must react to subsequent route data changes.
     if (isPlatformBrowser(this.platformId)) {
-      this.route.data.subscribe((data) => {
-        this.applyProduct(data['product'] as ProductDetail | null);
+      this.route.data.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((data) => {
+        const product = data['product'] as ProductDetail | null;
+        if (product) {
+          this.applyProduct(product);
+        } else {
+          this.fetchFromSlug();
+        }
       });
+    }
+  }
+
+  private async fetchFromSlug(): Promise<void> {
+    const slug = this.route.snapshot.paramMap.get('slug');
+    if (!slug) {
+      this.initialLoad = false;
+      this.notFound = true;
+      return;
+    }
+
+    this.loading = true;
+    this.notFound = false;
+    try {
+      const product = await this.productService.getProductBySlug(slug);
+      this.applyProduct(product);
+    } catch {
+      this.initialLoad = false;
+      this.loading = false;
+      this.notFound = true;
     }
   }
 
   private applyProduct(product: ProductDetail | null): void {
     this.loading = false;
+    this.initialLoad = false;
 
     if (!product) {
       this.notFound = true;
@@ -177,7 +226,13 @@ export class ItemDetailsComponent {
       image: this.product.image || (this.product.images?.[0] ?? ''),
     });
     this.added = true;
-    setTimeout(() => (this.added = false), 2500);
+    if (this.addedTimer) {
+      clearTimeout(this.addedTimer);
+    }
+    this.addedTimer = setTimeout(() => {
+      this.added = false;
+      this.addedTimer = null;
+    }, 2500);
   }
 
   zoomStyle: { transform: string; transformOrigin?: string } = { transform: 'scale(1)' };
@@ -205,13 +260,17 @@ export class ItemDetailsComponent {
     this.modalSelectedImage = this.selectedImage;
     this.modalZoomed = false;
     this.isModalOpen = true;
-    document.body.style.overflow = 'hidden';
+    if (isPlatformBrowser(this.platformId)) {
+      document.body.style.overflow = 'hidden';
+    }
   }
 
   closeModal() {
     this.isModalOpen = false;
     this.modalZoomed = false;
-    document.body.style.overflow = '';
+    if (isPlatformBrowser(this.platformId)) {
+      document.body.style.overflow = '';
+    }
   }
 
   toggleModalZoom() {

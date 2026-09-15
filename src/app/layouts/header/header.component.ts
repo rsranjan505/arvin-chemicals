@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, HostListener, inject } from '@angular/core';
+import { Component, ElementRef, HostListener, OnDestroy, ViewChild, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { CartService } from '../../services/cart/cart.service';
@@ -11,7 +11,7 @@ import { CustomerAuthService } from '../../services/auth/customer-auth.service';
   styleUrl: './header.component.css',
   animations: [],
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnDestroy {
   mobileOpen = false;
   dropdownOpen = false;
   accountMenuOpen = false;
@@ -27,10 +27,18 @@ export class HeaderComponent implements OnInit {
   @ViewChild('searchInput') desktopSearchInput?: ElementRef<HTMLInputElement>;
   @ViewChild('mobileSearchInput') mobileSearchInput?: ElementRef<HTMLInputElement>;
 
+  private focusTimer: ReturnType<typeof setTimeout> | null = null;
+
   ngOnInit(): void {
     this.cartService.items$.subscribe((items) => {
       this.cartCount = items.reduce((sum, i) => sum + i.quantity, 0);
     });
+  }
+
+  ngOnDestroy() {
+    if (this.focusTimer) {
+      clearTimeout(this.focusTimer);
+    }
   }
 
   toggleMenu() {
@@ -75,10 +83,14 @@ export class HeaderComponent implements OnInit {
   }
 
   focusInput() {
-    setTimeout(() => {
+    if (this.focusTimer) {
+      clearTimeout(this.focusTimer);
+    }
+    this.focusTimer = setTimeout(() => {
       const el =
         window.innerWidth >= 768 ? this.desktopSearchInput : this.mobileSearchInput;
       el?.nativeElement.focus();
+      this.focusTimer = null;
     }, 80);
   }
 

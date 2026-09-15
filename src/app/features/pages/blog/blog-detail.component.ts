@@ -1,5 +1,6 @@
 import { CommonModule, isPlatformBrowser } from '@angular/common';
-import { Component, inject, OnInit, PLATFORM_ID } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit, PLATFORM_ID } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { BlogPostDetail, BlogPostSummary } from '../../../services/blog/blog.service';
 import { SeoService } from '../../../services/seo/seo.service';
@@ -14,6 +15,7 @@ export class BlogDetailComponent implements OnInit {
   private route = inject(ActivatedRoute);
   private seo = inject(SeoService);
   private platformId = inject(PLATFORM_ID);
+  private destroyRef = inject(DestroyRef);
 
   loading = true;
   failed = false;
@@ -35,7 +37,7 @@ export class BlogDetailComponent implements OnInit {
     // In-app navigation between posts reuses this instance; only the browser
     // needs to react to subsequent route data changes.
     if (isPlatformBrowser(this.platformId)) {
-      this.route.data.subscribe((data) => {
+      this.route.data.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((data) => {
         this.applyPost(data['post'] as BlogPostDetail | null);
       });
     }

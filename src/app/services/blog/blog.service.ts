@@ -49,72 +49,85 @@ export interface BlogCategoriesResponse {
 })
 export class BlogService {
   async getPosts(page = 1, categorySlug = ''): Promise<BlogListResponse> {
-    const params = new URLSearchParams({ page: String(page) });
-    if (categorySlug) {
-      params.set('category', categorySlug);
+    const emptyResponse: BlogListResponse = { success: false, posts: [], pagination: { current_page: 1, last_page: 1, per_page: 9, total: 0 } };
+    try {
+      const params = new URLSearchParams({ page: String(page) });
+      if (categorySlug) {
+        params.set('category', categorySlug);
+      }
+
+      const res = await fetch(`${environment.apiUrl}/api/storefront/blog/posts?${params.toString()}`, {
+        method: 'GET',
+        headers: { Accept: 'application/json' },
+        signal: AbortSignal.timeout(10000),
+      });
+      const data = await res.json();
+
+      if (!res.ok) {
+        return emptyResponse;
+      }
+
+      return {
+        ...data,
+        posts: (data.posts ?? []).map((post: BlogPostSummary) => ({
+          ...post,
+          cover_url: resolveImageUrl(post.cover_url),
+        })),
+      };
+    } catch {
+      return emptyResponse;
     }
-
-    const res = await fetch(`${environment.apiUrl}/api/storefront/blog/posts?${params.toString()}`, {
-      method: 'GET',
-      headers: { Accept: 'application/json' },
-      signal: AbortSignal.timeout(10000),
-    });
-    const data = await res.json();
-
-    if (!res.ok) {
-      return { success: false, posts: [], pagination: { current_page: 1, last_page: 1, per_page: 9, total: 0 } };
-    }
-
-    return {
-      ...data,
-      posts: (data.posts ?? []).map((post: BlogPostSummary) => ({
-        ...post,
-        cover_url: resolveImageUrl(post.cover_url),
-      })),
-    };
   }
 
   async getPostBySlug(slug: string): Promise<{ success: boolean; post?: BlogPostDetail; message?: string }> {
-    const res = await fetch(`${environment.apiUrl}/api/storefront/blog/posts/${encodeURIComponent(slug)}`, {
-      method: 'GET',
-      headers: { Accept: 'application/json' },
-      signal: AbortSignal.timeout(10000),
-    });
-    const data = await res.json();
+    try {
+      const res = await fetch(`${environment.apiUrl}/api/storefront/blog/posts/${encodeURIComponent(slug)}`, {
+        method: 'GET',
+        headers: { Accept: 'application/json' },
+        signal: AbortSignal.timeout(10000),
+      });
+      const data = await res.json();
 
-    if (!res.ok) {
-      return { success: false, message: data?.message || 'Post not found.' };
+      if (!res.ok) {
+        return { success: false, message: data?.message || 'Post not found.' };
+      }
+
+      if (!data.post) {
+        return { success: false, message: 'Post not found.' };
+      }
+
+      return {
+        ...data,
+        post: {
+          ...data.post,
+          cover_url: resolveImageUrl(data.post.cover_url),
+          related: (data.post.related ?? []).map((item: BlogPostSummary) => ({
+            ...item,
+            cover_url: resolveImageUrl(item.cover_url),
+          })),
+        },
+      };
+    } catch {
+      return { success: false, message: 'Failed to load post.' };
     }
-
-    if (!data.post) {
-      return { success: false, message: 'Post not found.' };
-    }
-
-    return {
-      ...data,
-      post: {
-        ...data.post,
-        cover_url: resolveImageUrl(data.post.cover_url),
-        related: (data.post.related ?? []).map((item: BlogPostSummary) => ({
-          ...item,
-          cover_url: resolveImageUrl(item.cover_url),
-        })),
-      },
-    };
   }
 
   async getCategories(): Promise<BlogCategoriesResponse> {
-    const res = await fetch(`${environment.apiUrl}/api/storefront/blog/categories`, {
-      method: 'GET',
-      headers: { Accept: 'application/json' },
-      signal: AbortSignal.timeout(10000),
-    });
-    const data = await res.json();
+    try {
+      const res = await fetch(`${environment.apiUrl}/api/storefront/blog/categories`, {
+        method: 'GET',
+        headers: { Accept: 'application/json' },
+        signal: AbortSignal.timeout(10000),
+      });
+      const data = await res.json();
 
-    if (!res.ok) {
+      if (!res.ok) {
+        return { success: false, categories: [] };
+      }
+
+      return data;
+    } catch {
       return { success: false, categories: [] };
     }
-
-    return data;
   }
 }

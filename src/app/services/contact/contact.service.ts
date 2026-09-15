@@ -26,21 +26,25 @@ export class ContactService {
       return { success: false, message: 'Enquiries can only be submitted from the browser.' };
     }
 
-    const res = await fetch(`${environment.apiUrl}/api/storefront/contact`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload),
-      signal: AbortSignal.timeout(10000),
-    });
-    const data = await res.json();
+    try {
+      const res = await fetch(`${environment.apiUrl}/api/storefront/contact`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+        signal: AbortSignal.timeout(10000),
+      });
+      const data = await res.json();
 
-    if (!res.ok) {
-      return {
-        success: false,
-        message: data?.message || 'Could not submit your enquiry. Please try again.',
-      };
+      if (!res.ok) {
+        return {
+          success: false,
+          message: data?.message || 'Could not submit your enquiry. Please try again.',
+        };
+      }
+
+      return data;
+    } catch {
+      return { success: false, message: 'Network error. Please check your connection and try again.' };
     }
-
-    return data;
   }
 }

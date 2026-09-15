@@ -25,11 +25,11 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.products = this.route.snapshot.data['products'] as ProductSummary[];
     this.seo.setPageSeo({
-      title: 'Premium health supplements for Liver Detox & Wellness',
-      description: 'Shop ArvinPlus™ research-backed health supplements for liver detox, immunity, bone health and vitality. GMP certified, FSSAI approved, third-party lab tested. Free shipping across India on orders above ₹999.',
-      keywords: 'health supplements, liver detox capsules, milk thistle, immunity boost, bone health supplements, natural wellness, ArvinPlus, herbal supplements India',
+      title: 'Buy Health Supplements Online in India | ArvinPlus™ Vitamins & Minerals',
+      description: 'ArvinPlus™ is an Indian health and wellness brand offering carefully formulated vitamins, minerals and nutritional supplements for everyday wellness. Explore supplements including Zinc, Iron with Vitamin B12 and Folic Acid, Vitamin D3 + K2, multivitamins and more—designed for convenient daily nutrition and available for delivery across India.',
+      keywords: 'health supplements, best health supplements India, vitamins and minerals supplements, buy supplements online India, energy and wellness supplements, affordable health supplements India, iron tablets, iron supplements, liver detox capsules, zink tablets, vitamin K2 MK-7, magnesium glycinate, immunity boost, bone health supplements, natural wellness, ArvinPlus, herbal supplements India',
       url: 'https://arvinplus.in',
-      image: '/assets/arvin-white.png',
+      image: '/assets/logo.png',
       jsonLd: [
         {
           '@context': 'https://schema.org',

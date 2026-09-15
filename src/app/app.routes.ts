@@ -5,25 +5,41 @@ import { customerAuthGuard } from './services/auth/customer-auth.guard';
 import { ProductService, ProductDetail, ProductSummary } from './services/product/product.service';
 import { BlogService, BlogPostDetail } from './services/blog/blog.service';
 
+function withTimeout<T>(promise: Promise<T>, ms: number, fallback: T): Promise<T> {
+  return Promise.race([promise, new Promise<T>((resolve) => setTimeout(() => resolve(fallback), ms))]);
+}
+
+const RESOLVER_TIMEOUT_MS = 5000;
+
 export const productsResolver: ResolveFn<ProductSummary[]> = () =>
-  inject(ProductService)
-    .getProducts()
-    .catch(() => []);
+  withTimeout(
+    inject(ProductService).getProducts(),
+    RESOLVER_TIMEOUT_MS,
+    [],
+  );
 
 export const productDetailResolver: ResolveFn<ProductDetail | null> = (route) => {
   const slug = route.paramMap.get('slug');
-  if (!slug) return null;
-  return inject(ProductService).getProductBySlug(slug);
+  if (!slug) return Promise.resolve(null);
+  return withTimeout(
+    inject(ProductService).getProductBySlug(slug),
+    RESOLVER_TIMEOUT_MS,
+    null,
+  );
 };
 
 export const blogDetailResolver: ResolveFn<BlogPostDetail | null> = (route) => {
   const slug = route.paramMap.get('slug');
   if (!slug) return null;
-  return inject(BlogService)
-    .getPostBySlug(slug)
-    .then((res: { success: boolean; post?: BlogPostDetail; message?: string }) =>
-      res.success ? (res.post ?? null) : null,
-    );
+  return withTimeout(
+    inject(BlogService)
+      .getPostBySlug(slug)
+      .then((res: { success: boolean; post?: BlogPostDetail; message?: string }) =>
+        res.success ? (res.post ?? null) : null,
+      ),
+    RESOLVER_TIMEOUT_MS,
+    null,
+  );
 };
 
 export const routes: Routes = [

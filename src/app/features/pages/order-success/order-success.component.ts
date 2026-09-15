@@ -1,5 +1,6 @@
 import { CommonModule, isPlatformBrowser } from '@angular/common';
-import { Component, inject, OnInit, PLATFORM_ID } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit, PLATFORM_ID } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { PaymentService, OrderLookupResponse } from '../../../services/payment/payment.service';
 import { SeoService } from '../../../services/seo/seo.service';
@@ -15,6 +16,7 @@ export class OrderSuccessComponent implements OnInit {
   private paymentService = inject(PaymentService);
   private seo = inject(SeoService);
   private platformId = inject(PLATFORM_ID);
+  private destroyRef = inject(DestroyRef);
 
   loading = true;
   failed = false;
@@ -32,7 +34,7 @@ export class OrderSuccessComponent implements OnInit {
       robots: 'noindex, nofollow',
     });
 
-    this.route.queryParams.subscribe((params) => {
+    this.route.queryParams.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((params) => {
       this.orderId = Number(params['orderId']) || 0;
       this.orderNumber = params['orderNumber'] || '';
       const token = params['token'] || '';

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute } from '@angular/router';
 import { ProductListsComponent } from '../components/product-lists/product-lists.component';
 import { SeoService } from '../../../services/seo/seo.service';
@@ -11,13 +12,15 @@ import { ProductSummary } from '../../../services/product/product.service';
   styleUrl: './products.page.css'
 })
 export class ProductsPage implements OnInit {
-  constructor(private seo: SeoService, private route: ActivatedRoute) {}
+  private seo = inject(SeoService);
+  private route = inject(ActivatedRoute);
+  private destroyRef = inject(DestroyRef);
 
   products: ProductSummary[] = [];
 
   ngOnInit() {
     this.products = this.route.snapshot.data['products'] as ProductSummary[];
-    this.route.data.subscribe((data) => {
+    this.route.data.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((data) => {
       this.products = data['products'] as ProductSummary[];
     });
     this.seo.setPageSeo({

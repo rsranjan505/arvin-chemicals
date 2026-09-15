@@ -28,9 +28,17 @@
 
 <app-product-lists [products]="products"></app-product-lists>
 
-<app-customer-stories></app-customer-stories>
+@defer (on viewport) {
+  <app-customer-stories></app-customer-stories>
+} @placeholder {
+  <div class="min-h-[200px]"></div>
+}
 
-<app-home-blog></app-home-blog>
+@defer (on viewport) {
+  <app-home-blog></app-home-blog>
+} @placeholder {
+  <div class="min-h-[200px]"></div>
+}
 
 <!-- Certifications Strip Section -->
 <section class="py-14 lg:py-18 bg-white">

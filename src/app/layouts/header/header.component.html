@@ -29,9 +29,9 @@
 <header class="py-3 lg:py-3.5 bg-white/95 backdrop-blur-md shadow-sm sticky top-10 z-50 border-b border-gray-100/50">
   <div class="flex justify-between items-center px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
     <!-- Left: Logo -->
-    <a routerLink="/" class="flex items-center gap-3 group">
+    <a routerLink="/" class="flex items-center gap-3 group" title="ArvinPlus – Clean, research-backed supplements that restore balance to the body and support long-term health.">
       <div class="relative w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br from-green-200 to-emerald-700 flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300 overflow-hidden">
-        <img src="assets/logo-2.png" alt="ArvinPlus Logo" class="h-8 w-auto sm:h-9 object-contain" />
+        <img src="assets/logo-2.png" title="ArvinPlus Logo" alt="ArvinPlus Logo" class="h-8 w-auto sm:h-9 object-contain" />
         <div class="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
       </div>
 
@@ -47,6 +47,7 @@
         routerLinkActive="text-green-900 font-semibold bg-green-50"
         [routerLinkActiveOptions]="{exact:true}"
         class="px-4 py-2 rounded-lg hover:text-green-900 hover:bg-green-50 font-medium text-4sm transition-all duration-200"
+        title="Home"
         >Home</a
       >
       <a
@@ -54,6 +55,7 @@
         routerLinkActive="text-green-900 font-semibold bg-green-50"
         [routerLinkActiveOptions]="{exact:true}"
         class="px-4 py-2 rounded-lg hover:text-green-900 hover:bg-green-50 font-medium text-4sm transition-all duration-200"
+        title="Our Products"
         >Our Collections</a
       >
 
@@ -79,12 +81,14 @@
         routerLink="/about-us"
         routerLinkActive="text-green-900 font-semibold bg-green-50"
         class="px-4 py-2 rounded-lg hover:text-green-900 hover:bg-green-50 font-medium text-4sm transition-all duration-200"
+        title="About ArvinPlus – Our Story, Mission, and Values"
         >About Us</a
       >
       <a
         routerLink="/contact-us"
         routerLinkActive="text-green-900 font-semibold bg-green-50"
         class="px-4 py-2 rounded-lg hover:text-green-900 hover:bg-green-50 font-medium text-4sm transition-all duration-200"
+        title="Contact ArvinPlus – Get in Touch with Our Team"
         >Contact Us</a
       >
 
@@ -92,6 +96,7 @@
         routerLink="/blog"
         routerLinkActive="text-green-900 font-semibold bg-green-50"
         class="px-4 py-2 rounded-lg hover:text-green-900 hover:bg-green-50 font-medium text-4sm transition-all duration-200"
+        title="ArvinPlus Blog"
         >Blog</a
       >
       
@@ -252,7 +257,8 @@
         <a routerLink="/our-collections" fragment="therapeutics" class="px-3 py-2.5 rounded-lg hover:bg-green-50 hover:text-green-900 font-medium text-4sm transition-colors pl-6" (click)="closeMenu()">Therapeutics</a>
         <a routerLink="/our-collections" fragment="combos" class="px-3 py-2.5 rounded-lg hover:bg-green-50 hover:text-green-900 font-medium text-4sm transition-colors pl-6" (click)="closeMenu()">Combos</a>
         <div class="border-t border-gray-100 my-1"></div> -->
-        <a routerLink="/about-us" class="px-3 py-2.5 rounded-lg hover:bg-green-50 hover:text-green-900 font-medium text-4sm transition-colors" (click)="closeMenu()">About Us</a>
+        <a routerLink="/about-us" class="px-3 py-2.5 rounded-lg hover:bg-green-50 hover:text-green-900 font-medium text-4sm transition-colors" (click)="closeMenu()"
+        title="About us Arvin Plus">About Us</a>
         <a routerLink="/contact-us" class="px-3 py-2.5 rounded-lg hover:bg-green-50 hover:text-green-900 font-medium text-4sm transition-colors" (click)="closeMenu()">Contact Us</a>
         <a routerLink="/blog" class="px-3 py-2.5 rounded-lg hover:bg-green-50 hover:text-green-900 font-medium text-4sm transition-colors" (click)="closeMenu()">Blog</a>
 

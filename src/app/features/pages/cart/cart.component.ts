@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { RouterLink } from '@angular/router';
 import { CartItem, CartService } from '../../../services/cart/cart.service';
 import { SeoService } from '../../../services/seo/seo.service';
@@ -13,6 +14,7 @@ import { SeoService } from '../../../services/seo/seo.service';
 export class CartComponent implements OnInit {
   private cartService = inject(CartService);
   private seo = inject(SeoService);
+  private destroyRef = inject(DestroyRef);
 
   items: CartItem[] = [];
   subtotal = 0;
@@ -21,7 +23,7 @@ export class CartComponent implements OnInit {
   readonly shippingFee = 99;
 
   ngOnInit() {
-    this.cartService.items$.subscribe((items) => {
+    this.cartService.items$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((items) => {
       this.items = items;
       this.subtotal = this.cartService.getSubtotal();
     });
